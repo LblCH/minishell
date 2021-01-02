@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_lstclear_bonus.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/03 00:22:36 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/03 02:52:42 by ztawanna         ###   ########.fr       */
+/*   Created: 2020/06/01 22:47:57 by ztawanna          #+#    #+#             */
+/*   Updated: 2020/06/01 22:52:04 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include "libft.h"
-# include <stdio.h>
-# include <string.h>
-# include <fcntl.h>
-# include <dirent.h>
-# include <sys/wait.h>
-# include <limits.h>
-# include <errno.h>
-# include <signal.h>
+void	ft_lstclear(t_list **lst, void (*del)(void*))
+{
+	t_list	*tmp;
+	t_list	*nxt;
 
-#endif
+	tmp = *lst;
+	nxt = NULL;
+	while (tmp)
+	{
+		nxt = tmp->next;
+		(*del)(tmp->content);
+		free(tmp);
+		tmp = nxt;
+	}
+	*lst = NULL;
+}

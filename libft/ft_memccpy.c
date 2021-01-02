@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_memccpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/03 00:22:36 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/03 02:52:42 by ztawanna         ###   ########.fr       */
+/*   Created: 2020/05/27 23:02:42 by ztawanna          #+#    #+#             */
+/*   Updated: 2020/05/29 23:56:33 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include "libft.h"
-# include <stdio.h>
-# include <string.h>
-# include <fcntl.h>
-# include <dirent.h>
-# include <sys/wait.h>
-# include <limits.h>
-# include <errno.h>
-# include <signal.h>
+void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
+{
+	size_t			i;
+	unsigned char	*srctmp;
+	unsigned char	*dsttmp;
 
-#endif
+	i = 0;
+	srctmp = (unsigned char *)src;
+	dsttmp = (unsigned char *)dst;
+	while (n--)
+	{
+		dsttmp[i] = srctmp[i];
+		if (srctmp[i] == (unsigned char)c)
+			return (dsttmp + i + 1);
+		i++;
+	}
+	return (NULL);
+}
