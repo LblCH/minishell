@@ -6,7 +6,7 @@
 #    By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/02 23:10:05 by ztawanna          #+#    #+#              #
-#    Updated: 2021/01/03 00:20:00 by ztawanna         ###   ########.fr        #
+#    Updated: 2021/01/03 05:08:43 by ztawanna         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,32 +15,27 @@ NAME = minishell
 
 CC = clang
 
-CFLAGS = -Wall -Wextra -Werror -I includes/ -I libft/includes/
+CFLAGS = -Wall -Wextra -Werror
 
 LIBFT = -L libft -lft
 
-SRCS = minishell.c
-#		$(addsuffix .c, $(addprefix srcs/builtins/, $(BUILTINS))) \
-		$(addsuffix .c, $(addprefix srcs/env/, $(ENV))) \
-	  $(addsuffix .c, $(addprefix srcs/exec/, $(EXEC))) \
-	  $(addsuffix .c, $(addprefix srcs/main/, $(MAIN))) \
-	  $(addsuffix .c, $(addprefix srcs/parsing/, $(PARSING))) \
-	  $(addsuffix .c, $(addprefix srcs/tools/, $(TOOLS))) \
+SRCS = minishell.c parcer.c ./gnl/get_next_line.c ./gnl/get_next_line_utils.c
+#		$(addsuffix .c, $(addprefix srcs/srcs/, $(SRCS)))
 
-OBJS = $(SRCS:c=o)
+OBJS = $(SRCS:.c=.o)
+
+$(%.o): $(%.c)
+	@printf "\033[0;33mCompiling minishell objects... %-33.33s\r" $@
+	$(CC) -o $@ -c $^
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJS)
 	@echo "\n"
 	@make -C libft/
 	@echo "\033[0;32mCompiling minishell..."
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(LIBFT)
 	@echo "\n\033[0mDone !"
-
-%.o: %.c
-	@printf "\033[0;33mCompiling minishell objects... %-33.33s\r" $@
-	@${CC} ${CFLAGS} -c $< -o $@
 
 clean:
 	@echo "\033[0;31mCleaning libft..."
