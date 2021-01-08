@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 00:22:36 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/03 05:43:00 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/01/08 07:10:30 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,8 @@ typedef struct		s_shell
 }					t_shell;
 
 int			ft_parcer(t_shell *shell);
+int			invitation(t_shell *shell);
+int			quotes_cl(char *line);
+char		*get_env(t_shell *shell, char *env);
 
 #endif

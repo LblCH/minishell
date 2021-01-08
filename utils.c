@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/02 23:08:34 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/08 07:20:57 by ztawanna         ###   ########.fr       */
+/*   Created: 2021/01/08 05:48:10 by ztawanna          #+#    #+#             */
+/*   Updated: 2021/01/08 05:55:23 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int invitation(t_shell *shell)
+char		*get_env(t_shell *shell, char *env)
 {
-	ft_putstr_fd("💀 \033[35miMiNishell ⇥ \033[0m", 1);
-	if(get_next_line(0, &shell->command) < 0)
-		ft_putstr_fd("Failed GNL\n", 2);
-	if(ft_parcer(shell))
-		return (0);
-	invitation(shell);
-	return (0);
-}
+	int i;
 
-int main(int argc, char **argv, char **envp)
-{
-	t_shell shell;
-
-	(void)argc;
-	(void)argv;
-	shell.env = envp;
-	invitation(&shell);
-	return (0);
+	i = 0;
+	while(shell->env[i])
+	{
+		if (!ft_strncmp(env, shell->env[i], ft_strlen(env)) \
+			&& shell->env[i][ft_strlen(env)] == '=')
+			return (&shell->env[i][ft_strlen(env) + 1]);
+		i++;
+	}
+	return (NULL);
 }
