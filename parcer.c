@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 04:15:50 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/10 13:45:30 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/01/10 14:42:41 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ char		*ft_parcer(t_shell *shell, char *line)
 	char *res;
 
 	s[1] = '\0';
+	res = ft_strdup("");
 	while(ft_isspace(*line))
 		line++;
 	while(*line && *line != ' ')
@@ -62,9 +63,10 @@ char		*ft_parcer(t_shell *shell, char *line)
 		else
 		{
 			s[0] = *line;
-			res = ft_strjoin(shell->command, s);
+			res = ft_strjoin(res, s);
 			line++;
 		}
 	}
+	printf("%s\n", res);
 	return (res);
 }
