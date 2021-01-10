@@ -6,24 +6,22 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 04:15:50 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/08 09:58:08 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/01/10 13:45:30 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*spec_simbol(t_shell *shell, char *line)
+char	*spec_simbol(t_shell *shell, char *line, char **res)
 {
 	if(*line == '$')
 	{
-		printf("%s\n", line);
-		shell->command = ft_strjoin(shell->command, get_env(shell, line + 1));
+		*res = ft_strjoin(*res, get_env(shell, ++line));
 		while (ft_isalnum(*line) || *line == '_')
-		{
-//			printf("%s\n", line);
 			line++;
-		}
 	}
+	else if(*line == '\'' || *line == '\"')
+		line = quotes_handler(shell, line, res, *line);
 	return (line);
 }
 
@@ -49,34 +47,24 @@ int		quotes_cl(char *line)
 	return (open || open2);
 }
 
-int		ft_parcer(t_shell *shell, char *line)
+char		*ft_parcer(t_shell *shell, char *line)
 {
 	char s[2];
-	int i;
+	char *res;
 
 	s[1] = '\0';
-	i = 0;
 	while(ft_isspace(*line))
 		line++;
-	while(*line)
+	while(*line && *line != ' ')
 	{
 		if(ft_strchr("\'\"$", *line))
-			line = spec_simbol(shell, line);
-		s[0] = *line;
-		shell->command = ft_strjoin(shell->command, s);
-		line++;
+			line = spec_simbol(shell, line, &res);
+		else
+		{
+			s[0] = *line;
+			res = ft_strjoin(shell->command, s);
+			line++;
+		}
 	}
-//	if(ft_strchr(line, '\'') || ft_strchr(line, '\"'))
-//	{
-//		if(quotes_cl(line))
-//		{
-//			ft_putstr_fd("Non couple quotes.\n", 2);
-//			return (0);
-//		}
-//		shell->command++;
-//	}
-	printf("%s\n", shell->command);
-	if(!ft_strncmp("exit", shell->command, 4))
-		return (1);
-	return (0);
+	return (res);
 }

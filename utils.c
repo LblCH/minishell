@@ -6,11 +6,26 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 05:48:10 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/08 09:47:10 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/01/10 13:57:19 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char		*quotes_handler(t_shell *shell, char *line, char **res, char quote)
+{
+	char s[2];
+
+	s[1] = '\0';
+	while(*(++line) && *line != quote)
+	{
+		if (*line == '$' && quote == '\"')
+			line = spec_simbol(shell, line, res);
+		s[0] = *line;
+		*res = ft_strjoin(*res, s);
+	}
+	return (line++);
+}
 
 char		*get_env(t_shell *shell, char *env)
 {
