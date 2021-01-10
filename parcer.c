@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 04:15:50 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/10 14:42:41 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/01/10 18:50:51 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,15 @@
 
 char	*spec_simbol(t_shell *shell, char *line, char **res)
 {
-	if(*line == '$')
+	if (*line == '$')
 	{
 		*res = ft_strjoin(*res, get_env(shell, ++line));
 		while (ft_isalnum(*line) || *line == '_')
 			line++;
 	}
-	else if(*line == '\'' || *line == '\"')
+	else if (*line == '\\')
+		line = escape_handler(++line, res);
+	else if (*line == '\'' || *line == '\"')
 		line = quotes_handler(shell, line, res, *line);
 	return (line);
 }
@@ -54,11 +56,13 @@ char		*ft_parcer(t_shell *shell, char *line)
 
 	s[1] = '\0';
 	res = ft_strdup("");
-	while(ft_isspace(*line))
+	while (ft_isspace(*line))
 		line++;
-	while(*line && *line != ' ')
+	if (!(*line))
+		return (res);
+	while (*line && *line != ' ')
 	{
-		if(ft_strchr("\'\"$", *line))
+		if (ft_strchr("\'\"$\\", *line))
 			line = spec_simbol(shell, line, &res);
 		else
 		{
@@ -67,6 +71,5 @@ char		*ft_parcer(t_shell *shell, char *line)
 			line++;
 		}
 	}
-	printf("%s\n", res);
 	return (res);
 }
