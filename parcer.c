@@ -20,7 +20,7 @@ char	*spec_simbol(t_shell *shell, char *line)
 		shell->command = ft_strjoin(shell->command, get_env(shell, line + 1));
 		while (ft_isalnum(*line) || *line == '_')
 		{
-			printf("%s\n", line);
+//			printf("%s\n", line);
 			line++;
 		}
 	}

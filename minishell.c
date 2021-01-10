@@ -17,7 +17,7 @@ int invitation(t_shell *shell)
 	char *line;
 
 	shell->command = ft_strdup("");
-	ft_putstr_fd("💀 \033[35miMiNishell ⇥ \033[0m", 1);
+	ft_putstr_fd("💀 \033[35mGhost mINiShell ⇥ \033[0m", 1);
 	if(get_next_line(0, &line) < 0)
 		ft_putstr_fd("Failed GNL\n", 2);
 	if(ft_parcer(shell, line))

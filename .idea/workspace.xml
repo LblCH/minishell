@@ -80,9 +80,7 @@
       <change afterPath="$PROJECT_DIR$/utils.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/minishell.c" beforeDir="false" afterPath="$PROJECT_DIR$/minishell.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/minishell.h" beforeDir="false" afterPath="$PROJECT_DIR$/minishell.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/parcer.c" beforeDir="false" afterPath="$PROJECT_DIR$/parcer.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/utils.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,7 +162,8 @@
       <workItem from="1609638099327" duration="149000" />
       <workItem from="1609638272470" duration="7850000" />
       <workItem from="1610066981877" duration="7114000" />
-      <workItem from="1610078415082" duration="8579000" />
+      <workItem from="1610078415082" duration="8766000" />
+      <workItem from="1610267899354" duration="602000" />
     </task>
     <task id="LOCAL-00001" summary="+ libft">
       <created>1609631754009</created>
