@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 00:22:36 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/13 17:08:52 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/01/13 23:09:14 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef struct		s_shell
 	char			*line_left;
 	char			**env;
 	t_token			*start;
+	int 			exit;
+	uint8_t 		ret;
 }					t_shell;
 
 /*
@@ -61,13 +63,29 @@ char		*quotes_handler(t_shell *shell, char *line, char **res, char quote);
 char		*get_env(t_shell *shell, char *env);
 
 /*
- * buildin.c
+ * buildins
  */
+
+int 		ft_cd(t_shell *shell);
+int 		ft_echo(char **args);
+int			ft_env(t_shell *shell);
+void		ft_exit(t_shell *shell);
+int			ft_export(t_shell *shell);
+int			ft_pwd(void);
+int			ft_unset(t_shell *shell);
+
 
 /*
  * lsts.c
  */
 t_token		*new_token(void);
 t_token		*token_last(t_token *token);
+
+/*
+ * command_run.c
+ */
+
+void		cmd_run(t_shell *shell);
+
 
 #endif

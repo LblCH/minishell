@@ -6,7 +6,7 @@
 #    By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/28 00:10:49 by ztawanna          #+#    #+#              #
-#    Updated: 2020/10/11 19:50:10 by ztawanna         ###   ########.fr        #
+#    Updated: 2021/01/13 23:09:14 by cdrennan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SOURCES	= ft_atoi.c \
 		  ft_substr.c \
 		  ft_tolower.c \
 		  ft_toupper.c \
+		  ft_strcmp.c
 
 OBJECTS		= ${SOURCES:.c=.o}
 

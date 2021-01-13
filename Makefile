@@ -6,7 +6,7 @@
 #    By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/02 23:10:05 by ztawanna          #+#    #+#              #
-#    Updated: 2021/01/03 05:08:43 by ztawanna         ###   ########.fr        #
+#    Updated: 2021/01/13 23:09:14 by cdrennan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ CFLAGS = -Wall -Wextra -Werror
 LIBFT = -L libft -lft
 
 SRCS = minishell.c parcer.c ./gnl/get_next_line.c ./gnl/get_next_line_utils.c \
-		utils.c lsts.c
+		utils.c lsts.c $(wildcard buildins/*.c) command_run.c
 #		$(addsuffix .c, $(addprefix srcs/srcs/, $(SRCS)))
 
 OBJS = $(SRCS:.c=.o)

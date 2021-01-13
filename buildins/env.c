@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear_bonus.h                                :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/01 22:47:57 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/13 23:09:14 by cdrennan         ###   ########.fr       */
+/*   Created: 2021/01/13 18:55:55 by cdrennan          #+#    #+#             */
+/*   Updated: 2021/01/13 18:55:55 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+# include "../minishell.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void*))
+int		ft_env(t_shell *shell)
 {
-	t_list	*tmp;
-	t_list	*nxt;
+	int i;
 
-	tmp = *lst;
-	nxt = NULL;
-	while (tmp)
+    i = 0;
+    while (shell->env[i])
 	{
-		nxt = tmp->next;
-		(*del)(tmp->content);
-		free(tmp);
-		tmp = nxt;
+		ft_putendl_fd(shell->env[i], 1);
+        i++;
 	}
-	*lst = NULL;
+	return (0);
 }

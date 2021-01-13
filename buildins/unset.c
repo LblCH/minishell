@@ -1,30 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear_bonus.h                                :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/06/01 22:47:57 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/13 23:09:14 by cdrennan         ###   ########.fr       */
+/*   Created: 2021/01/12 12:49:23 by cdrennan          #+#    #+#             */
+/*   Updated: 2021/01/13 22:15:04 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../minishell.h"
 
-void	ft_lstclear(t_list **lst, void (*del)(void*))
+int ft_unset (t_shell *shell)
 {
-	t_list	*tmp;
-	t_list	*nxt;
-
-	tmp = *lst;
-	nxt = NULL;
-	while (tmp)
-	{
-		nxt = tmp->next;
-		(*del)(tmp->content);
-		free(tmp);
-		tmp = nxt;
-	}
-	*lst = NULL;
+	printf("There are will be a good function one time");
 }
