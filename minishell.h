@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 00:22:36 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/13 06:37:35 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/01/13 13:25:33 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,37 @@ typedef struct		s_shell
 	char			**env;
 }					t_shell;
 
-char		*ft_parcer(t_shell *shell, char *line);
+typedef struct		s_token
+{
+	char 			*command;
+	char 			**args;
+	struct s_token	*next;
+}					t_token;
+/*
+ * minishell.c
+ */
 int			invitation(t_shell *shell);
+
+/*
+ * parcer.c
+ */
+char		*ft_parcer(t_shell *shell, char *line);
 char		*spec_simbol(t_shell *shell, char *line, char **res);
+int			quotes_cl(char *line);
+
+/*
+ * utils.c
+ */
 char		*escape_handler(char *line, char **res);
 char		**realloc_args(t_shell *shell, int i);
-int			quotes_cl(char *line);
 char		*quotes_handler(t_shell *shell, char *line, char **res, char quote);
 char		*get_env(t_shell *shell, char *env);
 
+/*
+ * buildin.c
+ */
+
+/*
+ *
+ */
 #endif
