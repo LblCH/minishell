@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 04:15:50 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/13 16:51:14 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/01/13 18:13:15 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,14 @@ char		*ft_parcer(t_shell *shell, char *line)
 	{
 		if (ft_strchr("\'\"$\\", *line))
 			line = spec_simbol(shell, line, &res);
+		else if (*line == ';')
+		{
+			line++;
+//			printf("left: %s\n", line);
+			token_last(shell->start)->next = new_token();
+			add_token(shell, token_last(shell->start), line);
+			line = shell->line_left;
+		}
 		else
 		{
 			s[0] = *line;

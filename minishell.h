@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 00:22:36 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/13 15:20:44 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/01/13 17:08:52 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,15 @@ char		*escape_handler(char *line, char **res);
 char		**realloc_args(t_token *token, int i);
 char		*quotes_handler(t_shell *shell, char *line, char **res, char quote);
 char		*get_env(t_shell *shell, char *env);
-t_token		*new_token(void);
 
 /*
  * buildin.c
  */
 
 /*
- *
+ * lsts.c
  */
+t_token		*new_token(void);
+t_token		*token_last(t_token *token);
+
 #endif
