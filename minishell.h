@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 00:22:36 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/10 15:12:57 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/01/13 06:37:35 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@
 typedef struct		s_shell
 {
 	char 			*command;
-	char 			*args;
+	char			*line_left;
+	char 			**args;
 	char			**env;
 }					t_shell;
 
@@ -37,6 +38,7 @@ char		*ft_parcer(t_shell *shell, char *line);
 int			invitation(t_shell *shell);
 char		*spec_simbol(t_shell *shell, char *line, char **res);
 char		*escape_handler(char *line, char **res);
+char		**realloc_args(t_shell *shell, int i);
 int			quotes_cl(char *line);
 char		*quotes_handler(t_shell *shell, char *line, char **res, char quote);
 char		*get_env(t_shell *shell, char *env);

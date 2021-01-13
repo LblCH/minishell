@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 04:15:50 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/10 18:50:51 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/01/13 10:41:33 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,6 @@ char		*ft_parcer(t_shell *shell, char *line)
 			line++;
 		}
 	}
+	shell->line_left = line;
 	return (res);
 }

@@ -6,11 +6,22 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 05:48:10 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/10 18:50:51 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/01/13 10:48:14 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char		**realloc_args(t_shell *shell, int i)
+{
+	char	**new;
+
+	if (!(new = (char **) malloc(i)))
+		return (NULL);
+	if (shell->args)
+		new = shell->args;
+	return (new);
+}
 
 char		*escape_handler(char *line, char **res)
 {
