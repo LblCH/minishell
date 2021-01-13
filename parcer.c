@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 04:15:50 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/13 10:41:33 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/01/13 16:51:14 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,26 +27,21 @@ char	*spec_simbol(t_shell *shell, char *line, char **res)
 	return (line);
 }
 
-int		quotes_cl(char *line)
+void 		add_token(t_shell *shell, t_token *token, char *line)
 {
-	int open;
-	int open2;
+	int i;
 
-	open = 0;
-	open2 = 0;
-	while(*line)
+	i = 0;
+	token->command = ft_parcer(shell, line);
+	printf("command: %s\n", token->command);
+	while(*shell->line_left)
 	{
-		if (*line == '\'' && open == 0)
-			open = 1;
-		else if (*line == '\"' && open2 == 0)
-			open2 = 1;
-		else if (*line == '\'' && open == 1)
-			open = 0;
-		else if (*line == '\"' && open2 == 1)
-			open2 = 0;
-		line++;
+		token->args = realloc_args(token, i + 1);
+		token->args[i] = ft_strjoin("", \
+											ft_parcer(shell, shell->line_left));
+		printf("arg %d: %s\n", i, token->args[i]);
+		i++;
 	}
-	return (open || open2);
 }
 
 char		*ft_parcer(t_shell *shell, char *line)

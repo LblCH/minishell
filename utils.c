@@ -6,20 +6,31 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 05:48:10 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/13 10:48:14 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/01/13 15:05:03 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char		**realloc_args(t_shell *shell, int i)
+t_token		*new_token(void)
+{
+	struct s_token *res;
+
+	if(!(res = malloc(sizeof(struct s_token))))
+		return (NULL);
+	res->command = ft_strdup("");
+	res->next = NULL;
+	return (res);
+}
+
+char		**realloc_args(t_token *token, int i)
 {
 	char	**new;
 
 	if (!(new = (char **) malloc(i)))
 		return (NULL);
-	if (shell->args)
-		new = shell->args;
+	if (token->args)
+		new = token->args;
 	return (new);
 }
 
