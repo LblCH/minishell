@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 00:22:36 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/14 18:32:29 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/14 21:00:31 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct		s_shell
 {
 	char			*line_left;
 	char			**env;
+	char 			**env_export;
 	t_token			*start;
 	int 			exit;
 	uint8_t 		ret;
@@ -87,6 +88,14 @@ t_token		*token_last(t_token *token);
  */
 
 void		cmd_run(t_shell *shell);
+
+/*
+ * env_utils.c
+ */
+
+char		**sort_env(char **env, int y);
+int			env_count(char **env);
+char		*env_name(const char *src, char *dest);
 
 
 #endif

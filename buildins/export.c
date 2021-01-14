@@ -6,48 +6,11 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 12:49:15 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/01/12 19:44:35 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/14 21:33:48 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-static int env_count (char **env)
-{
-	int i;
-
-	i = 0;
-	while (env[i])
-		i++;
-	return (i);
-}
-
-char **sort_env (char **env, int y)
-{
-	int x;
-	char *tmp;
-	int sorted;
-
-	sorted = 0;
-	while (env && sorted == 0)
-	{
-		sorted = 1;
-		x = 0;
-		while (x < y - 1)
-		{
-			if (ft_strcmp(env[x], env[x + 1]) > 0)
-			{
-				tmp = env[x];
-				env[x] = env[x + 1];
-				env [x + 1] = tmp;
-				sorted = 0;
-			}
-			x++;
-		}
-		y--;
-	}
-	return (env);
-}
 
 void env_print (char **env)
 {
@@ -62,17 +25,79 @@ void env_print (char **env)
 	}
 }
 
+int		env_validation(const char *env)
+{
+	int		i;
+
+	i = 0;
+	if (ft_isdigit(env[i]) == 1)
+		return (-1);
+	if ((env[0]) == '=')
+		return (-1);
+	while (env[i] && env[i] != '=')
+	{
+		if (ft_isalnum(env[i]) == 0)
+			return (-1);
+		i++;
+	}
+	if (env[i] != '=')
+		return (1);
+	return (2);
+}
+
+void error_printing (char *env)
+{
+	ft_putstr_fd("export: not a valid identifier: ", 2);
+	ft_putendl_fd(env, 2);
+}
+
+
+int add_env (t_shell *shell)
+{
+	int i;
+	char *name;
+
+	i = 0;
+	name = ft_calloc(1, ft_strlen(shell->start->args[0]));
+	name = env_name(shell->start->args[0], name);
+	while (shell->env[i])
+	{
+		if (ft_strncmp(shell->env[i], name, ft_strlen(name)) == 0)
+		{
+			shell->env[i] = ft_strdup(shell->start->args[0]);
+			shell->env_export[i] = ft_strdup(shell->start->args[0]);
+			return (0);
+		}
+		i++;
+	}
+	free(name);
+	shell->env[i] = ft_strdup(shell->start->args[0]);
+	shell->env_export[i] = ft_strdup(shell->start->args[0]);
+	return (0);
+}
+
 int ft_export (t_shell *shell)
 {
-	char **tab;
 	int count;
+	int ret;
 
 	if (shell->start->argc < 1)
 	{
 		count = env_count(shell->env);
-		tab = shell->env;
-		sort_env(tab, count);
-		env_print(tab);
+		sort_env(shell->env_export, count);
+		env_print(shell->env_export);
+		return (0);
+	}
+	else
+	{
+		ret = env_validation(shell->start->args[0]);
+		if (ret < 0)
+		{
+			error_printing(shell->start->args[0]);
+			return (1);
+		}
+		if (ret == 2)
+			add_env(shell);
 	}
 	return (0);
 }

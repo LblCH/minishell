@@ -38,6 +38,7 @@ int		main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	shell.env = envp;
+	shell.env_export = shell.env;
 	shell.ret = 0;
 	shell.exit = 0;
 	invitation(&shell);

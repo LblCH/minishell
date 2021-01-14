@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 19:58:11 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/01/14 18:58:25 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/14 19:45:36 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,19 @@ int is_buildin(char *command)
 
 void run_buildin (t_shell *shell)
 {
-	int ret;
 
-	ret = 0;
 	if (ft_strcmp(shell->start->command, "echo") == 0)
-		ret = ft_echo(shell);
-	if (ft_strcmp(shell->start->command, "cd") == 0)
-		ret = ft_cd(shell);
-	if (ft_strcmp(shell->start->command, "env") == 0)
-		ret = ft_env(shell);
-	if (ft_strcmp(shell->start->command, "export") == 0)
-		ret = ft_export(shell);
-	if (ft_strcmp(shell->start->command, "unset") == 0)
-		ret = ft_unset(shell);
-	if (ft_strcmp(shell->start->command, "pwd") == 0)
-		ret = ft_pwd();
+		shell->ret = ft_echo(shell);
+	else if (ft_strcmp(shell->start->command, "cd") == 0)
+		shell->ret = ft_cd(shell);
+	else if (ft_strcmp(shell->start->command, "env") == 0)
+		shell->ret = ft_env(shell);
+	else if (ft_strcmp(shell->start->command, "export") == 0)
+		shell->ret = ft_export(shell);
+	else if (ft_strcmp(shell->start->command, "unset") == 0)
+		shell->ret = ft_unset(shell);
+	else if (ft_strcmp(shell->start->command, "pwd") == 0)
+		shell->ret = ft_pwd();
 
 }
 
