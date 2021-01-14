@@ -2,4 +2,4 @@
 *.o
 minishell
 CMakeLists.txt
-cmake-build-debug
+cmake-build-debug/

@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 19:58:11 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/01/13 22:07:58 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/14 18:58:25 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void run_buildin (t_shell *shell)
 
 	ret = 0;
 	if (ft_strcmp(shell->start->command, "echo") == 0)
-		ret = ft_echo(shell->start->args);
+		ret = ft_echo(shell);
 	if (ft_strcmp(shell->start->command, "cd") == 0)
 		ret = ft_cd(shell);
 	if (ft_strcmp(shell->start->command, "env") == 0)
@@ -46,7 +46,13 @@ void run_buildin (t_shell *shell)
 
 void run_execve(t_shell *shell)
 {
+	int i;
+
+	i = 0;
 	printf ("I'm execve command: %s\n", shell->start->command);
+	while (ft_strncmp(shell->env[i], "PATH=", 5) != 0)
+		i++;
+
 }
 
 void cmd_run (t_shell *shell)

@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 18:23:11 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/01/12 10:54:45 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/14 19:31:47 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,13 @@ int ft_echo (t_shell *shell)
 			n_option = 1;
 			i++;
 		}
-		while (shell->start->args[++i] != NULL)
+		while (shell->start->argc > 0)
 		{
 			ft_putstr_fd(shell->start->args[i], 1);
 			if (shell->start->args[i + 1] && shell->start->args[i][0] != '\0')
 				ft_putchar_fd(' ', 1);
+			shell->start->argc -= 1;
+			i++;
 		}
 	}
 	if (n_option == 0)
