@@ -42,6 +42,7 @@ void 		add_token(t_shell *shell, t_token *token, char *line)
 		printf("arg %d: %s\n", i, token->args[i]);
 		i++;
 	}
+	token->argc = i;
 }
 
 char		*ft_parcer(t_shell *shell, char *line)

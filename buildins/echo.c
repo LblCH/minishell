@@ -12,35 +12,24 @@
 
 #include "../minishell.h"
 
-static int argc_count (char **argv)
-{
-	int i;
-
-	i = 0;
-	while (argv[i])
-		i++;
-	return (i);
-}
-int ft_echo (char **args)
+int ft_echo (t_shell *shell)
 {
 	int n_option;
 	int i;
-	int argc;
 
 	n_option = 0;
 	i = 0;
-	argc = argc_count(args);
-	if (argc > 1)
+	if (shell->start->argc > 0)
 	{
-		if (ft_strcmp(args[0], "-n") == 0)
+		if (ft_strcmp(shell->start->args[0], "-n") == 0)
 		{
 			n_option = 1;
 			i++;
 		}
-		while (args[++i] != NULL)
+		while (shell->start->args[++i] != NULL)
 		{
-			ft_putstr_fd(args[i], 1);
-			if (args[i + 1] && args[i][0] != '\0')
+			ft_putstr_fd(shell->start->args[i], 1);
+			if (shell->start->args[i + 1] && shell->start->args[i][0] != '\0')
 				ft_putchar_fd(' ', 1);
 		}
 	}

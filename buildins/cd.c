@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 18:34:24 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/01/12 10:54:45 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/14 18:48:32 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int ft_cd (t_shell *shell)
 	char buf[PATH_MAX];
 	int ret;
 
-	if (!(shell->start->args[0]))
+	if (shell->start->argc == 0)
 	{
 		if (ft_strcmp(get_env(shell, "HOME"), "") == 0)
 			ft_putstr_fd("cd: HOME not set", 1);
@@ -50,9 +50,8 @@ int ft_cd (t_shell *shell)
 			curpath = get_env(shell, "HOME");
 	}
 	else
-		curpath = shell->start->args[0];
+		curpath = ft_strjoin_with_slash(getcwd(buf, 1024), shell->start->args[0]);
 
-	curpath = ft_strjoin_with_slash(getcwd(buf, 1024), curpath);
 	printf("%s\n", curpath);
 	ret = chdir(curpath);
 	printf("%d\n", ret);

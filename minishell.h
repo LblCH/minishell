@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 00:22:36 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/13 23:09:14 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/14 18:32:29 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct		s_token
 {
 	char 			*command;
 	char 			**args;
+	int 			argc;
 	struct s_token	*next;
 }					t_token;
 
@@ -67,7 +68,7 @@ char		*get_env(t_shell *shell, char *env);
  */
 
 int 		ft_cd(t_shell *shell);
-int 		ft_echo(char **args);
+int			ft_echo(t_shell *shell);
 int			ft_env(t_shell *shell);
 void		ft_exit(t_shell *shell);
 int			ft_export(t_shell *shell);

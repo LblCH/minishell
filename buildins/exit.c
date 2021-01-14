@@ -29,7 +29,7 @@ void ft_exit (t_shell *shell)
 {
 	shell->exit = 1;
 	ft_putstr_fd("exit", 2);
-	if (shell->start->args[0])
+	if (shell->start->argc > 0)
 	{
 		if (arg_is_digit(shell->start->args[0]))
 			shell->ret = ft_atoi(shell->start->args[0]);

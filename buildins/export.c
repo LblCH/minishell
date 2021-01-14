@@ -67,7 +67,7 @@ int ft_export (t_shell *shell)
 	char **tab;
 	int count;
 
-	if (!shell->start->args[1])
+	if (shell->start->argc < 1)
 	{
 		count = env_count(shell->env);
 		tab = shell->env;
