@@ -6,18 +6,18 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 18:34:24 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/01/14 18:48:32 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/15 21:07:50 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static char	*ft_strjoin_with_slash(char const *s1, char const *s2)
+static char		*ft_strjoin_with_slash(char const *s1, char const *s2)
 {
-	size_t i;
-	size_t j;
-	size_t z;
-	char *res;
+	size_t	i;
+	size_t	j;
+	size_t	z;
+	char	*res;
 
 	i = 0;
 	j = 0;
@@ -36,12 +36,18 @@ static char	*ft_strjoin_with_slash(char const *s1, char const *s2)
 	return (res);
 }
 
-int ft_cd (t_shell *shell)
+static int		set_oldpwd(t_shell *shell)
 {
-	char *curpath = NULL;
-	char buf[PATH_MAX];
-	int ret;
 
+}
+
+int				ft_cd(t_shell *shell)
+{
+	char	*curpath;
+	char	buf[PATH_MAX];
+	int		ret;
+
+	curpath = NULL;
 	if (shell->start->argc == 0)
 	{
 		if (ft_strcmp(get_env(shell, "HOME"), "") == 0)
@@ -51,7 +57,6 @@ int ft_cd (t_shell *shell)
 	}
 	else
 		curpath = ft_strjoin_with_slash(getcwd(buf, 1024), shell->start->args[0]);
-
 	printf("%s\n", curpath);
 	ret = chdir(curpath);
 	printf("%d\n", ret);

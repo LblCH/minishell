@@ -6,13 +6,13 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 23:42:50 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/01/13 21:52:47 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/15 21:14:49 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../minishell.h"
+#include "../minishell.h"
 
-static int arg_is_digit (char *arg)
+static int	arg_is_digit(char *arg)
 {
 	int i;
 
@@ -25,7 +25,8 @@ static int arg_is_digit (char *arg)
 	}
 	return (1);
 }
-void ft_exit (t_shell *shell)
+
+void		ft_exit(t_shell *shell)
 {
 	shell->exit = 1;
 	ft_putstr_fd("exit", 2);
@@ -39,7 +40,6 @@ void ft_exit (t_shell *shell)
 			ft_putstr_fd(": ", 2);
 			ft_putstr_fd(shell->start->args[0], 2);
 			ft_putendl_fd(": numeric argument required", 2);
-
 		}
 	}
 }

@@ -6,13 +6,13 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 12:49:15 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/01/14 21:33:48 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/15 21:14:49 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void env_print (char **env)
+void		env_print(char **env)
 {
 	int i;
 
@@ -25,7 +25,7 @@ void env_print (char **env)
 	}
 }
 
-int		env_validation(const char *env)
+int			env_validation(const char *env)
 {
 	int		i;
 
@@ -45,17 +45,16 @@ int		env_validation(const char *env)
 	return (2);
 }
 
-void error_printing (char *env)
+void		error_printing(char *env)
 {
 	ft_putstr_fd("export: not a valid identifier: ", 2);
 	ft_putendl_fd(env, 2);
 }
 
-
-int add_env (t_shell *shell)
+int			add_env(t_shell *shell)
 {
-	int i;
-	char *name;
+	int		i;
+	char	*name;
 
 	i = 0;
 	name = ft_calloc(1, ft_strlen(shell->start->args[0]));
@@ -76,7 +75,7 @@ int add_env (t_shell *shell)
 	return (0);
 }
 
-int ft_export (t_shell *shell)
+int			ft_export(t_shell *shell)
 {
 	int count;
 	int ret;

@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 05:48:10 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/13 23:09:14 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/15 21:07:50 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char		**realloc_args(t_token *token, int i)
 {
 	char	**new;
 
-	if (!(new = (char **) malloc(i)))
+	if (!(new = (char **)malloc(i)))
 		return (NULL);
 	if (token->args)
 		new = token->args;
@@ -66,13 +66,13 @@ char		*get_env(t_shell *shell, char *env)
 
 	len = 0;
 	i = 0;
-	while(ft_isalnum(env[i]) || env[i] == '_')
+	while (ft_isalnum(env[i]) || env[i] == '_')
 	{
 		len++;
 		i++;
 	}
 	i = 0;
-	while(shell->env[i])
+	while (shell->env[i])
 	{
 		if (!ft_strncmp(env, shell->env[i], len) \
 			&& shell->env[i][len] == '=')

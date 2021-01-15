@@ -6,13 +6,13 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 18:23:11 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/01/14 19:31:47 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/15 21:07:50 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int ft_echo (t_shell *shell)
+int	ft_echo(t_shell *shell)
 {
 	int n_option;
 	int i;
@@ -36,6 +36,6 @@ int ft_echo (t_shell *shell)
 		}
 	}
 	if (n_option == 0)
-		write (1, "\n", 1);
+		write(1, "\n", 1);
 	return (0);
 }

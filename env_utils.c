@@ -6,17 +6,17 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 20:00:01 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/01/14 21:08:32 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/15 21:07:50 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char **sort_env (char **env, int y)
+char		**sort_env(char **env, int y)
 {
-	int x;
-	char *tmp;
-	int sorted;
+	int		x;
+	char	*tmp;
+	int		sorted;
 
 	sorted = 0;
 	while (env && sorted == 0)
@@ -29,7 +29,7 @@ char **sort_env (char **env, int y)
 			{
 				tmp = env[x];
 				env[x] = env[x + 1];
-				env [x + 1] = tmp;
+				env[x + 1] = tmp;
 				sorted = 0;
 			}
 			x++;
@@ -39,7 +39,7 @@ char **sort_env (char **env, int y)
 	return (env);
 }
 
-int env_count (char **env)
+int			env_count(char **env)
 {
 	int i;
 
@@ -49,7 +49,7 @@ int env_count (char **env)
 	return (i);
 }
 
-char *env_name(const char *src, char *dest)
+char		*env_name(const char *src, char *dest)
 {
 	int		i;
 

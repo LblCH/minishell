@@ -6,13 +6,13 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 04:15:50 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/13 23:09:14 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/15 21:07:50 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*spec_simbol(t_shell *shell, char *line, char **res)
+char		*spec_simbol(t_shell *shell, char *line, char **res)
 {
 	if (*line == '$')
 	{
@@ -34,7 +34,7 @@ void 		add_token(t_shell *shell, t_token *token, char *line)
 	i = 0;
 	token->command = ft_parcer(shell, line);
 	printf("command: %s\n", token->command);
-	while(*shell->line_left)
+	while (*shell->line_left)
 	{
 		token->args = realloc_args(token, i + 1);
 		token->args[i] = ft_strjoin("", \
