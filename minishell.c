@@ -25,8 +25,8 @@ int		invitation(t_shell *shell)
 		if (!shell->start)
 			shell->start = new_token();
 		add_token(shell, shell->start, line);
-		free(line);
 		cmd_run(shell);
+		free(line);
 	}
 	return (0);
 }

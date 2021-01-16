@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 19:58:11 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/01/16 11:45:38 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/16 19:10:22 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,24 +44,31 @@ char		*check_location(char **paths, char *cmd)
 		while (dir_content)
 		{
 			if (ft_strcmp(dir_content->d_name, cmd) == 0)
+			{
 				valid_path = ft_strjoin_with_slash(paths[i], cmd);
+				closedir(dir);
+				return (valid_path);
+			}
 			dir_content = readdir(dir);
 		}
 	}
 	closedir(dir);
-	return (valid_path);
+	return (0);
 }
 
 int 		run_execve(t_shell *shell, char *path)
 {
+	pid_t pid;
 	int ret;
 
-	ret = fork();
-	if (ret == 0)
+	pid = fork();
+	if (pid == 0)
 	{
 		execve(path, shell->start->args, shell->env_export);
-		exit (ret);
+		exit (pid);
 	}
+	else
+		waitpid(pid, &ret, 0);
 	return (0);
 }
 
@@ -79,7 +86,6 @@ void		prep_execve(t_shell *shell)
 	paths[0] = paths[0] + 5;
 	valid_path = check_location(paths, shell->start->command);
 	run_execve (shell, valid_path);
-
 }
 
 void		cmd_run(t_shell *shell)
