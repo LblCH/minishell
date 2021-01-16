@@ -6,20 +6,20 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 18:55:55 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/01/15 21:07:50 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/15 21:14:49 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_env(t_shell *shell)
+int	ft_env(char **env)
 {
 	int i;
 
 	i = 0;
-	while (shell->env[i])
+	while (env[i])
 	{
-		ft_putendl_fd(shell->env[i], 1);
+		ft_putendl_fd(env[i], 1);
 		i++;
 	}
 	return (0);

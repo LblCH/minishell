@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 00:22:36 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/15 21:07:44 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/16 11:34:29 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,12 @@ char		*get_env(t_shell *shell, char *env);
  */
 
 int 		ft_cd(t_shell *shell);
-int			ft_echo(t_shell *shell);
-int			ft_env(t_shell *shell);
+int			ft_echo(int argc, char **argv);
+int			ft_env(char **env);
 void		ft_exit(t_shell *shell);
 int			ft_export(t_shell *shell);
 int			ft_pwd(void);
-int			ft_unset(t_shell *shell);
+int			ft_unset(t_shell *shell, char *arg);
 
 
 /*
@@ -96,6 +96,14 @@ void		cmd_run(t_shell *shell);
 char		**sort_env(char **env, int y);
 int			env_count(char **env);
 char		*env_name(const char *src, char *dest);
+int			add_env(t_shell *shell, char *arg);
+void		error_printing(char *env, char *text);
 
+/*
+ * cmd_exec_utils.c
+ */
+
+char		*ft_strjoin_with_slash(char const *s1, char const *s2);
+int			is_buildin(char *command);
 
 #endif

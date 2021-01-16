@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 12:49:15 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/01/15 21:14:49 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/15 22:00:33 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,36 +45,6 @@ int			env_validation(const char *env)
 	return (2);
 }
 
-void		error_printing(char *env)
-{
-	ft_putstr_fd("export: not a valid identifier: ", 2);
-	ft_putendl_fd(env, 2);
-}
-
-int			add_env(t_shell *shell)
-{
-	int		i;
-	char	*name;
-
-	i = 0;
-	name = ft_calloc(1, ft_strlen(shell->start->args[0]));
-	name = env_name(shell->start->args[0], name);
-	while (shell->env[i])
-	{
-		if (ft_strncmp(shell->env[i], name, ft_strlen(name)) == 0)
-		{
-			shell->env[i] = ft_strdup(shell->start->args[0]);
-			shell->env_export[i] = ft_strdup(shell->start->args[0]);
-			return (0);
-		}
-		i++;
-	}
-	free(name);
-	shell->env[i] = ft_strdup(shell->start->args[0]);
-	shell->env_export[i] = ft_strdup(shell->start->args[0]);
-	return (0);
-}
-
 int			ft_export(t_shell *shell)
 {
 	int count;
@@ -92,11 +62,12 @@ int			ft_export(t_shell *shell)
 		ret = env_validation(shell->start->args[0]);
 		if (ret < 0)
 		{
-			error_printing(shell->start->args[0]);
+			error_printing(shell->start->args[0],
+				  "export: not a valid identifier: ");
 			return (1);
 		}
 		if (ret == 2)
-			add_env(shell);
+			add_env(shell, shell->start->args[0]);
 	}
 	return (0);
 }

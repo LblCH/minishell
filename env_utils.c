@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 20:00:01 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/01/15 21:07:50 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/15 22:00:33 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,34 @@ char		*env_name(const char *src, char *dest)
 	dest[i] = '=';
 	dest[i + 1] = '\0';
 	return (dest);
+}
+
+int			add_env(t_shell *shell, char *arg)
+{
+	int		i;
+	char	*name;
+
+	i = 0;
+	name = ft_calloc(1, ft_strlen(arg));
+	name = env_name(arg, name);
+	while (shell->env[i])
+	{
+		if (ft_strncmp(shell->env[i], name, ft_strlen(name)) == 0)
+		{
+			shell->env[i] = ft_strdup(arg);
+			shell->env_export[i] = ft_strdup(arg);
+			return (0);
+		}
+		i++;
+	}
+	free(name);
+	shell->env[i] = ft_strdup(arg);
+	shell->env_export[i] = ft_strdup(arg);
+	return (0);
+}
+
+void		error_printing(char *env, char *text)
+{
+	ft_putstr_fd(text, 2);
+	ft_putendl_fd(env, 2);
 }

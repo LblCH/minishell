@@ -6,47 +6,80 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 19:58:11 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/01/15 21:07:50 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/16 11:45:38 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int			is_buildin(char *command)
+void		run_buildin(t_shell *shell, char *cmd)
 {
-	if (ft_strcmp(command, "echo") == 0 || ft_strcmp(command, "cd") == 0)
-		return (1);
-	if (ft_strcmp(command, "env") == 0 || ft_strcmp(command, "pwd") == 0)
-		return (1);
-	if (ft_strcmp(command, "export") == 0 || ft_strcmp(command, "unset") == 0)
-		return (1);
-	return (0);
-}
-
-void		run_buildin(t_shell *shell)
-{
-	if (ft_strcmp(shell->start->command, "echo") == 0)
-		shell->ret = ft_echo(shell);
-	else if (ft_strcmp(shell->start->command, "cd") == 0)
+	if (ft_strcmp(cmd, "echo") == 0)
+		shell->ret = ft_echo(shell->start->argc, shell->start->args);
+	else if (ft_strcmp(cmd, "cd") == 0)
 		shell->ret = ft_cd(shell);
-	else if (ft_strcmp(shell->start->command, "env") == 0)
-		shell->ret = ft_env(shell);
-	else if (ft_strcmp(shell->start->command, "export") == 0)
+	else if (ft_strcmp(cmd, "env") == 0)
+		shell->ret = ft_env(shell->env);
+	else if (ft_strcmp(cmd, "export") == 0)
 		shell->ret = ft_export(shell);
-	else if (ft_strcmp(shell->start->command, "unset") == 0)
-		shell->ret = ft_unset(shell);
-	else if (ft_strcmp(shell->start->command, "pwd") == 0)
+	else if (ft_strcmp(cmd, "unset") == 0)
+		shell->ret = ft_unset(shell, shell->start->args[0]);
+	else if (ft_strcmp(cmd, "pwd") == 0)
 		shell->ret = ft_pwd();
 }
 
-void		run_execve(t_shell *shell)
+char		*check_location(char **paths, char *cmd)
 {
+	char *valid_path;
+	DIR *dir;
+	struct dirent *dir_content;
 	int i;
 
 	i = 0;
-	printf("I'm execve command: %s\n", shell->start->command);
-	while (ft_strncmp(shell->env[i], "PATH=", 5) != 0)
+	while (paths[i++])
+	{
+		if(!(dir = opendir(paths[i])))
+			return (NULL);
+		dir_content = readdir(dir);
+		while (dir_content)
+		{
+			if (ft_strcmp(dir_content->d_name, cmd) == 0)
+				valid_path = ft_strjoin_with_slash(paths[i], cmd);
+			dir_content = readdir(dir);
+		}
+	}
+	closedir(dir);
+	return (valid_path);
+}
+
+int 		run_execve(t_shell *shell, char *path)
+{
+	int ret;
+
+	ret = fork();
+	if (ret > 0)
+	{
+		execve(path, shell->start->args, shell->env_export);
+		exit (ret);
+	}
+	return (0);
+}
+
+void		prep_execve(t_shell *shell)
+{
+	int i;
+	char **paths;
+	char* valid_path;
+
+	i = 0;
+
+	while (shell->env && ft_strncmp(shell->env[i], "PATH=", 5) != 0)
 		i++;
+	paths = ft_split(shell->env[i], ':');
+	paths[0] = paths[0] + 5;
+	valid_path = check_location(paths, shell->start->command);
+	run_execve (shell, valid_path);
+
 }
 
 void		cmd_run(t_shell *shell)
@@ -54,7 +87,7 @@ void		cmd_run(t_shell *shell)
 	if (!ft_strcmp(shell->start->command, "exit"))
 		ft_exit(shell);
 	else if (is_buildin(shell->start->command))
-		run_buildin(shell);
+		run_buildin(shell, shell->start->command);
 	else
-		run_execve(shell);
+		prep_execve(shell);
 }

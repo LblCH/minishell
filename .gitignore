@@ -3,3 +3,4 @@
 minishell
 CMakeLists.txt
 cmake-build-debug/
+minishell-tester/

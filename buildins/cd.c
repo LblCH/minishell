@@ -6,39 +6,33 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 18:34:24 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/01/15 21:07:50 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/16 11:26:30 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static char		*ft_strjoin_with_slash(char const *s1, char const *s2)
-{
-	size_t	i;
-	size_t	j;
-	size_t	z;
-	char	*res;
 
-	i = 0;
-	j = 0;
-	z = 0;
-	if (!s1 || !s2)
-		return (NULL);
-	if (!(res = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2)) + 2)))
-		return (NULL);
-	while (s1[i])
-		res[z++] = s1[i++];
-	res[z] = '/';
-	z++;
-	while (s2[j])
-		res[z++] = s2[j++];
-	res[z] = '\0';
-	return (res);
+
+static int		set_pwd(t_shell *shell, char* pwd)
+{
+	char buf[PATH_MAX];
+	char *env;
+
+	env = ft_strjoin(pwd, getcwd(buf, PATH_MAX));
+	add_env(shell, env);
+	return (0);
 }
 
-static int		set_oldpwd(t_shell *shell)
+int error_handling (t_shell *shell)
 {
-
+	if (errno == 2)
+		error_printing(shell->start->args[0],
+					   "No such file or directory: ");
+	else if (errno == 13)
+		error_printing(shell->start->args[0],
+					   "Permission denied: ");
+	return (0);
 }
 
 int				ft_cd(t_shell *shell)
@@ -57,8 +51,13 @@ int				ft_cd(t_shell *shell)
 	}
 	else
 		curpath = ft_strjoin_with_slash(getcwd(buf, 1024), shell->start->args[0]);
-	printf("%s\n", curpath);
-	ret = chdir(curpath);
-	printf("%d\n", ret);
+	set_pwd(shell, "OLDPWD=");
+	if ((ret = chdir(curpath) < 0))
+	{
+		error_handling(shell);
+		return (1);
+	}
+	printf("%d\n%d\n", ret, errno);
+	set_pwd(shell, "PWD=");
 	return (0);
 }
