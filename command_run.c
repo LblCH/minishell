@@ -57,7 +57,7 @@ int 		run_execve(t_shell *shell, char *path)
 	int ret;
 
 	ret = fork();
-	if (ret > 0)
+	if (ret == 0)
 	{
 		execve(path, shell->start->args, shell->env_export);
 		exit (ret);
