@@ -12,6 +12,23 @@
 
 #include "minishell.h"
 
+void 		add_token(t_shell *shell, t_token *token, char *line)
+{
+	int i;
+
+	i = 0;
+	token->command = ft_parcer(shell, line);
+	printf("command: %s\n", token->command);
+	while(*shell->line_left)
+	{
+		token->args = realloc_args(token, i + 1);
+		token->args[i] = ft_strjoin("", \
+											ft_parcer(shell, shell->line_left));
+		printf("arg %d: %s\n", i, token->args[i]);
+		i++;
+	}
+}
+
 t_token		*new_token(void)
 {
 	struct s_token *res;

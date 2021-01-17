@@ -50,7 +50,7 @@ int			invitation(t_shell *shell);
  */
 char		*ft_parcer(t_shell *shell, char *line);
 char		*spec_simbol(t_shell *shell, char *line, char **res);
-void 		add_token(t_shell *shell, t_token *token, char *line);
+
 
 /*
  * utils.c
@@ -69,5 +69,6 @@ char		*get_env(t_shell *shell, char *env);
  */
 t_token		*new_token(void);
 t_token		*token_last(t_token *token);
+void 		add_token(t_shell *shell, t_token *token, char *line);
 
 #endif

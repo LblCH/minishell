@@ -27,23 +27,6 @@ char	*spec_simbol(t_shell *shell, char *line, char **res)
 	return (line);
 }
 
-void 		add_token(t_shell *shell, t_token *token, char *line)
-{
-	int i;
-
-	i = 0;
-	token->command = ft_parcer(shell, line);
-	printf("command: %s\n", token->command);
-	while(*shell->line_left)
-	{
-		token->args = realloc_args(token, i + 1);
-		token->args[i] = ft_strjoin("", \
-											ft_parcer(shell, shell->line_left));
-		printf("arg %d: %s\n", i, token->args[i]);
-		i++;
-	}
-}
-
 char		*ft_parcer(t_shell *shell, char *line)
 {
 	char s[2];
