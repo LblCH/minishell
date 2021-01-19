@@ -6,11 +6,30 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 05:48:10 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/13 15:20:44 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/01/19 20:04:07 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char		*add_char(char *line, char c)
+{
+	char *temp;
+	int i;
+
+	i = 0;
+	if (!(temp = (char *) malloc(sizeof(char) * ft_strlen(line) + 2)))
+		return (NULL);
+	while (line[i])
+	{
+		temp[i] = line[i];
+	i++;
+	}
+	temp[i] = c;
+	temp[i + 1] = '\0';
+	free(line);
+	return (temp);
+}
 
 char		**realloc_args(t_token *token, int i)
 {

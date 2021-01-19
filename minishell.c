@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 23:08:34 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/13 16:51:14 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/01/19 16:39:46 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int		invitation(t_shell *shell)
 	char *line;
 
 	shell->line_left = ft_strdup("");
+	shell->fd = -1;
 	ft_putstr_fd("👻 \033[35mGhost'm IN i-Shell ⇥ \033[0m", 1);
 	if (get_next_line(0, &line) < 0)
 		ft_putstr_fd("Failed GNL\n", 2);

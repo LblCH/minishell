@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 00:22:36 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/13 17:08:52 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/01/19 16:51:42 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ typedef struct		s_token
 {
 	char 			*command;
 	char 			**args;
+	int 			fd_in;
+	int 			fd_out;
 	struct s_token	*next;
 }					t_token;
 
@@ -38,6 +40,8 @@ typedef struct		s_shell
 	char			*line_left;
 	char			**env;
 	t_token			*start;
+	int 			fd_type;
+	int 			fd;
 }					t_shell;
 
 /*
@@ -48,6 +52,7 @@ int			invitation(t_shell *shell);
 /*
  * parcer.c
  */
+char		*redirect(t_shell *shell, char *line);
 char		*ft_parcer(t_shell *shell, char *line);
 char		*spec_simbol(t_shell *shell, char *line, char **res);
 
@@ -55,6 +60,7 @@ char		*spec_simbol(t_shell *shell, char *line, char **res);
 /*
  * utils.c
  */
+char		*add_char(char *line, char c);
 char		*escape_handler(char *line, char **res);
 char		**realloc_args(t_token *token, int i);
 char		*quotes_handler(t_shell *shell, char *line, char **res, char quote);
