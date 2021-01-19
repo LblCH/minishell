@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 00:22:36 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/19 16:51:42 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/01/19 23:21:23 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,9 @@ char		*quotes_handler(t_shell *shell, char *line, char **res, char quote);
 char		*get_env(t_shell *shell, char *env);
 
 /*
- * buildin.c
+ * pipe_utils.c
  */
+char		*add_pipe(t_shell *shell, char *line);
 
 /*
  * lsts.c

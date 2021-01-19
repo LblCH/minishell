@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 04:15:50 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/19 20:09:54 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/01/19 23:21:23 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ char	*spec_simbol(t_shell *shell, char *line, char **res)
 		line = quotes_handler(shell, line, res, *line);
 	else if (*line == '<' || *line == '>')
 		line = redirect(shell, line);
+	else if (*line == '|')
+		line = add_pipe(shell, line);
 	return (line);
 }
 
@@ -70,7 +72,7 @@ char		*ft_parcer(t_shell *shell, char *line)
 		return (res);
 	while (*line && *line != ' ')
 	{
-		if (ft_strchr("\'\"$\\><", *line))
+		if (ft_strchr("\'\"$\\><|", *line))
 			line = spec_simbol(shell, line, &res);
 		else if (*line == ';')
 		{
