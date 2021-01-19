@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 04:15:50 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/19 23:21:23 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/01/20 00:38:32 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,26 @@ char	*spec_simbol(t_shell *shell, char *line, char **res)
 		line = quotes_handler(shell, line, res, *line);
 	else if (*line == '<' || *line == '>')
 		line = redirect(shell, line);
-	else if (*line == '|')
-		line = add_pipe(shell, line);
 	return (line);
+}
+
+char		*separators(t_shell *shell, char *line)
+{
+	int pipe_fd[2];
+
+	if (*line == '|')
+		pipe(pipe_fd);
+	if (*line == '|' && token_last(shell->start)->fd_out < 0)
+	{
+		token_last(shell->start)->is_piped = 1;
+		token_last(shell->start)->fd_out = pipe_fd[1];
+	}
+	token_last(shell->start)->next = new_token();
+	if (*line == '|')
+		token_last(shell->start)->fd_in = pipe_fd[0];
+	line++;
+	add_token(shell, token_last(shell->start), line);
+	return(shell->line_left);
 }
 
 char		*ft_parcer(t_shell *shell, char *line)
@@ -72,15 +89,10 @@ char		*ft_parcer(t_shell *shell, char *line)
 		return (res);
 	while (*line && *line != ' ')
 	{
-		if (ft_strchr("\'\"$\\><|", *line))
+		if (ft_strchr("\'\"$\\><", *line))
 			line = spec_simbol(shell, line, &res);
-		else if (*line == ';')
-		{
-			line++;
-			token_last(shell->start)->next = new_token();
-			add_token(shell, token_last(shell->start), line);
-			line = shell->line_left;
-		}
+		else if (*line == ';' || *line == '|')
+			line = separators(shell, line);
 		else
 		{
 			res = add_char(res, *line);

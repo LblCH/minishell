@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 17:03:42 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/19 23:21:19 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/01/20 00:30:38 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ void 		add_token(t_shell *shell, t_token *token, char *line)
 	i = 0;
 	token->command = ft_parcer(shell, line);
 	printf("command: %s\n", token->command);
-	token->fd_in = -1;
-	token->fd_out = -1;
 	while(*shell->line_left)
 	{
 		token->args = realloc_args(token, i + 1);
@@ -43,6 +41,9 @@ t_token		*new_token(void)
 		return (NULL);
 	res->command = ft_strdup("");
 	res->next = NULL;
+	res->fd_in = -1;
+	res->fd_out = -1;
+	res->is_piped = 0;
 	return (res);
 }
 
