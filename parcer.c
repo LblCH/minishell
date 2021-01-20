@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 04:15:50 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/20 00:38:32 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/01/20 22:12:15 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,6 @@ char		*ft_parcer(t_shell *shell, char *line)
 	res = ft_strdup("");
 	while (ft_isspace(*line))
 		line++;
-	if (!(*line))
-		return (res);
 	while (*line && *line != ' ')
 	{
 		if (ft_strchr("\'\"$\\><", *line))
