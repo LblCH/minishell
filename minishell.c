@@ -23,7 +23,7 @@ int		invitation(t_shell *shell)
 		ft_putstr_fd("Failed GNL\n", 2);
 	if (!shell->start)
 		shell->start = new_token();
-	add_token(shell, shell->start, line);
+	(*line)	? add_token(shell, shell->start, line) : 0;
 	if (!ft_strncmp("exit", (shell->start->command), 4))
 		return (0);
 	free(line);
