@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/28 00:06:48 by ztawanna          #+#    #+#             */
-/*   Updated: 2020/10/20 23:58:52 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/01/15 21:07:43 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int					ft_strncmp(const char *s1, const char *s2, size_t n);
 char				*ft_strnstr(const char *big, const char *little,
 					size_t len);
 char				*ft_strchr(const char *s, int c);
+int					ft_strcmp(const char *s1, const char *s2);
 char				*ft_strrchr(const char *s, int c);
 size_t				ft_strlen(const char *str);
 size_t				ft_strlcat(char *dst, const char *src, size_t size);

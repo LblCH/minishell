@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/27 23:12:37 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/15 21:07:44 by cdrennan         ###   ########.fr       */
+/*   Created: 2021/01/11 23:03:35 by cdrennan          #+#    #+#             */
+/*   Updated: 2021/01/15 21:07:50 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../minishell.h"
 
-int		ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_pwd(void)
 {
-	size_t i;
+	char buf[PATH_MAX];
 
-	i = 0;
-	while ((s1[i] != '\0' || s2[i] != '\0') && i < n)
+	if (getcwd(buf, PATH_MAX))
 	{
-		if (s1[i] != s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-		i++;
+		ft_putendl_fd(buf, 1);
+		return (0);
 	}
-	return (0);
+	else
+		return (1);
 }

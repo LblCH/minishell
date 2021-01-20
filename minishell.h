@@ -30,6 +30,7 @@ typedef struct		s_token
 {
 	char 			*command;
 	char 			**args;
+	int 			argc;
 	int 			is_piped;
 	int 			fd_in;
 	int 			fd_out;
@@ -40,9 +41,12 @@ typedef struct		s_shell
 {
 	char			*line_left;
 	char			**env;
+	char 			**env_export;
 	t_token			*start;
 	int 			fd_type;
 	int 			fd;
+	int 			exit;
+	uint8_t 		ret;
 }					t_shell;
 
 /*
@@ -69,10 +73,46 @@ char		*quotes_handler(t_shell *shell, char *line, char **res, char quote);
 char		*get_env(t_shell *shell, char *env);
 
 /*
+ * buildins
+ */
+
+int 		ft_cd(t_shell *shell);
+int			ft_echo(int argc, char **argv);
+int			ft_env(char **env);
+void		ft_exit(t_shell *shell);
+int			ft_export(t_shell *shell);
+int			ft_pwd(void);
+int			ft_unset(t_shell *shell, char *arg);
+
+
+/*
  * lsts.c
  */
 t_token		*new_token(void);
 t_token		*token_last(t_token *token);
 void 		add_token(t_shell *shell, t_token *token, char *line);
+
+/*
+ * command_run.c
+ */
+
+void		cmd_run(t_shell *shell);
+
+/*
+ * env_utils.c
+ */
+
+char		**sort_env(char **env, int y);
+int			env_count(char **env);
+char		*env_name(const char *src, char *dest);
+int			add_env(t_shell *shell, char *arg);
+void		error_printing(char *env, char *text);
+
+/*
+ * cmd_exec_utils.c
+ */
+
+char		*ft_strjoin_with_slash(char const *s1, char const *s2);
+int			is_buildin(char *command);
 
 #endif

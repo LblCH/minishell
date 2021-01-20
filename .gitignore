@@ -1,4 +1,9 @@
 /.idea/
 *.o
 minishell
+CMakeLists.txt
+cmake-build-debug/
+minishell-tester/
+seek_path_2.c
+cmake-build-debug-coverage/
 .DS*

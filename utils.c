@@ -35,7 +35,7 @@ char		**realloc_args(t_token *token, int i)
 {
 	char	**new;
 
-	if (!(new = (char **) malloc(i)))
+	if (!(new = (char **)malloc(i)))
 		return (NULL);
 	if (token->args)
 		new = token->args;
@@ -85,13 +85,13 @@ char		*get_env(t_shell *shell, char *env)
 
 	len = 0;
 	i = 0;
-	while(ft_isalnum(env[i]) || env[i] == '_')
+	while (ft_isalnum(env[i]) || env[i] == '_')
 	{
 		len++;
 		i++;
 	}
 	i = 0;
-	while(shell->env[i])
+	while (shell->env[i])
 	{
 		if (!ft_strncmp(env, shell->env[i], len) \
 			&& shell->env[i][len] == '=')

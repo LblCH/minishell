@@ -42,7 +42,7 @@ char		*redirect(t_shell *shell, char *line)
 	return (line);
 }
 
-char	*spec_simbol(t_shell *shell, char *line, char **res)
+char		*spec_simbol(t_shell *shell, char *line, char **res)
 {
 	if (*line == '$')
 	{

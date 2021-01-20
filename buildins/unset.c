@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/27 23:12:37 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/15 21:07:44 by cdrennan         ###   ########.fr       */
+/*   Created: 2021/01/12 12:49:23 by cdrennan          #+#    #+#             */
+/*   Updated: 2021/01/15 23:28:10 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../minishell.h"
 
-int		ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_unset(t_shell *shell, char *arg)
 {
-	size_t i;
+	int i;
 
 	i = 0;
-	while ((s1[i] != '\0' || s2[i] != '\0') && i < n)
+	if (shell->start->argc < 1)
+		return (0);
+	while (shell->env[i])
 	{
-		if (s1[i] != s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		if (ft_strncmp(shell->env[i], arg, ft_strlen(arg)) == 0)
+		{
+			shell->env[i] = NULL;
+			shell->env_export[i] = NULL;
+			return (0);
+		}
 		i++;
 	}
 	return (0);

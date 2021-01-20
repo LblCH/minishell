@@ -46,7 +46,7 @@ t_token		*new_token(void)
 {
 	struct s_token *res;
 
-	if(!(res = malloc(sizeof(struct s_token))))
+	if (!(res = malloc(sizeof(struct s_token))))
 		return (NULL);
 	res->command = ft_strdup("");
 	res->next = NULL;
