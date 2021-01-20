@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 00:22:36 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/19 16:51:42 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/01/20 23:34:43 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct		s_token
 {
 	char 			*command;
 	char 			**args;
+	int 			is_piped;
 	int 			fd_in;
 	int 			fd_out;
 	struct s_token	*next;
@@ -52,6 +53,7 @@ int			invitation(t_shell *shell);
 /*
  * parcer.c
  */
+char		*separators(t_shell *shell, char *line);
 char		*redirect(t_shell *shell, char *line);
 char		*ft_parcer(t_shell *shell, char *line);
 char		*spec_simbol(t_shell *shell, char *line, char **res);
@@ -67,8 +69,9 @@ char		*quotes_handler(t_shell *shell, char *line, char **res, char quote);
 char		*get_env(t_shell *shell, char *env);
 
 /*
- * buildin.c
+ * pipe_utils.c
  */
+char		*add_pipe(t_shell *shell, char *line);
 
 /*
  * lsts.c

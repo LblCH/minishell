@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 04:15:50 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/19 20:09:54 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/01/20 23:34:43 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,25 @@ char	*spec_simbol(t_shell *shell, char *line, char **res)
 	return (line);
 }
 
+char		*separators(t_shell *shell, char *line)
+{
+	int pipe_fd[2];
+
+	if (*line == '|')
+		pipe(pipe_fd);
+	if (*line == '|' && token_last(shell->start)->fd_out < 0)
+	{
+		token_last(shell->start)->is_piped = 1;
+		token_last(shell->start)->fd_out = pipe_fd[1];
+	}
+	token_last(shell->start)->next = new_token();
+	if (*line == '|')
+		token_last(shell->start)->fd_in = pipe_fd[0];
+	line++;
+	add_token(shell, token_last(shell->start), line);
+	return(shell->line_left);
+}
+
 char		*ft_parcer(t_shell *shell, char *line)
 {
 	char *res;
@@ -66,19 +85,12 @@ char		*ft_parcer(t_shell *shell, char *line)
 	res = ft_strdup("");
 	while (ft_isspace(*line))
 		line++;
-	if (!(*line))
-		return (res);
 	while (*line && *line != ' ')
 	{
 		if (ft_strchr("\'\"$\\><", *line))
 			line = spec_simbol(shell, line, &res);
-		else if (*line == ';')
-		{
-			line++;
-			token_last(shell->start)->next = new_token();
-			add_token(shell, token_last(shell->start), line);
-			line = shell->line_left;
-		}
+		else if (*line == ';' || *line == '|')
+			line = separators(shell, line);
 		else
 		{
 			res = add_char(res, *line);

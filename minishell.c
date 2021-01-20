@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 23:08:34 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/19 16:39:46 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/01/20 23:34:43 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		invitation(t_shell *shell)
 		ft_putstr_fd("Failed GNL\n", 2);
 	if (!shell->start)
 		shell->start = new_token();
-	add_token(shell, shell->start, line);
+	(*line)	? add_token(shell, shell->start, line) : 0;
 	if (!ft_strncmp("exit", (shell->start->command), 4))
 		return (0);
 	free(line);
