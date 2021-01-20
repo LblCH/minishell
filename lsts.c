@@ -32,14 +32,15 @@ void 		add_token(t_shell *shell, t_token *token, char *line)
 			shell->line_left++;
 		i++;
 	}
-	printf("command: %s \n", token->command);
-	printf("fd_in: %d fd_out: %d\n", token->fd_in, token->fd_out);
-	i = 0;
-	while (token->args && token->args[i])
-	{
-		printf("arg %d: %s\n", i, token->args[i]);
-		i++;
-	}
+	printf("token added\n");
+//	printf("command: %s \n", token->command);
+//	printf("fd_in: %d fd_out: %d\n", token->fd_in, token->fd_out);
+//	i = 0;
+//	while (token->args && token->args[i])
+//	{
+//		printf("arg %d: %s\n", i, token->args[i]);
+//		i++;
+//	}
 }
 
 t_token		*new_token(void)

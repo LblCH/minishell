@@ -1,5 +1,6 @@
 /.idea/
 *.o
+*.a
 minishell
 CMakeLists.txt
 cmake-build-debug/

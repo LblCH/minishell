@@ -29,7 +29,7 @@ static int	arg_is_digit(char *arg)
 void		ft_exit(t_shell *shell)
 {
 	shell->exit = 1;
-	ft_putstr_fd("exit", 2);
+	ft_putstr_fd("exit\n", 2);
 	if (shell->start->argc > 0)
 	{
 		if (arg_is_digit(shell->start->args[0]))

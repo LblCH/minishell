@@ -12,6 +12,30 @@
 
 #include "minishell.h"
 
+void	clear_tokens(t_shell *shell)
+{
+	t_token	*tmp;
+	t_token	*nxt;
+	int i;
+
+	i = 0;
+	tmp = shell->start;
+	nxt = NULL;
+	while (tmp)
+	{
+		nxt = tmp->next;
+		(tmp->command) ? free(tmp->command) : 0;
+		while (tmp->args && tmp->args[i])
+			free(tmp->args[i++]);
+		(tmp->args) ? free(tmp->args) : 0;
+		close(tmp->fd_in);
+		close(tmp->fd_out);
+		free(tmp);
+		tmp = nxt;
+	}
+	shell = NULL;
+}
+
 int		invitation(t_shell *shell)
 {
 	char *line;
@@ -27,6 +51,7 @@ int		invitation(t_shell *shell)
 			shell->start = new_token();
 		(*line)	? add_token(shell, shell->start, line) : 0;
 		cmd_run(shell);
+		clear_tokens(shell);
 		free(line);
 	}
 	return (0);
