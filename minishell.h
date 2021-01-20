@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 00:22:36 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/20 00:10:57 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/01/20 23:36:41 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,6 @@ char		*escape_handler(char *line, char **res);
 char		**realloc_args(t_token *token, int i);
 char		*quotes_handler(t_shell *shell, char *line, char **res, char quote);
 char		*get_env(t_shell *shell, char *env);
-
-/*
- * pipe_utils.c
- */
-char		*add_pipe(t_shell *shell, char *line);
 
 /*
  * lsts.c
