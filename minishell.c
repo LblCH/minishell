@@ -34,7 +34,6 @@ void	clear_tokens(t_shell *shell)
 		}
 		printf("args cleared\n");
 		(tmp->args) ? free(tmp->args) : 0;
-		printf("test\n");
 		(tmp->fd_in > 0) ? close(tmp->fd_in) : 0;
 		(tmp->fd_out > 0) ? close(tmp->fd_out) : 0;
 		free(tmp);

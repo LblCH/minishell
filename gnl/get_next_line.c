@@ -26,9 +26,9 @@ int		find_index(const char *s, int c)
 
 int		get_line(char *str, char **line, int i)
 {
-	*line = ft_substr(str, 0, i);
+	*line = ft_substr_gnl(str, 0, i);
 	++i;
-	ft_memmove(str, str + i, (ft_strlen(str + i) + 1));
+	ft_memmove_gnl(str, str + i, (ft_strlen_gnl(str + i) + 1));
 	return (1);
 }
 
@@ -52,11 +52,11 @@ int		get_next_line(int fd, char **line)
 	}
 	if (str)
 	{
-		*line = ft_strdup(str);
+		*line = ft_strdup_gnl(str);
 		free(str);
 		str = NULL;
 		return (res);
 	}
-	*line = ft_strdup("");
+	*line = ft_strdup_gnl("");
 	return (res);
 }

@@ -34,15 +34,23 @@ char		*add_char(char *line, char c)
 char		**realloc_args(t_token *token, int i)
 {
 	char	**new;
+	int j;
 
-	if (!(new = (char **)malloc(i)))
+	j = 0;
+	if (!(new = (char **)malloc(sizeof(char *) * i)))
 		return (NULL);
 	if (token->args)
 	{
 		new = token->args;
-		free(token->args);
+		printf("%s\n", token->args[j]);
+		while (token->args[j])
+		{
+			new[j] = token->args[j];
+			j++;
+		}
+//		free(token->args);
 	}
-	new[i - 1] = ft_strdup("\0");
+	new[i - 1] = NULL;
 	return (new);
 }
 

@@ -35,7 +35,7 @@
 #include <stdio.h>                      // printf=)
 #include <dirent.h>                     // для структуры dirent, opendir(), readdir()
 #include <stdlib.h>                     // для malloc и exit
-#include "../srcs/libft/libft.h"        // Заголовочный файл libft, ваш путь может отличаться=)
+#include "libft/libft.h"       		// Заголовочный файл libft, ваш путь может отличаться=)
 #include <unistd.h>                     // для write(), fork() и execve()
 #include <sys/wait.h>                   // для wait()
 #include <errno.h>                      // для errno

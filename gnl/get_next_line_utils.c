@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-size_t		ft_strlen(const char *s)
+size_t		ft_strlen_gnl(const char *s)
 {
 	size_t	i;
 
@@ -22,7 +22,7 @@ size_t		ft_strlen(const char *s)
 	return (i);
 }
 
-char		*ft_strdup(const char *s1)
+char		*ft_strdup_gnl(const char *s1)
 {
 	int		i;
 	char	*s2;
@@ -39,7 +39,7 @@ char		*ft_strdup(const char *s1)
 	return (s2);
 }
 
-void		*ft_memmove(void *dst, const void *src, size_t len)
+void		*ft_memmove_gnl(void *dst, const void *src, size_t len)
 {
 	size_t	i;
 
@@ -66,7 +66,7 @@ void		*ft_memmove(void *dst, const void *src, size_t len)
 	return (dst);
 }
 
-char		*ft_substr(char const *s, int start, int len)
+char		*ft_substr_gnl(char const *s, int start, int len)
 {
 	char	*str;
 	int		i;
@@ -93,11 +93,11 @@ char		*add_and_free(char *s1, char *s2)
 	char	*dst;
 
 	if (!s1)
-		return (ft_strdup(s2));
+		return (ft_strdup_gnl(s2));
 	if (!s2)
 		return (NULL);
-	len1 = ft_strlen(s1);
-	len2 = ft_strlen(s2);
+	len1 = ft_strlen_gnl(s1);
+	len2 = ft_strlen_gnl(s2);
 	if (!(dst = (char*)malloc((len1 + len2 + 1) * sizeof(char))))
 		return (NULL);
 	i = -1;
