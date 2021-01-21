@@ -18,22 +18,30 @@ void	clear_tokens(t_shell *shell)
 	t_token	*nxt;
 	int i;
 
+	printf("---------------------------------\nClearing tokens\n");
 	i = 0;
 	tmp = shell->start;
 	nxt = NULL;
+	nxt = tmp->next;
 	while (tmp)
 	{
-		nxt = tmp->next;
 		(tmp->command) ? free(tmp->command) : 0;
 		while (tmp->args && tmp->args[i])
-			free(tmp->args[i++]);
+		{
+			free(tmp->args[i]);
+			printf("args[%d] cleared\n", i);
+			i++;
+		}
+		printf("args cleared\n");
 		(tmp->args) ? free(tmp->args) : 0;
-		close(tmp->fd_in);
-		close(tmp->fd_out);
+		printf("test\n");
+		(tmp->fd_in > 0) ? close(tmp->fd_in) : 0;
+		(tmp->fd_out > 0) ? close(tmp->fd_out) : 0;
 		free(tmp);
 		tmp = nxt;
 	}
-	shell = NULL;
+	shell->start = NULL;
+	printf("Tokens cleared\n-----------------------------------\n");
 }
 
 int		invitation(t_shell *shell)

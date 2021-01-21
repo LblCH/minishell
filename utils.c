@@ -38,7 +38,11 @@ char		**realloc_args(t_token *token, int i)
 	if (!(new = (char **)malloc(i)))
 		return (NULL);
 	if (token->args)
+	{
 		new = token->args;
+		free(token->args);
+	}
+	new[i - 1] = ft_strdup("\0");
 	return (new);
 }
 
