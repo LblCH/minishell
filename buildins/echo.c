@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 18:23:11 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/01/15 21:17:20 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/22 19:41:33 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	ft_echo(t_token *token)
 			n_option = 1;
 			i++;
 		}
-		printf("%d\n", token->fd_out);
 		while (token->args[i])
 		{
 			ft_putstr_fd(token->args[i], (token->fd_out > 0) ? token->fd_out : 1);

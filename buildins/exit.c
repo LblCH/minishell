@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 23:42:50 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/01/15 21:14:49 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/22 20:20:26 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,15 @@ void		ft_exit(t_shell *shell)
 {
 	shell->exit = 1;
 	ft_putstr_fd("exit\n", 2);
-	if (shell->start->argc > 0)
+	if (shell->start->args[1])
 	{
-		if (arg_is_digit(shell->start->args[0]))
-			shell->ret = ft_atoi(shell->start->args[0]);
+		if (arg_is_digit(shell->start->args[1]))
+			shell->ret = ft_atoi(shell->start->args[1]);
 		else
 		{
 			shell->ret = 255;
 			ft_putstr_fd(": ", 2);
-			ft_putstr_fd(shell->start->args[0], 2);
+			ft_putstr_fd(shell->start->args[1], 2);
 			ft_putendl_fd(": numeric argument required", 2);
 		}
 	}

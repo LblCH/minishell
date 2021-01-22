@@ -46,3 +46,31 @@ int			is_buildin(char *command)
 		return (1);
 	return (0);
 }
+
+char		*check_location(char **paths, char *cmd)
+{
+	char *valid_path;
+	DIR *dir;
+	struct dirent *dir_content;
+	int i;
+
+	i = 0;
+	while (paths[i++])
+	{
+		if(!(dir = opendir(paths[i])))
+			return (NULL);
+		dir_content = readdir(dir);
+		while (dir_content)
+		{
+			if (ft_strcmp(dir_content->d_name, cmd) == 0)
+			{
+				valid_path = ft_strjoin_with_slash(paths[i], cmd);
+				closedir(dir);
+				return (valid_path);
+			}
+			dir_content = readdir(dir);
+		}
+	}
+	closedir(dir);
+	return (0);
+}

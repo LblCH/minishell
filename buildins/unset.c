@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 12:49:23 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/01/15 23:28:10 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/22 21:34:49 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_unset(t_shell *shell, char *arg)
 	int i;
 
 	i = 0;
-	if (shell->start->argc < 1)
+	if (!arg)
 		return (0);
 	while (shell->env[i])
 	{

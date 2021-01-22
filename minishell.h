@@ -30,7 +30,6 @@ typedef struct		s_token
 {
 	char 			*command;
 	char 			**args;
-	int 			argc;
 	int 			is_piped;
 	int 			fd_in;
 	int 			fd_out;
@@ -114,5 +113,6 @@ void		error_printing(char *env, char *text);
 
 char		*ft_strjoin_with_slash(char const *s1, char const *s2);
 int			is_buildin(char *command);
+char		*check_location(char **paths, char *cmd);
 
 #endif

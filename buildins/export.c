@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 12:49:15 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/01/15 22:00:33 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/22 19:41:33 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int			ft_export(t_shell *shell)
 	int count;
 	int ret;
 
-	if (shell->start->argc < 1)
+	if (!shell->start->args[1])
 	{
 		count = env_count(shell->env);
 		sort_env(shell->env_export, count);
@@ -59,15 +59,15 @@ int			ft_export(t_shell *shell)
 	}
 	else
 	{
-		ret = env_validation(shell->start->args[0]);
+		ret = env_validation(shell->start->args[1]);
 		if (ret < 0)
 		{
-			error_printing(shell->start->args[0],
+			error_printing(shell->start->args[1],
 				  "export: not a valid identifier: ");
 			return (1);
 		}
 		if (ret == 2)
-			add_env(shell, shell->start->args[0]);
+			add_env(shell, shell->start->args[1]);
 	}
 	return (0);
 }
