@@ -77,7 +77,7 @@ char		*get_env(t_shell *shell, char *env);
  */
 
 int 		ft_cd(t_shell *shell);
-int			ft_echo(int argc, char **argv);
+int			ft_echo(t_token *token);
 int			ft_env(char **env);
 void		ft_exit(t_shell *shell);
 int			ft_export(t_shell *shell);

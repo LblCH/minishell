@@ -42,10 +42,10 @@ char		**realloc_args(t_token *token, int i)
 	if (token->args)
 	{
 		new = token->args;
-		printf("%s\n", token->args[j]);
 		while (token->args[j])
 		{
-			new[j] = token->args[j];
+//			printf("arg[%d] = %s\n", j, token->args[j]);
+			new[j] = ft_strdup(token->args[j]);
 			j++;
 		}
 //		free(token->args);

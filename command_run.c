@@ -15,7 +15,7 @@
 void		run_buildin(t_shell *shell, char *cmd)
 {
 	if (ft_strcmp(cmd, "echo") == 0)
-		shell->ret = ft_echo(shell->start->argc, shell->start->args);
+		shell->ret = ft_echo(shell->start);
 	else if (ft_strcmp(cmd, "cd") == 0)
 		shell->ret = ft_cd(shell);
 	else if (ft_strcmp(cmd, "env") == 0)
@@ -76,7 +76,7 @@ void		prep_execve(t_shell *shell)
 {
 	int i;
 	char **paths;
-	char* valid_path;
+	char *valid_path;
 
 	i = 0;
 
@@ -85,7 +85,7 @@ void		prep_execve(t_shell *shell)
 	paths = ft_split(shell->env[i], ':');
 	paths[0] = paths[0] + 5;
 	valid_path = check_location(paths, shell->start->command);
-	run_execve (shell, valid_path);
+	run_execve(shell, valid_path);
 }
 
 void		cmd_run(t_shell *shell)
