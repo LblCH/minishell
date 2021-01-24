@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 23:08:34 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/24 18:23:32 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/24 19:20:28 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	clear_tokens(t_shell *shell)
 	while (tmp)
 	{
 		i = 0;
-		(tmp->command) ? free(tmp->command) : 0;
+		nxt = tmp->next;
+		//(tmp->command) ? free(tmp->command) : 0;
 		while (tmp->args && tmp->args[i])
 		{
 			free(tmp->args[i]);
@@ -34,11 +35,9 @@ void	clear_tokens(t_shell *shell)
 		(tmp->args) ? free(tmp->args) : 0;
 		(tmp->fd_in > 0) ? close(tmp->fd_in) : 0;
 		(tmp->fd_out > 0) ? close(tmp->fd_out) : 0;
-		nxt = tmp;
-		tmp = tmp->next;
-		free(nxt);
+		tmp = nxt;
+		free(tmp);
 	}
-
 	shell->start = NULL;
 //	printf("Tokens cleared\n-----------------------------------\n");
 }
@@ -74,6 +73,7 @@ int		main(int argc, char **argv, char **envp)
 	shell.env_export = envp;
 	shell.ret = 0;
 	shell.exit = 0;
+	shell.start = NULL;
 	invitation(&shell);
 	return (shell.ret);
 }
