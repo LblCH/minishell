@@ -19,7 +19,7 @@ int	ft_echo(t_token *token)
 
 	n_option = 0;
 	i = 1;
-	if (token->args[0])
+	if (token->args[1])
 	{
 		if (ft_strcmp(token->args[1], "-n") == 0)
 		{
