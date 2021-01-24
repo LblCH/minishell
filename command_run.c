@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 19:58:11 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/01/22 21:37:54 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/24 22:00:03 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,16 @@ int		prep_execve(t_shell *shell)
 
 void		cmd_run(t_shell *shell)
 {
-	if (!ft_strcmp(shell->start->command, "exit"))
-		ft_exit(shell);
-	else if (is_buildin(shell->start->command))
-		shell->ret = run_buildin(shell, shell->start->command);
+	char *cmd;
+
+	if(shell->start->args)
+		cmd = shell->start->args[0];
 	else
+		cmd = NULL;
+	if (cmd && (!ft_strcmp(cmd, "exit")))
+		ft_exit(shell);
+	else if (cmd && (is_buildin(cmd)))
+		shell->ret = run_buildin(shell, cmd);
+	else if (cmd)
 		shell->ret = prep_execve(shell);
 }
