@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 23:08:34 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/24 19:20:28 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/25 19:44:47 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	clear_tokens(t_shell *shell)
 {
 	t_token	*tmp;
-	t_token	*nxt;
+	t_token	*previous;
 	int i;
 
 //	printf("---------------------------------\nClearing tokens\n");
@@ -23,8 +23,8 @@ void	clear_tokens(t_shell *shell)
 	while (tmp)
 	{
 		i = 0;
-		nxt = tmp->next;
 		//(tmp->command) ? free(tmp->command) : 0;
+		previous = tmp;
 		while (tmp->args && tmp->args[i])
 		{
 			free(tmp->args[i]);
@@ -35,8 +35,8 @@ void	clear_tokens(t_shell *shell)
 		(tmp->args) ? free(tmp->args) : 0;
 		(tmp->fd_in > 0) ? close(tmp->fd_in) : 0;
 		(tmp->fd_out > 0) ? close(tmp->fd_out) : 0;
-		tmp = nxt;
-		free(tmp);
+		tmp = tmp->next;
+		free(previous);
 	}
 	shell->start = NULL;
 //	printf("Tokens cleared\n-----------------------------------\n");
