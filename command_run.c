@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 19:58:11 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/01/26 12:15:58 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/26 16:26:45 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ int 		run_execve(t_shell *shell, char *path)
 
 	if (g_sig.pid == 0)
 	{
-		execve(path, shell->start->args, shell->env_export);
+		if (ft_strchr(path, '/') != NULL)
+			execve(path, shell->start->args, shell->env_export);
 		ret = error_execve(path);
 		exit(ret);
 	}
@@ -94,7 +95,7 @@ int		prep_execve(t_shell *shell)
 	if (shell->env[i] == NULL)
 		return (run_execve(shell, shell->start->args[0]));
 	paths = ft_split(shell->env[i] + 5, ':');
-	valid_path = check_location(paths, shell->start->command);
+	valid_path = check_location(paths, shell->start->args[0]);
 	if (valid_path)
 		ret = run_execve(shell, valid_path);
 	else
