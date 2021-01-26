@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 00:22:36 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/21 00:53:18 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/01/26 12:10:11 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,14 @@ typedef struct		s_shell
 	int 			exit;
 	uint8_t 		ret;
 }					t_shell;
+
+typedef struct	s_sig
+{
+	int				sigint;
+	int				sigquit;
+	int				ret;
+	pid_t			pid;
+}				t_sig;
 
 /*
  * minishell.c
@@ -114,5 +122,14 @@ void		error_printing(char *env, char *text);
 char		*ft_strjoin_with_slash(char const *s1, char const *s2);
 int			is_buildin(char *command);
 char		*check_location(char **paths, char *cmd);
+void		sig_init();
+
+/*
+ * signal.c
+ */
+
+void		sig_quit(int sig);
+void		sig_int(int sig);
+extern		t_sig g_sig;
 
 #endif

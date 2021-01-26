@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 19:58:11 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/01/24 22:00:03 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/26 12:15:58 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,21 +62,22 @@ int			error_execve(char *path)
 
 int 		run_execve(t_shell *shell, char *path)
 {
-	pid_t pid;
 	int ret;
 
 
 	ret = 0;
-	pid = fork();
+	g_sig.pid = fork();
 
-	if (pid == 0)
+	if (g_sig.pid == 0)
 	{
 		execve(path, shell->start->args, shell->env_export);
 		ret = error_execve(path);
 		exit(ret);
 	}
 	else
-		waitpid(pid, &ret, 0);
+		waitpid(g_sig.pid, &ret, 0);
+	if (g_sig.sigint == 1 || g_sig.sigquit == 1)
+		return (g_sig.ret);
 	return (ret);
 }
 

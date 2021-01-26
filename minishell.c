@@ -6,11 +6,13 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 23:08:34 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/25 19:44:47 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/26 15:28:23 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_sig g_sig;
 
 void	clear_tokens(t_shell *shell)
 {
@@ -51,8 +53,15 @@ int		invitation(t_shell *shell)
 		shell->line_left = ft_strdup("");
 		shell->fd = -1;
 		ft_putstr_fd("👻 \033[35mGhost'm IN i-Shell ⇥ \033[0m", 1);
-		if (get_next_line(0, &line) < 0)
-			ft_putstr_fd("Failed GNL\n", 2);
+		sig_init(shell);
+		signal(SIGINT, &sig_int);
+		signal(SIGQUIT, &sig_quit);
+		if (get_next_line(0, &line) == -2)
+		{
+			ft_putstr_fd("exit", 2);
+			shell->exit = 1;
+		}
+		shell->ret = (g_sig.sigint == 1) ? g_sig.ret : shell->ret;
 		if (!shell->start)
 			shell->start = new_token();
 		(*line)	? add_token(shell, shell->start, line) : 0;
