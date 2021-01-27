@@ -53,8 +53,8 @@ int			ft_export(t_shell *shell)
 	if (!shell->start->args[1])
 	{
 		count = env_count(shell->env);
-		sort_env(shell->env_export, count);
-		env_print(shell->env_export);
+		sort_env(shell->env, count);
+		env_print(shell->env);
 		return (0);
 	}
 	else

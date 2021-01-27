@@ -77,14 +77,14 @@ int			add_env(t_shell *shell, char *arg)
 		if (ft_strncmp(shell->env[i], name, ft_strlen(name)) == 0)
 		{
 			shell->env[i] = ft_strdup(arg);
-			shell->env_export[i] = ft_strdup(arg);
+			shell->env[i] = ft_strdup(arg);
 			return (0);
 		}
 		i++;
 	}
 	free(name);
 	shell->env[i] = ft_strdup(arg);
-	shell->env_export[i] = ft_strdup(arg);
+	shell->env[i] = ft_strdup(arg);
 	return (0);
 }
 

@@ -24,7 +24,6 @@ int	ft_unset(t_shell *shell, char *arg)
 		if (ft_strncmp(shell->env[i], arg, ft_strlen(arg)) == 0)
 		{
 			shell->env[i] = NULL;
-			shell->env_export[i] = NULL;
 			return (0);
 		}
 		i++;

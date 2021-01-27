@@ -20,8 +20,8 @@ CFLAGS = -Wall -Wextra -Werror
 LIBFT = -L libft -lft
 
 SRCS = minishell.c parcer.c ./gnl/get_next_line.c ./gnl/get_next_line_utils.c \
-		utils.c lsts.c $(wildcard buildins/*.c) command_run.c env_utils.c \
-		cmd_exec_utils.c signal.c preparcer.c
+		utils.c lsts.c buildins/cd.c buildins/echo.c buildins/env.c buildins/exit.c command_run.c env_utils.c \
+		cmd_exec_utils.c signal.c preparcer.c buildins/export.c buildins/pwd.c buildins/unset.c
 
 OBJS = $(SRCS:.c=.o)
 

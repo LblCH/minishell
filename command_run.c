@@ -71,7 +71,7 @@ int 		run_execve(t_shell *shell, char *path)
 	if (g_sig.pid == 0)
 	{
 		if (ft_strchr(path, '/') != NULL)
-			execve(path, shell->start->args, shell->env_export);
+			execve(path, shell->start->args, shell->env);
 		ret = error_execve(path);
 		exit(ret);
 	}

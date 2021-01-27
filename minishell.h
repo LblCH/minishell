@@ -40,7 +40,6 @@ typedef struct		s_shell
 {
 	char			*line_left;
 	char			**env;
-	char 			**env_export;
 	t_token			*start;
 	int 			fd_type;
 	int 			fd;
