@@ -23,34 +23,35 @@ char		*add_char(char *line, char c)
 	while (line[i])
 	{
 		temp[i] = line[i];
-	i++;
+		i++;
 	}
 	temp[i] = c;
 	temp[i + 1] = '\0';
-	free(line);
+	(*line) ? free(line) : (0);
+	line = NULL;
 	return (temp);
 }
 
-char		**realloc_args(t_token *token, int i)
+void		*realloc_ptr(char **ptr, size_t size)
 {
 	char	**new;
 	int j;
 
 	j = 0;
-	if (!(new = (char **)malloc(sizeof(char *) * i)))
+	if (!(new = ft_calloc(size + 1, sizeof(char *))))
 		return (NULL);
-	if (token->args)
+	if (ptr)
 	{
-		new = token->args;
-		while (token->args[j])
+//		new = ft_memcpy(new, ptr, size);
+		while (ptr[j])
 		{
 //			printf("arg[%d] = %s\n", j, token->args[j]);
-			new[j] = ft_strdup(token->args[j]);
+			new[j] = ft_strdup(ptr[j]);
 			j++;
 		}
-//		free(token->args);
+		free(ptr);
+		ptr = NULL;
 	}
-	new[i - 1] = NULL;
 	return (new);
 }
 

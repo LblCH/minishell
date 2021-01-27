@@ -25,7 +25,7 @@ char		*redirect(t_shell *shell, char *line)
 	(*line == '>') ? line++ : (0);
 	while (ft_isspace(*line))
 		line++;
-	while (ft_isalnum(*line))
+	while (*line && (ft_isalnum(*line) || ft_strchr("._-", *line)))
 		file = add_char(file, *line++);
 	shell->fd_type = 1;
 	if (redir == '<')
@@ -39,6 +39,7 @@ char		*redirect(t_shell *shell, char *line)
 	else
 		shell->fd = open(file, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	free(file);
+	file = NULL;
 	return (line);
 }
 
@@ -46,9 +47,17 @@ char		*spec_simbol(t_shell *shell, char *line, char **res)
 {
 	if (*line == '$')
 	{
-		*res = ft_strjoin(*res, get_env(shell, ++line));
-		while (ft_isalnum(*line) || *line == '_')
+		if (!(*(line + 1)) || *(line + 1) == ' ')
+		{
+			*res = add_char(*res, '$');
 			line++;
+		}
+		else
+		{
+			*res = ft_strjoin(*res, get_env(shell, ++line));
+			while (ft_isalnum(*line) || *line == '_')
+				line++;
+		}
 	}
 	else if (*line == '\\')
 		line = escape_handler(++line, res);

@@ -25,20 +25,23 @@ void	clear_tokens(t_shell *shell)
 	while (tmp)
 	{
 		i = 0;
-		//(tmp->command) ? free(tmp->command) : 0;
+		(tmp->command) ? free(tmp->command) : 0;
 		previous = tmp;
 		while (tmp->args && tmp->args[i])
 		{
 			free(tmp->args[i]);
+			tmp->args[i] = NULL;
 //			printf("args[%d] cleared\n", i);
 			i++;
 		}
 //		printf("args cleared\n");
 		(tmp->args) ? free(tmp->args) : 0;
+		tmp->args = NULL;
 		(tmp->fd_in > 0) ? close(tmp->fd_in) : 0;
 		(tmp->fd_out > 0) ? close(tmp->fd_out) : 0;
 		tmp = tmp->next;
 		free(previous);
+		previous = NULL;
 	}
 	shell->start = NULL;
 //	printf("Tokens cleared\n-----------------------------------\n");
@@ -61,12 +64,15 @@ int		invitation(t_shell *shell)
 			ft_putstr_fd("exit", 2);
 			shell->exit = 1;
 		}
-		shell->ret = (g_sig.sigint == 1) ? g_sig.ret : shell->ret;
-		if (!shell->start)
-			shell->start = new_token();
-		(*line)	? add_token(shell, shell->start, line) : 0;
-		cmd_run(shell);
-		clear_tokens(shell);
+		if (preparcer(line) == 0)
+		{
+			shell->ret = (g_sig.sigint == 1) ? g_sig.ret : shell->ret;
+			if (!shell->start)
+				shell->start = new_token();
+			(*line) ? add_token(shell, shell->start, line) : 0;
+			cmd_run(shell);
+			clear_tokens(shell);
+		}
 		free(line);
 	}
 	return (0);

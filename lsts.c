@@ -15,21 +15,26 @@
 void 		add_token(t_shell *shell, t_token *token, char *line)
 {
 	int i;
+	char *res;
 
 	i = 1;
 	shell->fd_type = 0;
 //	printf("Adding token\n");
 	token->command = ft_parcer(shell, line);
 //	printf("Command parced\n");
-	token->args = realloc_args(token, 2);
+	token->args = ft_calloc(2, sizeof(char *));
 	token->args[0] = ft_strdup(token->command);
 //	printf("command: %s\n", token->command);
 	while (ft_isspace(*shell->line_left))
 		shell->line_left++;
 	while(*shell->line_left)
 	{
-		token->args = realloc_args(token, i + 2);
-		token->args[i] = ft_parcer(shell, shell->line_left);
+		if (ft_strcmp((res = ft_parcer(shell, shell->line_left)), ""))
+		{
+			token->args = (char **)realloc_ptr(token->args, i + 2);
+			token->args[i + 2] = NULL;
+			token->args[i] = ft_strdup(res);
+		}
 		while (ft_isspace(*shell->line_left))
 			shell->line_left++;
 		i++;
@@ -41,18 +46,18 @@ void 		add_token(t_shell *shell, t_token *token, char *line)
 //	printf("Token added\n");
 //	printf("fd_in: %d fd_out: %d\n", token->fd_in, token->fd_out);
 //	i = 0;
-	while (token->args && token->args[i] != NULL)
-	{
-		printf("arg %d: %s\n", i, token->args[i]);
-		i++;
-	}
+//	while (token->args && token->args[i])
+//	{
+//		printf("arg %d: %s\n", i, token->args[i]);
+//		i++;
+//	}
 }
 
 t_token		*new_token(void)
 {
 	struct s_token *res;
 
-	if (!(res = ft_calloc(1, sizeof(struct s_token))))
+	if (!(res = (t_token *)ft_calloc(1, sizeof(struct s_token))))
 		return (NULL);
 	res->command = ft_strdup("");
 	res->next = NULL;

@@ -60,6 +60,7 @@ typedef struct	s_sig
  * minishell.c
  */
 int			invitation(t_shell *shell);
+void		clear_tokens(t_shell *shell);
 
 /*
  * parcer.c
@@ -69,13 +70,17 @@ char		*redirect(t_shell *shell, char *line);
 char		*ft_parcer(t_shell *shell, char *line);
 char		*spec_simbol(t_shell *shell, char *line, char **res);
 
+/*
+ * preparcer.c
+ */
+int 		preparcer(char *line);
 
 /*
  * utils.c
  */
 char		*add_char(char *line, char c);
 char		*escape_handler(char *line, char **res);
-char		**realloc_args(t_token *token, int i);
+void		*realloc_ptr(char **ptr, size_t size);
 char		*quotes_handler(t_shell *shell, char *line, char **res, char quote);
 char		*get_env(t_shell *shell, char *env);
 
