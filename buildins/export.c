@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 12:49:15 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/01/27 13:03:03 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/27 13:43:01 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ int			ft_export(t_shell *shell)
 	if (!shell->start->args[1])
 	{
 		count = env_count(shell->env);
-		sort_env(shell->env, count);
-		env_print(shell->env);
+		sort_env(shell->env_export, count);
+		env_print(shell->env_export);
 		return (0);
 	}
 	else
