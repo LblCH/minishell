@@ -1,6 +1,6 @@
 /.idea/
 *.o
-/libft/*.a
+libft/
 minishell
 CMakeLists.txt
 cmake-build-debug/

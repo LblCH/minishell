@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 00:22:36 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/27 13:51:47 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/27 15:58:41 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,5 +135,19 @@ void		sig_init();
 void		sig_quit(int sig);
 void		sig_int(int sig);
 extern		t_sig g_sig;
+
+/*
+ * ft_export.c
+ */
+
+char		**create_env_array(char **env, char *to_add, int var);
+
+
+/*
+ * free_utils.c
+ */
+
+void		*ft_free(void *ptr);
+void		free_tab(char **tab);
 
 #endif

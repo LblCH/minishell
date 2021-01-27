@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 20:00:01 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/01/27 13:52:15 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/27 15:58:41 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int			add_env(t_shell *shell, char *arg)
 {
 	int		i;
 	char	*name;
+	char	**tmp;
 
 	i = 0;
 	name = ft_calloc(1, ft_strlen(arg));
@@ -76,13 +77,17 @@ int			add_env(t_shell *shell, char *arg)
 	{
 		if (ft_strncmp(shell->env[i], name, ft_strlen(name)) == 0)
 		{
+			free(shell->env[i]);
 			shell->env[i] = ft_strdup(arg);
+			free(name);
 			return (0);
 		}
 		i++;
 	}
 	free(name);
-	shell->env[i] = ft_strdup(arg);
+	tmp = shell->env;
+	shell->env = create_env_array(tmp, arg, 1);
+	free_tab(tmp);
 	return (0);
 }
 

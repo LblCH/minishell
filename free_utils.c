@@ -1,18 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tolower.c                                       :+:      :+:    :+:   */
+/*   free_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/05/27 23:17:45 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/27 14:01:44 by cdrennan         ###   ########.fr       */
+/*   Created: 2021/01/27 16:01:59 by cdrennan          #+#    #+#             */
+/*   Updated: 2021/01/27 16:01:59 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_tolower(int c)
+#include "minishell.h"
+
+void	*ft_free(void *ptr)
 {
-	if (c >= 65 && c <= 90)
-		return (c + 32);
-	return (c);
+	if (ptr)
+	{
+		free(ptr);
+		ptr = NULL;
+	}
+	return (NULL);
+}
+
+void	free_tab(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+	{
+		if (tab[i])
+			ft_free(tab[i]);
+		i++;
+	}
+	ft_free(tab);
 }

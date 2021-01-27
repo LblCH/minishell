@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 23:08:34 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/27 13:51:47 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/27 15:26:28 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int		main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-	shell.env = envp;
+	shell.env = create_env_array(envp, NULL, 0);
 	shell.ret = 0;
 	shell.exit = 0;
 	shell.start = NULL;

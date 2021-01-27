@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 12:49:15 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/01/27 13:51:47 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/27 16:01:52 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,27 @@ int			env_validation(const char *env)
 	if (env[i] != '=')
 		return (1);
 	return (2);
+}
+
+char		**create_env_array(char **env, char *to_add, int var)
+{
+	char **new;
+	int i;
+	int count;
+
+	count = env_count(env);
+	i = (var == 1) ? 2 : 1;
+	new = malloc(sizeof(new) * (count + i));
+	i = 0;
+	while (env[i])
+	{
+		new[i] = ft_strdup(env[i]);
+		i++;
+	}
+	new[i] = (var == 1) ? ft_strdup(to_add) : NULL;
+	if (var == 1)
+		new[i + 1] = NULL;
+	return (new);
 }
 
 int			ft_export(t_shell *shell)
