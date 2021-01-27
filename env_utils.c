@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 20:00:01 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/01/27 13:43:35 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/01/27 13:52:15 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,11 @@ int			add_env(t_shell *shell, char *arg)
 		if (ft_strncmp(shell->env[i], name, ft_strlen(name)) == 0)
 		{
 			shell->env[i] = ft_strdup(arg);
-			shell->env[i] = ft_strdup(arg);
 			return (0);
 		}
 		i++;
 	}
 	free(name);
-	shell->env[i] = ft_strdup(arg);
 	shell->env[i] = ft_strdup(arg);
 	return (0);
 }
