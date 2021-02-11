@@ -35,9 +35,9 @@ char		*redirect(t_shell *shell, char *line)
 			return (NULL);
 	}
 	else if (d_red == 0)
-		shell->fd = open(file, O_RDWR | O_CREAT, 0644);
-	else
 		shell->fd = open(file, O_RDWR | O_CREAT | O_TRUNC, 0644);
+	else
+		shell->fd = open(file, O_RDWR | O_CREAT | O_APPEND, 0644);
 	free(file);
 	file = NULL;
 	return (line);
@@ -73,17 +73,19 @@ char		*separators(t_shell *shell, char *line)
 	int pipe_fd[2];
 
 	if (*line == '|')
-		pipe(pipe_fd);
-	if (*line == '|' && token_last(shell->start)->fd_out < 0)
 	{
-		token_last(shell->start)->is_piped = 1;
-		token_last(shell->start)->fd_out = pipe_fd[1];
+		pipe(pipe_fd);
+		if (token_last(shell->start)->fd_out < 0)
+		{
+			token_last(shell->start)->is_piped = 1;
+			token_last(shell->start)->fd_out = pipe_fd[1];
+		}
+		token_last(shell->start)->next = new_token();
+		if (*line == '|')
+			token_last(shell->start)->fd_in = pipe_fd[0];
+		line++;
+		add_token(shell, token_last(shell->start), line);
 	}
-	token_last(shell->start)->next = new_token();
-	if (*line == '|')
-		token_last(shell->start)->fd_in = pipe_fd[0];
-	line++;
-	add_token(shell, token_last(shell->start), line);
 	return(shell->line_left);
 }
 
@@ -98,8 +100,15 @@ char		*ft_parcer(t_shell *shell, char *line)
 	{
 		if (ft_strchr("\'\"$\\><", *line))
 			line = spec_simbol(shell, line, &res);
-		else if (*line == ';' || *line == '|')
+		else if (*line == '|')
 			line = separators(shell, line);
+		else if (*line == ';')
+		{
+			line++;
+			shell->line_left = line;
+			shell->semicol = 1;
+			return (res);
+		}
 		else
 		{
 			res = add_char(res, *line);

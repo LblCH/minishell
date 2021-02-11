@@ -60,7 +60,7 @@ char		*escape_handler(char *line, char **res)
 	char s[2];
 
 	s[1] = '\0';
-	if (ft_strchr(";\\\'\"><|", *line))
+	if (ft_strchr(";\\\'\"><| $", *line))
 	{
 		s[0] = *line;
 		*res = ft_strjoin(*res, s);

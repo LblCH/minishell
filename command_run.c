@@ -118,4 +118,5 @@ void		cmd_run(t_shell *shell)
 		shell->ret = run_buildin(shell, cmd);
 	else if (cmd)
 		shell->ret = prep_execve(shell);
+	clear_tokens(shell);
 }

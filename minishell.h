@@ -44,6 +44,7 @@ typedef struct		s_shell
 	int 			fd_type;
 	int 			fd;
 	int 			exit;
+	int				semicol;
 	uint8_t 		ret;
 }					t_shell;
 

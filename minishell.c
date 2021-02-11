@@ -71,9 +71,17 @@ int		invitation(t_shell *shell)
 				shell->start = new_token();
 			(*line) ? add_token(shell, shell->start, line) : 0;
 			cmd_run(shell);
-			clear_tokens(shell);
+			while (shell->semicol == 1)
+			{
+				shell->semicol = 0;
+				if (!shell->start)
+					shell->start = new_token();
+				(*shell->line_left) ? add_token(shell, shell->start, shell->line_left) : 0;
+				cmd_run(shell);
+			}
 		}
 		free(line);
+		line = NULL;
 	}
 	return (0);
 }
@@ -88,6 +96,7 @@ int		main(int argc, char **argv, char **envp)
 	shell.ret = 0;
 	shell.exit = 0;
 	shell.start = NULL;
+	shell.semicol = 0;
 	invitation(&shell);
 	return (shell.ret);
 }
