@@ -5,6 +5,7 @@ minishell
 CMakeLists.txt
 cmake-build-debug/
 minishell-tester/
+minishell.dSYM/
 seek_path_2.c
 cmake-build-debug-coverage/
 .DS*

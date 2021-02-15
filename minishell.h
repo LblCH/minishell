@@ -30,9 +30,9 @@ typedef struct		s_token
 {
 	char 			*command;
 	char 			**args;
-	int 			is_piped;
 	int 			fd_in;
 	int 			fd_out;
+	int				fd_out_prev;
 	struct s_token	*next;
 }					t_token;
 

@@ -43,7 +43,8 @@ void 		add_token(t_shell *shell, t_token *token, char *line)
 		token->fd_out = shell->fd;
 	else if (shell->fd_type == -1)
 		token->fd_in = shell->fd;
-	printf("Token added\n");
+//	shell->fd = -1;
+	printf("--------------\nToken added\n");
 	printf("fd_in: %d fd_out: %d\n", token->fd_in, token->fd_out);
 	i = 0;
 	while (token->args && token->args[i])
@@ -51,6 +52,7 @@ void 		add_token(t_shell *shell, t_token *token, char *line)
 		printf("arg %d: %s\n", i, token->args[i]);
 		i++;
 	}
+	printf("--------------\n");
 }
 
 t_token		*new_token(void)
@@ -63,7 +65,7 @@ t_token		*new_token(void)
 	res->next = NULL;
 	res->fd_in = -1;
 	res->fd_out = -1;
-	res->is_piped = 0;
+	res->fd_out_prev = -1;
 	return (res);
 }
 

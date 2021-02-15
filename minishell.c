@@ -20,7 +20,7 @@ void	clear_tokens(t_shell *shell)
 	t_token	*previous;
 	int i;
 
-//	printf("---------------------------------\nClearing tokens\n");
+	printf("---------------------------------\nClearing tokens\n");
 	tmp = shell->start;
 	while (tmp)
 	{
@@ -31,20 +31,21 @@ void	clear_tokens(t_shell *shell)
 		{
 			free(tmp->args[i]);
 			tmp->args[i] = NULL;
-//			printf("args[%d] cleared\n", i);
+			printf("args[%d] cleared\n", i);
 			i++;
 		}
-//		printf("args cleared\n");
+		printf("args cleared\n");
 		(tmp->args) ? free(tmp->args) : 0;
 		tmp->args = NULL;
 		(tmp->fd_in > 0) ? close(tmp->fd_in) : 0;
 		(tmp->fd_out > 0) ? close(tmp->fd_out) : 0;
+		tmp->fd_out_prev = -1;
 		tmp = tmp->next;
 		free(previous);
 		previous = NULL;
 	}
 	shell->start = NULL;
-//	printf("Tokens cleared\n-----------------------------------\n");
+	printf("Tokens cleared\n-----------------------------------\n");
 }
 
 int		invitation(t_shell *shell)
@@ -53,7 +54,7 @@ int		invitation(t_shell *shell)
 
 	while (shell->exit == 0)
 	{
-		shell->line_left = ft_strdup("");
+//		shell->line_left = ft_strdup("");
 		shell->fd = -1;
 		ft_putstr_fd("👻 \033[35mGhost'm IN i-Shell ⇥ \033[0m", 1);
 		sig_init(shell);

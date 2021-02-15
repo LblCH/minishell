@@ -63,20 +63,40 @@ int			error_execve(char *path)
 int 		run_execve(t_shell *shell, char *path)
 {
 	int ret;
+	struct s_token *token;
 
-
-	ret = 0;
-	g_sig.pid = fork();
-
-	if (g_sig.pid == 0)
+	token = shell->start;
+	while (token)
 	{
-		if (ft_strchr(path, '/') != NULL)
-			execve(path, shell->start->args, shell->env);
-		ret = error_execve(path);
-		exit(ret);
+		ret = 0;
+		g_sig.pid = fork();
+		if (g_sig.pid == 0)
+		{
+			printf("%s, fd_in:%d, fd_out:%d\n", token->args[0], token->fd_in, token->fd_out);
+			if (token->fd_in != -1)
+			{
+				printf("dupd in %s\n", token->args[0]);
+				dup2(token->fd_in, STDIN_FILENO);
+				(token->fd_out_prev != -1) ? close(token->fd_out_prev) : 0;
+			}
+			if (token->fd_out != -1)
+			{
+				printf("dupd out %s\n", token->args[0]);
+				dup2(token->fd_out, STDOUT_FILENO);
+				(token->next->fd_in != -1) ? close(token->next->fd_in) : 0;
+			}
+//			if (ft_strchr(path, '/') != NULL)
+//			{
+				printf("executing %s\n", token->args[0]);
+				execve(path, token->args, shell->env);
+//			}
+			ret = error_execve(path);
+			clear_tokens(shell);
+			exit(ret);
+		}
+		token = token->next;
 	}
-	else
-		waitpid(g_sig.pid, &ret, 0);
+	waitpid(g_sig.pid, &ret, 0);
 	if (g_sig.sigint == 1 || g_sig.sigquit == 1)
 		return (g_sig.ret);
 	return (ret);
@@ -90,7 +110,7 @@ int		prep_execve(t_shell *shell)
 	int ret;
 
 	i = 0;
-	while (shell->env && ft_strncmp(shell->env[i], "PATH=", 5) != 0)
+	while (shell->env && shell->env[i] && ft_strncmp(shell->env[i], "PATH=", 5) != 0)
 		i++;
 	if (shell->env[i] == NULL)
 		return (run_execve(shell, shell->start->args[0]));
