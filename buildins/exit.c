@@ -50,4 +50,5 @@ void		ft_exit(t_shell *shell)
 			ft_putendl_fd(": numeric argument required", 2);
 		}
 	}
+	clear_tokens(shell);
 }

@@ -40,6 +40,7 @@ int			error_execve(char *path)
 
 	fd = open(path, O_WRONLY);
 	dir = opendir(path);
+	ft_putstr_fd("👻 \033[35mGhost'm IN i-Shell: \033[0m", 2);
 	ft_putstr_fd(path, 2);
 	if (ft_strchr(path, '/') == NULL)
 		ft_putendl_fd(": command not found", 2);
@@ -63,40 +64,41 @@ int			error_execve(char *path)
 int 		run_execve(t_shell *shell, char *path)
 {
 	int ret;
+	int n;
 	struct s_token *token;
 
 	token = shell->start;
+	n = 0;
 	while (token)
 	{
 		ret = 0;
+		n++;
 		g_sig.pid = fork();
 		if (g_sig.pid == 0)
 		{
-			printf("%s, fd_in:%d, fd_out:%d\n", token->args[0], token->fd_in, token->fd_out);
 			if (token->fd_in != -1)
 			{
-				printf("dupd in %s\n", token->args[0]);
-				dup2(token->fd_in, STDIN_FILENO);
+			dup2(token->fd_in, 0);
 				(token->fd_out_prev != -1) ? close(token->fd_out_prev) : 0;
 			}
 			if (token->fd_out != -1)
 			{
-				printf("dupd out %s\n", token->args[0]);
-				dup2(token->fd_out, STDOUT_FILENO);
-				(token->next->fd_in != -1) ? close(token->next->fd_in) : 0;
+				dup2(token->fd_out, 1);
+				if (token->next)
+					(token->next->fd_in != -1) ? close(token->next->fd_in) : 0;
 			}
-//			if (ft_strchr(path, '/') != NULL)
-//			{
-				printf("executing %s\n", token->args[0]);
+			if (ft_strchr(path, '/') != NULL)
+			{
 				execve(path, token->args, shell->env);
-//			}
+			}
 			ret = error_execve(path);
 			clear_tokens(shell);
 			exit(ret);
 		}
 		token = token->next;
 	}
-	waitpid(g_sig.pid, &ret, 0);
+	while(n--)
+		wait(&ret);
 	if (g_sig.sigint == 1 || g_sig.sigquit == 1)
 		return (g_sig.ret);
 	return (ret);
