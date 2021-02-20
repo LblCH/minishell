@@ -14,13 +14,13 @@
 
 char		*add_char(char *line, char c)
 {
-	char *temp;
-	int i;
+	char	*temp;
+	int		i;
 
 	i = 0;
-	if (!(temp = (char *) malloc(sizeof(char) * ft_strlen(line) + 2)))
+	if (!(temp = (char *)malloc(sizeof(char) * ft_strlen(line) + 2)))
 		return (NULL);
-	while (line[i])
+	while (line && line[i])
 	{
 		temp[i] = line[i];
 		i++;
@@ -35,17 +35,15 @@ char		*add_char(char *line, char c)
 void		*realloc_ptr(char **ptr, size_t size)
 {
 	char	**new;
-	int j;
+	int		j;
 
 	j = 0;
 	if (!(new = ft_calloc(size + 1, sizeof(char *))))
 		return (NULL);
 	if (ptr)
 	{
-//		new = ft_memcpy(new, ptr, size);
 		while (ptr[j])
 		{
-//			printf("arg[%d] = %s\n", j, token->args[j]);
 			new[j] = ft_strdup(ptr[j]);
 			j++;
 		}

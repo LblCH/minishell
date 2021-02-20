@@ -78,7 +78,7 @@ int 		run_execve(t_shell *shell, char *path)
 		{
 			if (token->fd_in != -1)
 			{
-			dup2(token->fd_in, 0);
+				dup2(token->fd_in, 0);
 				(token->fd_out_prev != -1) ? close(token->fd_out_prev) : 0;
 			}
 			if (token->fd_out != -1)

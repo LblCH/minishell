@@ -19,7 +19,6 @@ void	clear_tokens(t_shell *shell)
 	t_token	*tmp;
 	t_token	*previous;
 	int i;
-
 //	printf("---------------------------------\nClearing tokens\n");
 	tmp = shell->start;
 	while (tmp)
@@ -75,7 +74,8 @@ int		invitation(t_shell *shell)
 				shell->semicol = 0;
 				if (!shell->start)
 					shell->start = new_token();
-				(*shell->line_left) ? add_token(shell, shell->start, shell->line_left) : 0;
+				if (*shell->line_left)
+					add_token(shell, shell->start, shell->line_left);
 				cmd_run(shell);
 			}
 		}

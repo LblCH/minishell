@@ -28,7 +28,7 @@
 
 typedef struct		s_token
 {
-	char 			*command;
+//	char 			*command;
 	char 			**args;
 	int 			fd_in;
 	int 			fd_out;
@@ -66,8 +66,8 @@ void		clear_tokens(t_shell *shell);
  * parcer.c
  */
 char		*separators(t_shell *shell, char *line);
-char		*redirect(t_shell *shell, char *line);
-char		*ft_parcer(t_shell *shell, char *line);
+char		*redirect(t_shell *shell, char *line, char *file);
+char		*ft_parcer(t_shell *shell, char *line, char *res);
 char		*spec_simbol(t_shell *shell, char *line, char **res);
 
 /*

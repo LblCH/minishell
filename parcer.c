@@ -12,15 +12,13 @@
 
 #include "minishell.h"
 
-char		*redirect(t_shell *shell, char *line)
+char		*redirect(t_shell *shell, char *line, char *file)
 {
-	char *file;
-	int d_red;
-	char redir;
+	int		d_red;
+	char	redir;
 
 	redir = *line++;
 	(shell->fd >= 0) ? close(shell->fd) : (0);
-	file = ft_strdup("");
 	d_red = (*line == '>') ? 1 : 0;
 	(*line == '>') ? line++ : (0);
 	while (ft_isspace(*line))
@@ -31,14 +29,13 @@ char		*redirect(t_shell *shell, char *line)
 	if (redir == '<')
 	{
 		shell->fd_type = -1;
-		if ((shell->fd = open(file, O_RDWR)) < 0 )
+		if ((shell->fd = open(file, O_RDWR)) < 0)
 			return (NULL);
 	}
 	else if (d_red == 0)
 		shell->fd = open(file, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	else
 		shell->fd = open(file, O_RDWR | O_CREAT | O_APPEND, 0644);
-//	printf("Redirect fd = %d\n", shell->fd);
 	free(file);
 	file = NULL;
 	return (line);
@@ -65,7 +62,7 @@ char		*spec_simbol(t_shell *shell, char *line, char **res)
 	else if (*line == '\'' || *line == '\"')
 		line = quotes_handler(shell, line, res, *line);
 	else if (*line == '<' || *line == '>')
-		line = redirect(shell, line);
+		line = redirect(shell, line, "");
 	return (line);
 }
 
@@ -76,7 +73,7 @@ char		*separators(t_shell *shell, char *line)
 	if (*line == '|')
 	{
 		pipe(pipe_fd);
-//		printf("pipe[0] = %d \npipe[1] = %d\n", pipe_fd[0], pipe_fd[1]);
+		printf("pipe[0] = %d \npipe[1] = %d\n", pipe_fd[0], pipe_fd[1]);
 		if (token_last(shell->start)->fd_out < 0)
 			token_last(shell->start)->fd_out = pipe_fd[1];
 		token_last(shell->start)->next = new_token();
@@ -88,14 +85,11 @@ char		*separators(t_shell *shell, char *line)
 		line++;
 		add_token(shell, token_last(shell->start), line);
 	}
-	return(shell->line_left);
+	return (shell->line_left);
 }
 
-char		*ft_parcer(t_shell *shell, char *line)
+char		*ft_parcer(t_shell *shell, char *line, char *res)
 {
-	char *res;
-
-	res = ft_strdup("");
 	while (ft_isspace(*line))
 		line++;
 	while (line && *line && *line != ' ')

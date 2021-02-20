@@ -12,24 +12,22 @@
 
 #include "minishell.h"
 
-void 		add_token(t_shell *shell, t_token *token, char *line)
+void		add_token(t_shell *shell, t_token *token, char *line)
 {
-	int i;
-	char *res;
+	int		i;
+	char	*res;
 
 	i = 1;
 	shell->fd_type = 0;
 //	printf("Adding token\n");
-	token->command = ft_parcer(shell, line);
-//	printf("Command parced\n");
+//	token->command = ft_parcer(shell, line, "");
 	token->args = ft_calloc(2, sizeof(char *));
-	token->args[0] = ft_strdup(token->command);
-//	printf("command: %s\n", token->command);
+	token->args[0] = ft_parcer(shell, line, "");
 	while (ft_isspace(*shell->line_left))
 		shell->line_left++;
 	while(*shell->line_left && shell->semicol != 1)
 	{
-		if (ft_strcmp((res = ft_parcer(shell, shell->line_left)), ""))
+		if (ft_strcmp((res = ft_parcer(shell, shell->line_left, "")), ""))
 		{
 			token->args = (char **)realloc_ptr(token->args, i + 2);
 			token->args[i + 2] = NULL;
@@ -62,7 +60,7 @@ t_token		*new_token(void)
 
 	if (!(res = (t_token *)ft_calloc(1, sizeof(struct s_token))))
 		return (NULL);
-	res->command = ft_strdup("");
+//	res->command = ft_strdup("");
 	res->next = NULL;
 	res->fd_in = -1;
 	res->fd_out = -1;
