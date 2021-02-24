@@ -30,13 +30,11 @@ int			env_validation(const char *env)
 	int		i;
 
 	i = 0;
-	if (ft_isdigit(env[i]) == 1)
-		return (-1);
-	if ((env[0]) == '=')
+	if (ft_isdigit(env[i]) == 1 || env[i] == '=')
 		return (-1);
 	while (env[i] && env[i] != '=')
 	{
-		if (ft_isalnum(env[i]) == 0)
+		if (ft_isalnum(env[i]) == 0 && env[i] != '_')
 			return (-1);
 		i++;
 	}
