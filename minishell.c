@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 23:08:34 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/27 15:26:28 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/02/24 20:16:05 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ int		invitation(t_shell *shell)
 		sig_init(shell);
 		signal(SIGINT, &sig_int);
 		signal(SIGQUIT, &sig_quit);
-		if (get_next_line(0, &line) == -2)
+		if (get_next_line(0, &line) == 0)
 		{
-			ft_putstr_fd("exit", 2);
+			ft_putstr_fd("exit\n", 2);
 			shell->exit = 1;
 		}
 		if (preparcer(line) == 0)

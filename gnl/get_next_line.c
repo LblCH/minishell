@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 23:23:04 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/27 14:01:44 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/02/24 20:11:22 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ int		get_next_line(int fd, char **line)
 	while (((res = read(fd, buff, BUFFER_SIZE)) > 0))
 	{
 		buff[res] = '\0';
+		(res == 0 || buff[res - 1] != '\n') ? ft_putstr_fd("  \b\b", 1) : 0;
 		str = add_and_free(str, buff);
 		if (((i = find_index(str, '\n')) != -1))
 			return (get_line(str, line, i));
 	}
-	if (res == 0 && *line == buff)
-		return (-2);
+
 	if (str)
 	{
 		*line = ft_strdup_gnl(str);
