@@ -15,8 +15,10 @@
 int		run_buildin(t_shell *shell, char *cmd)
 {
 	int ret;
+	int i;
 
 	ret = 0;
+	i = 1;
 	if (ft_strcmp(cmd, "echo") == 0)
 		ret = ft_echo(shell->start);
 	else if (ft_strcmp(cmd, "cd") == 0)
@@ -26,7 +28,13 @@ int		run_buildin(t_shell *shell, char *cmd)
 	else if (ft_strcmp(cmd, "export") == 0)
 		ft_export(shell);
 	else if (ft_strcmp(cmd, "unset") == 0)
-		ft_unset(shell, shell->start->args[1]);
+	{
+		while (shell->start->args[i])
+		{
+			ft_unset(shell, shell->start->args[i]);
+			i++;
+		}
+	}
 	else if (ft_strcmp(cmd, "pwd") == 0)
 		ret = (ft_pwd());
 	return (ret);
