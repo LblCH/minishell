@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 19:58:11 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/01/27 14:01:44 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/02/24 18:40:26 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,7 @@ int 		run_execve(t_shell *shell, char *path)
 					(token->next->fd_in != -1) ? close(token->next->fd_in) : 0;
 			}
 			if (ft_strchr(path, '/') != NULL)
-			{
 				execve(path, token->args, shell->env);
-			}
 			ret = error_execve(path);
 			clear_tokens(shell);
 			exit(ret);
@@ -99,6 +97,7 @@ int 		run_execve(t_shell *shell, char *path)
 	}
 	while(n--)
 		wait(&ret);
+	ret = WEXITSTATUS(ret);
 	if (g_sig.sigint == 1 || g_sig.sigquit == 1)
 		return (g_sig.ret);
 	return (ret);

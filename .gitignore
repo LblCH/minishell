@@ -11,3 +11,4 @@ cmake-build-debug-coverage/
 .DS*
 minishell_test/
 a.out
+todo.txt

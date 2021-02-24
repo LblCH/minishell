@@ -24,7 +24,7 @@ void	clear_tokens(t_shell *shell)
 	while (tmp)
 	{
 		i = 0;
-		(tmp->command) ? free(tmp->command) : 0;
+//		(tmp->command) ? free(tmp->command) : 0;
 		previous = tmp;
 		while (tmp->args && tmp->args[i])
 		{

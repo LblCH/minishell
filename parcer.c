@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 04:15:50 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/25 21:12:23 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/02/24 14:44:42 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,17 @@ char		*spec_simbol(t_shell *shell, char *line, char **res)
 		}
 		else
 		{
-			*res = ft_strjoin(*res, get_env(shell, ++line));
-			while (ft_isalnum(*line) || *line == '_')
+			if (*(++line) == '?')
+			{
+				*res = ft_strjoin(*res, ft_itoa(shell->ret));
 				line++;
+			}
+			else
+			{
+				ft_strjoin(*res, get_env(shell, line));
+				while (ft_isalnum(*line) || *line == '_')
+					line++;
+			}
 		}
 	}
 	else if (*line == '\\')
