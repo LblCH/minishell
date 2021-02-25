@@ -21,6 +21,7 @@ static int		set_pwd(t_shell *shell, char* pwd)
 
 	env = ft_strjoin(pwd, getcwd(buf, PATH_MAX));
 	add_env(shell, env);
+	free(env);
 	return (0);
 }
 

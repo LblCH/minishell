@@ -138,7 +138,7 @@ void		sig_int(int sig);
 extern		t_sig g_sig;
 
 /*
- * ft_export.c
+ * export.c
  */
 
 char		**create_env_array(char **env, char *to_add, int var);

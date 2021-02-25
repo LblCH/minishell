@@ -51,4 +51,5 @@ void		ft_exit(t_shell *shell)
 		}
 	}
 	clear_tokens(shell);
+	free_tab(shell->env);
 }
