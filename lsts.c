@@ -17,20 +17,18 @@ void		add_token(t_shell *shell, t_token *token, char *line)
 	int		i;
 	char	*res;
 
-	i = 1;
+	i = 0;
 	shell->fd_type = 0;
 //	printf("Adding token\n");
-//	token->command = ft_parcer(shell, line, "");
-	token->args = ft_calloc(2, sizeof(char *));
-	token->args[0] = ft_parcer(shell, line, "");
-	while (ft_isspace(*shell->line_left))
-		shell->line_left++;
+	while (ft_isspace(*line))
+		line++;
+	shell->line_left = line;
 	while(*shell->line_left && shell->semicol != 1)
 	{
 		if (ft_strcmp((res = ft_parcer(shell, shell->line_left, "")), ""))
 		{
 			token->args = (char **)realloc_ptr(token->args, i + 2);
-			token->args[i + 2] = NULL;
+			token->args[i + 1] = NULL;
 			token->args[i] = ft_strdup(res);
 		}
 		while (ft_isspace(*shell->line_left))

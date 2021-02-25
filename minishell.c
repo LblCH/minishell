@@ -59,7 +59,7 @@ int		invitation(t_shell *shell)
 		signal(SIGQUIT, &sig_quit);
 		if (get_next_line(0, &line) == 0)
 		{
-			ft_putstr_fd("exit\n", 2);
+			ft_putstr_fd("\nexit\n", 2);
 			shell->exit = 1;
 		}
 		if (preparcer(line) == 0)

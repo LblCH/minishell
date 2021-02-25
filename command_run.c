@@ -73,17 +73,29 @@ int 		run_execve(t_shell *shell, char *path)
 {
 	int ret;
 	int n;
+//	int i;
+	pid_t pid;
 	struct s_token *token;
 
+	(void)path;
 	token = shell->start;
 	n = 0;
 	while (token)
 	{
 		ret = 0;
 		n++;
-		g_sig.pid = fork();
-		if (g_sig.pid == 0)
+		pid = fork();
+		if (pid == 0)
 		{
+//			printf("--------------\nToken added\n");
+//			printf("fd_in: %d fd_out: %d fd_out_prev: %d\n", token->fd_in, token->fd_out, token->fd_out_prev);
+//			i = 0;
+//			while (token->args && token->args[i])
+//			{
+//				printf("arg %d: %s\n", i, token->args[i]);
+//				i++;
+//			}
+//			printf("--------------\n");
 			if (token->fd_in != -1)
 			{
 				dup2(token->fd_in, 0);
@@ -95,8 +107,9 @@ int 		run_execve(t_shell *shell, char *path)
 				if (token->next)
 					(token->next->fd_in != -1) ? close(token->next->fd_in) : 0;
 			}
-			if (ft_strchr(path, '/') != NULL)
-				execve(path, token->args, shell->env);
+//			if (ft_strchr(path, '/') != NULL)
+				token->args[0] = path;
+				execve(token->args[0], token->args, shell->env);
 			ret = error_execve(path);
 			clear_tokens(shell);
 			exit(ret);

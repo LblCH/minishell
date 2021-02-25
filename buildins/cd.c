@@ -40,7 +40,7 @@ int error_handling (t_shell *shell)
 char			*no_arg_cd(t_shell *shell, char *curpath)
 {
 	if (ft_strcmp(get_env(shell, "HOME"), "") == 0)
-		ft_putstr_fd("cd: HOME not set", 2);
+		ft_putstr_fd("cd: HOME not set\n", 2);
 	else
 		curpath = get_env(shell, "HOME");
 	return (curpath);
@@ -55,7 +55,7 @@ char			*special_args_cd(t_shell *shell, char *curpath)
 	else if ((ft_strcmp(shell->start->args[1], "-") == 0))
 	{
 		if (ft_strcmp(get_env(shell, "OLDPWD"), "") == 0)
-			ft_putstr_fd("cd: OLDPWD not set", 2);
+			ft_putstr_fd("cd: OLDPWD not set\n", 2);
 		else
 			curpath = get_env(shell, "OLDPWD");
 	}

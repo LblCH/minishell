@@ -59,7 +59,7 @@ char		*spec_simbol(t_shell *shell, char *line, char **res)
 			}
 			else
 			{
-				ft_strjoin(*res, get_env(shell, line));
+				*res = ft_strjoin(*res, get_env(shell, line));
 				while (ft_isalnum(*line) || *line == '_')
 					line++;
 			}

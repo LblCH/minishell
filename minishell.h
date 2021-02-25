@@ -28,7 +28,6 @@
 
 typedef struct		s_token
 {
-//	char 			*command;
 	char 			**args;
 	int 			fd_in;
 	int 			fd_out;
