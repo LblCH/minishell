@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 18:34:24 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/01/27 14:01:44 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/02/25 20:46:12 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,17 @@ int				ft_cd(t_shell *shell)
 {
 	char	*curpath;
 	int		ret;
+	int		free_me;
 
 	curpath = NULL;
+	free_me = 0;
 	if (!shell->start->args[1])
 		curpath = no_arg_cd(shell, curpath);
 	else
+	{
 		curpath = special_args_cd(shell, curpath);
+		free_me = 1;
+	}
 	set_pwd(shell, "OLDPWD=");
 	if ((ret = chdir(curpath)) < 0)
 	{
@@ -82,5 +87,7 @@ int				ft_cd(t_shell *shell)
 		ret *= -1;
 	}
 	set_pwd(shell, "PWD=");
+	if (free_me)
+		free(curpath);
 	return (ret);
 }
