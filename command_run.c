@@ -129,6 +129,8 @@ int		prep_execve(t_shell *shell)
 		ret = run_execve(shell, valid_path);
 	else
 		ret = run_execve(shell, shell->start->args[0]);
+	free_tab(paths);
+	free(valid_path);
 	return (ret);
 }
 
