@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 11:34:36 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/01/26 11:45:11 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/02/25 20:48:25 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ char		*check_location(char **paths, char *cmd)
 			}
 			dir_content = readdir(dir);
 		}
+		closedir(dir);
 	}
-	closedir(dir);
 	return (0);
 }
 

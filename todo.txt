@@ -1,8 +1,5 @@
 Unset:
 1. unset HOME - чистит все переменные окружения вместо HOME - только в CLion. Magic
 
-Ctrl + D:
-1. Должен не делать ничего, когда в строку введены символы
-
 Pointer being freed was not allocated:
 1. Вылетает сега если строка начинается с ;

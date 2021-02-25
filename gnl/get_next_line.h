@@ -18,6 +18,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include "../libft/libft.h"
+# include "../minishell.h"
 
 int			get_next_line(int fd, char **line);
 char		*add_and_free(char *s1, char *s2);
