@@ -57,11 +57,8 @@ int		invitation(t_shell *shell)
 		sig_init(shell);
 		signal(SIGINT, &sig_int);
 		signal(SIGQUIT, &sig_quit);
-		if (get_next_line(0, &line) == 0)
-		{
-			ft_putstr_fd("\nexit\n", 2);
-			shell->exit = 1;
-		}
+		if (get_next_line(0, &line) < 0)
+			ft_putstr_fd("\nGNL error\n", 2);
 		if (preparcer(line) == 0)
 		{
 			shell->ret = (g_sig.sigint == 1) ? g_sig.ret : shell->ret;

@@ -107,7 +107,7 @@ void 		add_token(t_shell *shell, t_token *token, char *line);
  * command_run.c
  */
 
-void		cmd_run(t_shell *shell, t_token *token);
+int			cmd_run(t_shell *shell, t_token *token);
 void		prep_execve(t_shell *shell, t_token *token);
 int 		start_execve(t_shell *shell);
 

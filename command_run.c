@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 19:58:11 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/02/24 18:40:26 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/02/26 11:36:37 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,9 @@ int			error_execve(char *path)
 	return (ret);
 }
 
-void 		child_process(t_shell *shell, t_token *token)
+int		child_process(t_shell *shell, t_token *token)
 {
+	int ret;
 //	printf("--------------\nToken added\n");
 //	printf("fd_in: %d fd_out: %d fd_out_prev: %d\n", token->fd_in, token->fd_out, token->fd_out_prev);
 //	int i = 0;
@@ -91,7 +92,8 @@ void 		child_process(t_shell *shell, t_token *token)
 		if (token->next)
 			(token->next->fd_in != -1) ? close(token->next->fd_in) : 0;
 	}
-	cmd_run(shell, token);
+	ret = cmd_run(shell, token);
+	return (ret);
 }
 
 int 		start_execve(t_shell *shell)
@@ -108,14 +110,17 @@ int 		start_execve(t_shell *shell)
 		ret = 0;
 		n++;
 		if (token->args && (!ft_strcmp(token->args[0], "exit")))
+		{
 			ft_exit(shell);
+			return (shell->ret);
+		}
 		else if (token->args && (is_buildin(token->args[0])))
-			shell->ret = run_buildin(shell, token->args[0]);
+			ret = run_buildin(shell, token->args[0]);
 		else
 		{
 			pid = fork();
 			if (pid == 0)
-				child_process(shell, token);
+				ret = child_process(shell, token);
 		}
 		token = token->next;
 	}
@@ -154,9 +159,10 @@ void		prep_execve(t_shell *shell, t_token *token)
 }
 
 
-void		cmd_run(t_shell *shell, t_token *token)
+int		cmd_run(t_shell *shell, t_token *token)
 {
 	char *cmd;
+	int ret;
 
 	if(token->args)
 		cmd = token->args[0];
@@ -164,7 +170,7 @@ void		cmd_run(t_shell *shell, t_token *token)
 		cmd = NULL;
 	if (cmd)
 		prep_execve(shell, token);
-	shell->ret = error_execve(token->args[0]);
+	ret = error_execve(token->args[0]);
 	clear_tokens(shell);
-	exit(shell->ret);
+	exit(ret);
 }
