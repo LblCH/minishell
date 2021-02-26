@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 19:58:11 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/02/26 11:37:06 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/02/26 12:57:16 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int 		start_execve(t_shell *shell)
 {
 	int ret;
 	int n;
-	pid_t pid;
+	//pid_t pid;
 	struct s_token *token;
 
 	token = shell->start;
@@ -118,8 +118,8 @@ int 		start_execve(t_shell *shell)
 			ret = run_buildin(shell, token->args[0]);
 		else
 		{
-			pid = fork();
-			if (pid == 0)
+			g_sig.pid = fork();
+			if (g_sig.pid == 0)
 				ret = child_process(shell, token);
 		}
 		token = token->next;
