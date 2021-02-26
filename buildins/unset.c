@@ -6,18 +6,18 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 12:49:23 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/02/26 21:00:54 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/02/26 21:44:46 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
 char		**recreate_env_array(char **env, int delete)
 {
-	char **new;
-	int i;
-	int k;
-	int count;
+	char	**new;
+	int		i;
+	int		k;
+	int		count;
 
 	count = env_count(env);
 	new = malloc(sizeof(new) * count);
@@ -38,10 +38,9 @@ char		**recreate_env_array(char **env, int delete)
 	return (new);
 }
 
-int	ft_unset(t_shell *shell, char *arg)
+int			check_arg(char *arg)
 {
 	int i;
-	char **tmp;
 
 	i = 0;
 	if (!arg)
@@ -50,11 +49,21 @@ int	ft_unset(t_shell *shell, char *arg)
 	{
 		if (arg[i] == '=')
 		{
-			error_printing(arg, "unset: not a valid identifier: ");
-			return(0);
+			error(arg, "unset: not a valid identifier: ");
+			return (0);
 		}
 		i++;
 	}
+	return (1);
+}
+
+int			ft_unset(t_shell *shell, char *arg)
+{
+	int			i;
+	char		**tmp;
+
+	if (!check_arg(arg))
+		return (0);
 	i = 0;
 	while (shell->env[i])
 	{

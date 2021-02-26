@@ -6,11 +6,11 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 12:49:15 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/02/26 20:18:08 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/02/26 21:47:19 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
 void		env_print(char **env)
 {
@@ -45,9 +45,9 @@ int			env_validation(const char *env)
 
 char		**create_env_array(char **env, char *to_add, int var)
 {
-	char **new;
-	int i;
-	int count;
+	char	**new;
+	int		i;
+	int		count;
 
 	count = env_count(env);
 	i = (var == 1) ? 2 : 1;
@@ -89,10 +89,7 @@ int			ft_export(t_shell *shell)
 		{
 			ret = env_validation(shell->start->args[i]);
 			if (ret < 0)
-			{
-				error_printing(shell->start->args[i],
-							   "export: not a valid identifier: ");
-			}
+				error(shell->start->args[i], "export: not valid identifier: ");
 			if (ret == 2)
 				add_env(shell, shell->start->args[i]);
 			i++;

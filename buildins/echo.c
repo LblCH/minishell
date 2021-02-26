@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
 int	ft_echo(t_token *token)
 {
@@ -28,7 +28,8 @@ int	ft_echo(t_token *token)
 		}
 		while (token->args[i])
 		{
-			ft_putstr_fd(token->args[i], (token->fd_out > 0) ? token->fd_out : 1);
+			ft_putstr_fd(token->args[i],
+				(token->fd_out > 0) ? token->fd_out : 1);
 			if (token->args[i + 1] && token->args[i][0] != '\0')
 				ft_putchar_fd(' ', (token->fd_out > 0) ? token->fd_out : 1);
 			i++;

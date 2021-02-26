@@ -60,7 +60,6 @@ int		get_next_line(int fd, char **line)
 		if (((i = find_index(str, '\n')) != -1))
 			return (get_line(str, line, i));
 	}
-
 	if (str)
 	{
 		*line = ft_strdup_gnl(str);

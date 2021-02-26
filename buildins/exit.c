@@ -6,11 +6,11 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 23:42:50 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/02/26 20:18:08 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/02/26 21:28:30 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
 static int	arg_is_digit(char *arg)
 {
@@ -29,14 +29,11 @@ static int	arg_is_digit(char *arg)
 void		ft_exit(t_shell *shell)
 {
 	shell->exit = 1;
-	ft_putstr_fd("exit\n", 2);
 	if (shell->start->args[1] && shell->start->args[2])
 	{
 		shell->ret = 1;
 		shell->exit = 0;
-		ft_putstr_fd(": ", 2);
-		ft_putstr_fd(shell->start->args[0], 2);
-		ft_putendl_fd(": too many arguments", 2);
+		ft_putendl_fd("exit: too many arguments", 2);
 	}
 	if (shell->start->args[1])
 	{
@@ -45,13 +42,12 @@ void		ft_exit(t_shell *shell)
 		else
 		{
 			shell->ret = 255;
-			ft_putstr_fd(": ", 2);
-			ft_putstr_fd(shell->start->args[0], 2);
-			ft_putendl_fd(": numeric argument required", 2);
+			ft_putendl_fd("exit: numeric argument required", 2);
 		}
 	}
 	if (shell->exit == 1)
 	{
+		ft_putstr_fd("exit\n", 2);
 		clear_tokens(shell);
 		free_tab(shell->env);
 	}

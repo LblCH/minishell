@@ -6,15 +6,13 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 18:34:24 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/02/26 20:18:08 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/02/26 21:44:46 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
-
-
-static int		set_pwd(t_shell *shell, char* pwd)
+static int		set_pwd(t_shell *shell, char *pwd)
 {
 	char buf[PATH_MAX];
 	char *env;
@@ -25,19 +23,17 @@ static int		set_pwd(t_shell *shell, char* pwd)
 	return (0);
 }
 
-int error_handling (t_shell *shell)
+int				error_handling(t_shell *shell)
 {
 	if (errno == ENOENT)
-		error_printing(shell->start->args[1],
-					   "No such file or directory: ");
+		error(shell->start->args[1], "No such file or directory: ");
 	else if (errno == EACCES)
-		error_printing(shell->start->args[1],
-					   "Permission denied: ");
+		error(shell->start->args[1], "Permission denied: ");
 	else if (errno == ENOTDIR)
-		error_printing(shell->start->args[1],
-					   "Not a directory: ");
+		error(shell->start->args[1], "Not a directory: ");
 	return (0);
 }
+
 char			*no_arg_cd(t_shell *shell, char *curpath)
 {
 	if (ft_strcmp(get_env(shell, "HOME"), "") == 0)
@@ -61,7 +57,8 @@ char			*special_args_cd(t_shell *shell, char *curpath)
 			curpath = get_env(shell, "OLDPWD");
 	}
 	else
-		curpath = ft_strjoin_with_slash(getcwd(buf, 1024), shell->start->args[1]);
+		curpath =
+				ft_strjoin_with_slash(getcwd(buf, 1024), shell->start->args[1]);
 	return (curpath);
 }
 

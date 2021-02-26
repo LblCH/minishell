@@ -6,13 +6,13 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 11:34:36 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/02/25 20:48:25 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/02/26 22:03:28 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char			*ft_strjoin_with_slash(char const *s1, char const *s2)
+char		*ft_strjoin_with_slash(char const *s1, char const *s2)
 {
 	size_t	i;
 	size_t	j;
@@ -49,15 +49,15 @@ int			is_buildin(char *command)
 
 char		*check_location(char **paths, char *cmd)
 {
-	char *valid_path;
-	DIR *dir;
-	struct dirent *dir_content;
-	int i;
+	char			*valid_path;
+	DIR				*dir;
+	struct dirent	*dir_content;
+	int 			i;
 
 	i = 0;
 	while (paths[i++])
 	{
-		if(!(dir = opendir(paths[i])))
+		if (!(dir = opendir(paths[i])))
 			return (NULL);
 		dir_content = readdir(dir);
 		while (dir_content)
@@ -75,10 +75,27 @@ char		*check_location(char **paths, char *cmd)
 	return (0);
 }
 
-void		sig_init()
+void		sig_init(void)
 {
 	g_sig.sigint = 0;
 	g_sig.sigquit = 0;
 	g_sig.pid = 0;
 	g_sig.ret = 0;
+}
+
+int		cmd_run(t_shell *shell, t_token *token)
+{
+	char	*cmd;
+	int		ret;
+
+	if (token->args)
+		cmd = token->args[0];
+	else
+		cmd = NULL;
+	if (cmd)
+		prep_execve(shell, token);
+	ret = error_execve(token->args[0]);
+	clear_tokens(shell);
+	free_tab(shell->env);
+	exit(ret);
 }

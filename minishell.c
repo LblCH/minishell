@@ -16,9 +16,9 @@ t_sig g_sig;
 
 void	clear_tokens(t_shell *shell)
 {
-	t_token	*tmp;
-	t_token	*previous;
-	int i;
+	t_token		*tmp;
+	t_token		*previous;
+	int			i;
 //	printf("---------------------------------\nClearing tokens\n");
 	tmp = shell->start;
 	while (tmp)

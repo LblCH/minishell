@@ -52,7 +52,7 @@ int		check_semicolon(char *line, int i)
 		return (1);
 	}
 	free(token);
-	return(0);
+	return (0);
 }
 
 int		preparcer(char *line)

@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/14 20:00:01 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/01/27 15:58:41 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/02/26 21:44:46 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int			add_env(t_shell *shell, char *arg)
 	return (0);
 }
 
-void		error_printing(char *env, char *text)
+void		error(char *env, char *text)
 {
 	ft_putstr_fd(text, 2);
 	ft_putendl_fd(env, 2);
