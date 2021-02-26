@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 00:22:36 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/02/26 22:03:28 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/02/26 22:06:52 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void				error(char *env, char *text);
 char				*ft_strjoin_with_slash(char const *s1, char const *s2);
 int					is_buildin(char *command);
 char				*check_location(char **paths, char *cmd);
-void				sig_init(void);
+void				sig_init();
 int					cmd_run(t_shell *shell, t_token *token);
 
 /*
