@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 23:42:50 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/02/26 16:36:31 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/02/26 16:54:48 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,9 @@ void		ft_exit(t_shell *shell)
 			ft_putendl_fd(": numeric argument required", 2);
 		}
 	}
-	clear_tokens(shell);
-	free_tab(shell->env);
+	if (shell->exit == 1)
+	{
+		clear_tokens(shell);
+		free_tab(shell->env);
+	}
 }
