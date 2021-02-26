@@ -45,7 +45,7 @@ char		*spec_simbol(t_shell *shell, char *line, char **res)
 {
 	if (*line == '$')
 	{
-		if (!ft_isalnum(*(line + 1)) && !ft_strchr("\'\"", *(line+1)))
+		if (!ft_isalnum(*(line + 1)) && !ft_strchr("\'\"?", *(line+1)))
 		{
 			*res = add_char(*res, '$');
 			line++;
