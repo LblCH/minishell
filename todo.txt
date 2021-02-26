@@ -3,3 +3,5 @@ Unset:
 
 Pointer being freed was not allocated:
 1. Вылетает сега если строка начинается с ;
+
+Ctrl+C выдает 2ое приглашение.

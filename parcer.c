@@ -45,7 +45,7 @@ char		*spec_simbol(t_shell *shell, char *line, char **res)
 {
 	if (*line == '$')
 	{
-		if (!(*(line + 1)) || *(line + 1) == ' ')
+		if (!ft_isalnum(*(line + 1)) && !ft_strchr("\'\"", *(line+1)))
 		{
 			*res = add_char(*res, '$');
 			line++;
@@ -81,7 +81,7 @@ char		*separators(t_shell *shell, char *line)
 	if (*line == '|')
 	{
 		pipe(pipe_fd);
-		printf("pipe[0] = %d \npipe[1] = %d\n", pipe_fd[0], pipe_fd[1]);
+//		printf("pipe[0] = %d \npipe[1] = %d\n", pipe_fd[0], pipe_fd[1]);
 		if (token_last(shell->start)->fd_out < 0)
 			token_last(shell->start)->fd_out = pipe_fd[1];
 		token_last(shell->start)->next = new_token();

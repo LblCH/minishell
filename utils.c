@@ -44,7 +44,7 @@ void		*realloc_ptr(char **ptr, size_t size)
 	{
 		while (ptr[j])
 		{
-			new[j] = ft_strdup(ptr[j]);
+			(new[j] = ft_strdup(ptr[j])) ? 0 : exit(9);
 			j++;
 		}
 		free(ptr);

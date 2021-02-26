@@ -69,98 +69,102 @@ int			error_execve(char *path)
 	return (ret);
 }
 
-int 		run_execve(t_shell *shell, char *path)
+void 		child_process(t_shell *shell, t_token *token)
+{
+//	printf("--------------\nToken added\n");
+//	printf("fd_in: %d fd_out: %d fd_out_prev: %d\n", token->fd_in, token->fd_out, token->fd_out_prev);
+//	int i = 0;
+//	while (token->args && token->args[i])
+//	{
+//		printf("arg %d: %s\n", i, token->args[i]);
+//		i++;
+//	}
+//	printf("--------------\n");
+	if (token->fd_in != -1)
+	{
+		dup2(token->fd_in, 0);
+		(token->fd_out_prev != -1) ? close(token->fd_out_prev) : 0;
+	}
+	if (token->fd_out != -1)
+	{
+		dup2(token->fd_out, 1);
+		if (token->next)
+			(token->next->fd_in != -1) ? close(token->next->fd_in) : 0;
+	}
+	cmd_run(shell, token);
+}
+
+int 		start_execve(t_shell *shell)
 {
 	int ret;
 	int n;
-//	int i;
 	pid_t pid;
 	struct s_token *token;
 
-	(void)path;
 	token = shell->start;
 	n = 0;
 	while (token)
 	{
 		ret = 0;
 		n++;
-		pid = fork();
-		if (pid == 0)
+		if (token->args && (!ft_strcmp(token->args[0], "exit")))
+			ft_exit(shell);
+		else if (token->args && (is_buildin(token->args[0])))
+			shell->ret = run_buildin(shell, token->args[0]);
+		else
 		{
-//			printf("--------------\nToken added\n");
-//			printf("fd_in: %d fd_out: %d fd_out_prev: %d\n", token->fd_in, token->fd_out, token->fd_out_prev);
-//			i = 0;
-//			while (token->args && token->args[i])
-//			{
-//				printf("arg %d: %s\n", i, token->args[i]);
-//				i++;
-//			}
-//			printf("--------------\n");
-			if (token->fd_in != -1)
-			{
-				dup2(token->fd_in, 0);
-				(token->fd_out_prev != -1) ? close(token->fd_out_prev) : 0;
-			}
-			if (token->fd_out != -1)
-			{
-				dup2(token->fd_out, 1);
-				if (token->next)
-					(token->next->fd_in != -1) ? close(token->next->fd_in) : 0;
-			}
-//			if (ft_strchr(path, '/') != NULL)
-				token->args[0] = path;
-				execve(token->args[0], token->args, shell->env);
-			ret = error_execve(path);
-			clear_tokens(shell);
-			exit(ret);
+			pid = fork();
+			if (pid == 0)
+				child_process(shell, token);
 		}
 		token = token->next;
 	}
 	while(n--)
 		wait(&ret);
+	clear_tokens(shell);
 	ret = WEXITSTATUS(ret);
 	if (g_sig.sigint == 1 || g_sig.sigquit == 1)
 		return (g_sig.ret);
 	return (ret);
 }
 
-int		prep_execve(t_shell *shell)
+void		prep_execve(t_shell *shell, t_token *token)
 {
 	int i;
 	char **paths;
 	char *valid_path;
-	int ret;
 
 	i = 0;
-	while (shell->env && shell->env[i] && ft_strncmp(shell->env[i], "PATH=", 5) != 0)
+	while (shell->env && shell->env[i] && ft_strncmp(shell->env[i], \
+															"PATH=", 5) != 0)
 		i++;
 	if (shell->env[i] == NULL)
-		return (run_execve(shell, shell->start->args[0]));
+		(ft_strchr(token->args[0], '/') != NULL) ? \
+					execve(token->args[0], token->args, shell->env) : 0;
 	paths = ft_split(shell->env[i] + 5, ':');
-	valid_path = check_location(paths, shell->start->args[0]);
-	if (valid_path)
-		ret = run_execve(shell, valid_path);
-	else
-		ret = run_execve(shell, shell->start->args[0]);
+	valid_path = check_location(paths, token->args[0]);
 	free_tab(paths);
+	if (valid_path)
+		(ft_strchr(valid_path, '/') != NULL) ? execve(valid_path, token->args, \
+															shell->env) : 0;
+	else
+		(ft_strchr(token->args[0], '/') != NULL) ? \
+					execve(token->args[0], token->args, shell->env) : 0;
 	free(valid_path);
-	return (ret);
 }
 
 
-void		cmd_run(t_shell *shell)
+void		cmd_run(t_shell *shell, t_token *token)
 {
 	char *cmd;
 
-	if(shell->start->args)
-		cmd = shell->start->args[0];
+	if(token->args)
+		cmd = token->args[0];
 	else
 		cmd = NULL;
-	if (cmd && (!ft_strcmp(cmd, "exit")))
-		ft_exit(shell);
-	else if (cmd && (is_buildin(cmd)))
-		shell->ret = run_buildin(shell, cmd);
-	else if (cmd)
-		shell->ret = prep_execve(shell);
+	if (cmd)
+		prep_execve(shell, token);
+	shell->ret = error_execve(token->args[0]);
 	clear_tokens(shell);
+	exit(shell->ret);
 }

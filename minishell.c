@@ -68,7 +68,7 @@ int		invitation(t_shell *shell)
 			if (!shell->start)
 				shell->start = new_token();
 			(*line) ? add_token(shell, shell->start, line) : 0;
-			cmd_run(shell);
+			shell->ret = start_execve(shell);
 			while (shell->semicol == 1)
 			{
 				shell->semicol = 0;
@@ -76,7 +76,7 @@ int		invitation(t_shell *shell)
 					shell->start = new_token();
 				if (*shell->line_left)
 					add_token(shell, shell->start, shell->line_left);
-				cmd_run(shell);
+				shell->ret = start_execve(shell);
 			}
 		}
 		free(line);
