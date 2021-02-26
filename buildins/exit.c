@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 23:42:50 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/02/26 12:34:27 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/02/26 16:36:31 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	arg_is_digit(char *arg)
 {
 	int i;
 
-	i = 0;
+	i = (arg[0] == '-') ? 1 : 0;
 	while (arg[i])
 	{
 		if (!(ft_isdigit(arg[i])))
