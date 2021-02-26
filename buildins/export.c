@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 12:49:15 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/02/26 16:13:38 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/02/26 20:18:08 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,12 @@ char		**create_env_array(char **env, char *to_add, int var)
 	}
 	new[i] = (var == 1) ? ft_strdup(to_add) : NULL;
 	if (var == 1)
+	{
+		new[i] = ft_strdup(to_add);
 		new[i + 1] = NULL;
+	}
+	else
+		new[i] = NULL;
 	return (new);
 }
 
