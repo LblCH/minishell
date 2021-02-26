@@ -28,6 +28,7 @@ int	ft_unset(t_shell *shell, char *arg)
 		}
 		i++;
 	}
+	i = 0;
 	while (shell->env[i])
 	{
 		if (ft_strncmp(shell->env[i], arg, ft_strlen(arg)) == 0)
