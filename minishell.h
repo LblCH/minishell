@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 00:22:36 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/02/27 12:03:51 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/02/27 13:16:35 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ int					cmd_run(t_shell *shell, t_token *token);
 void				prep_execve(t_shell *shell, t_token *token);
 int 				start_execve(t_shell *shell);
 int					error_execve(char *path);
+int					run_buildin(t_shell *shell, char *cmd);
 
 /*
  * env_utils.c
@@ -150,5 +151,12 @@ char				**create_env_array(char **env, char *to_add, int var);
 
 void				*ft_free(void *ptr);
 void				free_tab(char **tab);
+
+/*
+* childs_and_parents.c
+*/
+
+int					parent(int ret);
+int					buildin_or_child(t_shell *shell, t_token *token, int ret);
 
 #endif
