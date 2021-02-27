@@ -1,4 +1,3 @@
-
 5. mkdir a; mkdir a/b; cd a/b; rm -r ../../a; cd .. - segmentation fault
 6. echo -n -n -nnnn -nnnnm ; echo a
 7. echo -n -nnn hello -n ; echo a
@@ -17,6 +16,5 @@
 20. cat < test - segfault
 21. echo "$tests" "Makefile"
 22. export test="  foo    bar  " ; echo $test
-
 
 
