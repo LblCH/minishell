@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 23:08:34 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/02/27 12:09:58 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/02/27 12:12:53 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int		invitation(t_shell *shell)
 				shell->start = new_token();
 			(*line) ? add_token(shell, shell->start, line) : 0;
 			shell->ret = start_execve(shell);
-			while (shell->semicol == 1)
+			while (shell->semicol == 1 && shell->exit != 1)
 			{
 				shell->semicol = 0;
 				if (!shell->start)
