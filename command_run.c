@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 19:58:11 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/02/27 16:46:09 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/02/27 17:19:04 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int			start_execve(t_shell *shell)
 		ret = parent(ret);
 	if (g_sig.catched)
 		return (1);
+	clear_tokens(shell);
 	return (ret);
 }
 
