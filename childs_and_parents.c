@@ -61,6 +61,7 @@ int			parent(int ret)
 	wait(&ret);
 	signal(SIGQUIT, catch_sig);
 	signal(SIGINT, catch_sig);
-	ret = status_return(ret);
+	if (ret != 1)
+		ret = status_return(ret);
 	return (ret);
 }
