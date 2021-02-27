@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 11:34:36 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/02/27 11:29:41 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/02/27 19:53:18 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,5 @@ int			cmd_run(t_shell *shell, t_token *token)
 	if (cmd)
 		prep_execve(shell, token);
 	ret = error_execve(token->args[0]);
-	clear_tokens(shell);
-	free_tab(shell->env);
 	exit(ret);
 }
