@@ -86,7 +86,6 @@ int			start_execve(t_shell *shell)
 	}
 	while (n--)
 		ret = parent(ret);
-	clear_tokens(shell);
 	if (g_sig.catched)
 		return (1);
 	return (ret);
