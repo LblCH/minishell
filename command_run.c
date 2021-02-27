@@ -85,10 +85,12 @@ int			start_execve(t_shell *shell)
 		token = token->next;
 	}
 	while (n--)
+	{
 		ret = parent(ret);
+		clear_tokens(shell);
+	}
 	if (g_sig.catched)
 		return (1);
-	clear_tokens(shell);
 	return (ret);
 }
 
