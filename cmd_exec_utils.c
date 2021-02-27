@@ -72,7 +72,7 @@ char		*check_location(char **paths, char *cmd)
 		}
 		closedir(dir);
 	}
-	return (0);
+	return (NULL);
 }
 
 int			cmd_run(t_shell *shell, t_token *token)

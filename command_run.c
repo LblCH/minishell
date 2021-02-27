@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 19:58:11 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/02/27 17:19:04 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/02/27 19:55:45 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,16 +105,16 @@ void		prep_execve(t_shell *shell, t_token *token)
 															"PATH=", 5) != 0)
 		i++;
 	if (shell->env[i] == NULL)
-		(ft_strchr(token->args[0], '/') != NULL) ? \
-					execve(token->args[0], token->args, shell->env) : 0;
-	paths = ft_split(shell->env[i] + 5, ':');
-	valid_path = check_location(paths, token->args[0]);
-	free_tab(paths);
-	if (valid_path)
-		(ft_strchr(valid_path, '/') != NULL) ? execve(valid_path, token->args, \
-															shell->env) : 0;
+		execve(token->args[0], token->args, shell->env);
 	else
-		(ft_strchr(token->args[0], '/') != NULL) ? \
-					execve(token->args[0], token->args, shell->env) : 0;
-	free(valid_path);
+	{
+		paths = ft_split(shell->env[i] + 5, ':');
+		valid_path = check_location(paths, token->args[0]);
+		free_tab(paths);
+		if (valid_path)
+		{
+			execve(valid_path, token->args,shell->env);
+			ft_free(valid_path);
+		}
+	}
 }
