@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 19:58:11 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/02/27 11:53:22 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/02/27 12:21:33 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,6 @@ int			child_process(t_shell *shell, t_token *token)
 {
 	int ret;
 
-//	printf("--------------\nToken added\n");
-//	printf("fd_in: %d fd_out: %d fd_out_prev: %d\n", token->fd_in, token->fd_out, token->fd_out_prev);
-//	int i = 0;
-//	while (token->args && token->args[i])
-//	{
-//		printf("arg %d: %s\n", i, token->args[i]);
-//		i++;
-//	}
-//	printf("--------------\n");
 	if (token->fd_in != -1)
 	{
 		dup2(token->fd_in, 0);

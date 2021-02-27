@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 21:03:00 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/02/27 12:09:58 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/02/27 12:10:53 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int		status_return(int status)
 			return (143);
 	}
 	return (WEXITSTATUS(status));
-
 }
 
 void	catch_sig(int signal)
@@ -46,7 +45,7 @@ void	catch_sig(int signal)
 		ft_putstr_fd("\b\b  \b\b", 2);
 }
 
-void init()
+void	init(void)
 {
 	g_sig.pid = 0;
 	g_sig.catched = 0;

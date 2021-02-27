@@ -52,7 +52,7 @@ char		*check_location(char **paths, char *cmd)
 	char			*valid_path;
 	DIR				*dir;
 	struct dirent	*dir_content;
-	int 			i;
+	int				i;
 
 	i = 0;
 	while (paths[i++])
@@ -75,7 +75,7 @@ char		*check_location(char **paths, char *cmd)
 	return (0);
 }
 
-int		cmd_run(t_shell *shell, t_token *token)
+int			cmd_run(t_shell *shell, t_token *token)
 {
 	char	*cmd;
 	int		ret;
