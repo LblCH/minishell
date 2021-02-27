@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 13:14:39 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/02/27 13:16:35 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/02/28 00:36:32 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int			parent(int ret)
 	wait(&ret);
 	signal(SIGQUIT, catch_sig);
 	signal(SIGINT, catch_sig);
-	if (ret != 1)
+	if (g_sig.pid == 0)
 		ret = status_return(ret);
 	return (ret);
 }

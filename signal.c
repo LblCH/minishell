@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 21:03:00 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/02/27 12:10:53 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/02/28 00:33:37 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,6 @@ void	catch_sig(int signal)
 
 void	init(void)
 {
-	g_sig.pid = 0;
+	g_sig.pid = -10;
 	g_sig.catched = 0;
 }
