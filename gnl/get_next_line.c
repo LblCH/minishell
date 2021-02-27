@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/07/24 23:23:04 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/02/27 10:45:48 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/02/27 13:38:32 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,20 @@ int		get_line(char *str, char **line, int i)
 	return (1);
 }
 
+int		gnl_exit(int res, char *str)
+{
+	int ret;
+
+	if (res == 0 && str[0] == 0)
+	{
+		ft_putstr_fd("\nexit\n", 2);
+		exit(1);
+	}
+	else
+		ret = 1;
+	return (ret);
+}
+
 int		get_next_line(int fd, char **line)
 {
 	char			buff[BUFFER_SIZE + 1];
@@ -50,23 +64,12 @@ int		get_next_line(int fd, char **line)
 		buff[res] = '\0';
 		(res == 0 || buff[res - 1] != '\n') ? ft_putstr_fd("  \b\b", 1) : 0;
 		str = add_and_free(str, buff);
-		if (res == 0 && str[0] == 0)
-		{
-			ft_putstr_fd("\nexit\n", 2);
-			exit(1);
-		}
-		else
-			res = 1;
+		gnl_exit(res, str);
 		if (((i = find_index(str, '\n')) != -1))
 			return (get_line(str, line, i));
 	}
+	*line = (str) ? ft_strdup_gnl(str) : ft_strdup_gnl("");
 	if (str)
-	{
-		*line = ft_strdup_gnl(str);
-		free(str);
-		str = NULL;
-		return (res);
-	}
-	*line = ft_strdup_gnl("");
+		ft_free(str);
 	return (res);
 }
