@@ -77,14 +77,14 @@ int			add_env(t_shell *shell, char *arg)
 	{
 		if (ft_strncmp(shell->env[i], name, ft_strlen(name)) == 0)
 		{
-			free(shell->env[i]);
+			ft_free(shell->env[i]);
 			shell->env[i] = ft_strdup(arg);
-			free(name);
+			ft_free(name);
 			return (0);
 		}
 		i++;
 	}
-	free(name);
+	ft_free(name);
 	tmp = shell->env;
 	shell->env = create_env_array(tmp, arg, 1);
 	free_tab(tmp);

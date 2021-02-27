@@ -58,7 +58,6 @@ char		**create_env_array(char **env, char *to_add, int var)
 		new[i] = ft_strdup(env[i]);
 		i++;
 	}
-	new[i] = (var == 1) ? ft_strdup(to_add) : NULL;
 	if (var == 1)
 	{
 		new[i] = ft_strdup(to_add);
