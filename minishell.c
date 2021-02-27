@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 23:08:34 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/02/27 12:12:53 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/02/27 18:52:19 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ void	clear_tokens(t_shell *shell)
 		{
 			free(tmp->args[i]);
 			tmp->args[i] = NULL;
-//			printf("args[%d] cleared\n", i);
+			//printf("args[%d] cleared\n", i);
 			i++;
 		}
-//		printf("args cleared\n");
+		//printf("args cleared\n");
 		(tmp->args) ? free(tmp->args) : 0;
 		tmp->args = NULL;
 		(tmp->fd_in > 0) ? close(tmp->fd_in) : 0;
