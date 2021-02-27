@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 23:08:34 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/02/26 22:11:51 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/02/27 12:09:58 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,14 +54,14 @@ int		invitation(t_shell *shell)
 	while (shell->exit == 0)
 	{
 		ft_putstr_fd("👻 \033[35mGhost'm IN i-Shell ⇥ \033[0m", 1);
-		sig_init(shell);
-		signal(SIGINT, &sig_int);
-		signal(SIGQUIT, &sig_quit);
+		init();
+		signal(SIGQUIT, catch_sig);
+		signal(SIGINT, catch_sig);
 		if (get_next_line(0, &line) < 0)
 			ft_putstr_fd("\nGNL error\n", 2);
 		if (preparcer(line) == 0)
 		{
-			shell->ret = (g_sig.sigint == 1) ? g_sig.ret : shell->ret;
+			shell->ret = (g_sig.catched == 1) ? 1 : shell->ret;
 			if (!shell->start)
 				shell->start = new_token();
 			(*line) ? add_token(shell, shell->start, line) : 0;
@@ -89,7 +89,6 @@ int		main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	shell.env = create_env_array(envp, NULL, 0);
-	shell.ret = 0;
 	shell.exit = 0;
 	shell.start = NULL;
 	shell.semicol = 0;

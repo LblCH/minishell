@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 19:58:11 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/02/26 21:53:22 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/02/27 11:53:22 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,16 +120,27 @@ int			start_execve(t_shell *shell)
 		{
 			g_sig.pid = fork();
 			if (g_sig.pid == 0)
+			{
+				signal(SIGQUIT, SIG_DFL);
+				signal(SIGINT, SIG_DFL);
+				signal(SIGTERM, SIG_DFL);
 				ret = child_process(shell, token);
+			}
 		}
 		token = token->next;
 	}
 	while (n--)
+	{
+		signal(SIGQUIT, SIG_IGN);
+		signal(SIGINT, SIG_IGN);
 		wait(&ret);
+		signal(SIGQUIT, catch_sig);
+		signal(SIGINT, catch_sig);
+		ret = status_return(ret);
+	}
 	clear_tokens(shell);
-	ret = WEXITSTATUS(ret);
-	if (g_sig.sigint == 1 || g_sig.sigquit == 1)
-		return (g_sig.ret);
+	if (g_sig.catched)
+		return (1);
 	return (ret);
 }
 

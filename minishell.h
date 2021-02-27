@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 00:22:36 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/02/26 22:06:52 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/02/27 12:03:51 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,7 @@ typedef struct		s_shell
 
 typedef struct		s_sig
 {
-	int				sigint;
-	int				sigquit;
-	int				ret;
+	int				catched;
 	pid_t			pid;
 }					t_sig;
 
@@ -129,15 +127,15 @@ void				error(char *env, char *text);
 char				*ft_strjoin_with_slash(char const *s1, char const *s2);
 int					is_buildin(char *command);
 char				*check_location(char **paths, char *cmd);
-void				sig_init();
 int					cmd_run(t_shell *shell, t_token *token);
 
 /*
  * signal.c
  */
 
-void				sig_quit(int sig);
-void				sig_int(int sig);
+void				catch_sig(int signal);
+int					status_return(int status);
+void				init();
 extern				t_sig g_sig;
 
 /*
@@ -145,7 +143,6 @@ extern				t_sig g_sig;
  */
 
 char				**create_env_array(char **env, char *to_add, int var);
-
 
 /*
  * free_utils.c
