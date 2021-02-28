@@ -10,16 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-int	ft_env(char **env)
+int	ft_env(char **env, t_token *token)
 {
 	int i;
 
 	i = 0;
 	while (env[i])
 	{
-		ft_putendl_fd(env[i], 1);
+		ft_putendl_fd(env[i], (token->fd_out > 0) ? token->fd_out : 1);
 		i++;
 	}
 	return (0);

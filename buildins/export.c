@@ -10,17 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-void		env_print(char **env)
+void		env_print(char **env, t_token *token)
 {
 	int i;
 
 	i = 0;
 	while (env[i])
 	{
-		ft_putstr_fd("declare -x ", 1);
-		ft_putendl_fd(env[i], 1);
+		ft_putstr_fd("declare -x ", (token->fd_out > 0) ? token->fd_out : 1);
+		ft_putendl_fd(env[i], (token->fd_out > 0) ? token->fd_out : 1);
 		i++;
 	}
 }
@@ -68,7 +68,7 @@ char		**create_env_array(char **env, char *to_add, int var)
 	return (new);
 }
 
-int			ft_export(t_shell *shell)
+int			ft_export(t_shell *shell, t_token *token)
 {
 	int count;
 	int ret;
@@ -78,7 +78,7 @@ int			ft_export(t_shell *shell)
 	{
 		count = env_count(shell->env);
 		sort_env(shell->env, count);
-		env_print(shell->env);
+		env_print(shell->env, token);
 		return (0);
 	}
 	else

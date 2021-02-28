@@ -87,10 +87,10 @@ char				*get_env(t_shell *shell, char *env);
 
 int 				ft_cd(t_shell *shell);
 int					ft_echo(t_token *token);
-int					ft_env(char **env);
+int					ft_env(char **env, t_token *token);
 void				ft_exit(t_shell *shell);
-int					ft_export(t_shell *shell);
-int					ft_pwd(void);
+int					ft_export(t_shell *shell, t_token *token);
+int					ft_pwd(t_token *token);
 int					ft_unset(t_shell *shell, char *arg);
 
 
@@ -109,7 +109,7 @@ int					cmd_run(t_shell *shell, t_token *token);
 void				prep_execve(t_shell *shell, t_token *token);
 int 				start_execve(t_shell *shell);
 int					error_execve(char *path);
-int					run_buildin(t_shell *shell, char *cmd);
+int					run_buildin(t_shell *shell, char *cmd, t_token *token);
 
 /*
  * env_utils.c

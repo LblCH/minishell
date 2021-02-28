@@ -38,7 +38,7 @@ int		gnl_exit(int res, char *str)
 
 	if (res == 0 && str[0] == 0)
 	{
-		ft_putstr_fd("\nexit\n", 2);
+		ft_putstr_fd("\nexit GNL\n", 2);
 		exit(1);
 	}
 	else
@@ -53,7 +53,7 @@ int		get_next_line(int fd, char **line)
 	int				res;
 	int				i;
 
-	if (!line || fd < 0 || BUFFER_SIZE < 1 || read(fd, buff, 0) < 0)
+	if (!line || fd < 0 || BUFFER_SIZE < 1 || (read(fd, buff, 0) < 0))
 		return (-1);
 	if (str && (((i = find_index(str, '\n')) != -1)))
 		return (get_line(str, line, i));

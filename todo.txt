@@ -10,8 +10,8 @@
 14. cat Makefile | grep pr | head -n 5 | cd file_not_exit
 15. ls | exit
 16. sleep 5 | exit
-17. <a cat <b <c - segfault
-18. >a cat <b >>c  - segfault
+17. <a cat <b <c - segfault   -  не может открыть файл, по цепочке передает NUll
+18. >a cat <b >>c  - segfault    ошибка GNL???
 19. cat -e > test1 < test2 - segfault
 20. cat < test - segfault
 21. echo "$tests" "Makefile"

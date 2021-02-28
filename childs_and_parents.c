@@ -39,12 +39,15 @@ int			buildin_or_child(t_shell *shell, t_token *token, int ret)
 		return (shell->ret);
 	}
 	else if (token->args && (is_buildin(token->args[0])))
-		ret = run_buildin(shell, token->args[0]);
+		ret = run_buildin(shell, token->args[0], token);
 	else
 	{
 		g_sig.pid = fork();
 		if (g_sig.pid == 0)
 		{
+			if (!ft_strcmp(token->args[0], "./minishell"))
+				add_env(shell, ft_strjoin("SHLVL=",\
+				ft_itoa(ft_atoi(get_env(shell, "SHLVL")) + 1)));
 			signal(SIGQUIT, SIG_DFL);
 			signal(SIGINT, SIG_DFL);
 			signal(SIGTERM, SIG_DFL);

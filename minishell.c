@@ -57,9 +57,13 @@ int		invitation(t_shell *shell)
 		init();
 		signal(SIGQUIT, catch_sig);
 		signal(SIGINT, catch_sig);
+		line = ft_strdup("");
 		if (get_next_line(0, &line) < 0)
+		{
 			ft_putstr_fd("\nGNL error\n", 2);
-		if (preparcer(line) == 0)
+			exit(1);
+		}
+		if (line && preparcer(line) == 0)
 		{
 			shell->ret = (g_sig.catched == 1) ? 1 : shell->ret;
 			if (!shell->start)
@@ -77,6 +81,7 @@ int		invitation(t_shell *shell)
 			}
 		}
 		free(line);
+		clear_tokens(shell);
 		line = NULL;
 	}
 	return (0);
@@ -90,8 +95,11 @@ int		main(int argc, char **argv, char **envp)
 	(void)argv;
 	shell.env = create_env_array(envp, NULL, 0);
 	shell.exit = 0;
+	shell.fd = -1;
 	shell.start = NULL;
 	shell.semicol = 0;
+	add_env(&shell, ft_strjoin("SHLVL=",\
+				ft_itoa(ft_atoi(get_env(&shell, "SHLVL")) + 1)));
 	invitation(&shell);
 	return (shell.ret);
 }

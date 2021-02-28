@@ -28,7 +28,7 @@ int		check_redirect(char *line, int i)
 		free(token);
 		return (1);
 	}
-//	if (!line[i])
+	free(token);
 	return (0);
 }
 
@@ -60,12 +60,17 @@ int		preparcer(char *line)
 	int i;
 
 	i = 0;
-	while (line[i])
+	while (line && line[i])
 	{
 		if (line[i] == ';' && check_semicolon(line, i))
 			return (1);
 		else if (ft_strchr("><", line[i]) && check_redirect(line, i))
 			return (1);
+		else if (line[i + 1] && line [i] == '|' && line [i + 1] == '|')
+		{
+			ft_putstr_fd("mini: syntax error near unexpected token `||'\n", 2);
+			return (1);
+		}
 		i++;
 	}
 	return (0);

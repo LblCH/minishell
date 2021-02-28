@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int			run_buildin(t_shell *shell, char *cmd)
+int			run_buildin(t_shell *shell, char *cmd, t_token *token)
 {
 	int ret;
 	int i;
@@ -24,9 +24,9 @@ int			run_buildin(t_shell *shell, char *cmd)
 	else if (ft_strcmp(cmd, "cd") == 0)
 		ret = (ft_cd(shell));
 	else if (ft_strcmp(cmd, "env") == 0)
-		ft_env(shell->env);
+		ft_env(shell->env, token);
 	else if (ft_strcmp(cmd, "export") == 0)
-		ft_export(shell);
+		ft_export(shell, token);
 	else if (ft_strcmp(cmd, "unset") == 0)
 	{
 		while (shell->start->args[i])
@@ -36,7 +36,7 @@ int			run_buildin(t_shell *shell, char *cmd)
 		}
 	}
 	else if (ft_strcmp(cmd, "pwd") == 0)
-		ret = (ft_pwd());
+		ret = (ft_pwd(token));
 	return (ret);
 }
 
@@ -77,10 +77,11 @@ int			start_execve(t_shell *shell)
 
 	token = shell->start;
 	n = 0;
+	ret = 0;
 	while (token)
 	{
-		ret = 0;
 		n++;
+		ret = 0;
 		ret = buildin_or_child(shell, token, ret);
 		token = token->next;
 	}

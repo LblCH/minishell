@@ -18,7 +18,7 @@ char		*redirect(t_shell *shell, char *line, char *file)
 	char	redir;
 
 	redir = *line++;
-	(shell->fd >= 0) ? close(shell->fd) : (0);
+	(shell->fd >= 0) ? close(shell->fd) : 0;
 	d_red = (*line == '>') ? 1 : 0;
 	(*line == '>') ? line++ : (0);
 	while (ft_isspace(*line))
@@ -30,7 +30,12 @@ char		*redirect(t_shell *shell, char *line, char *file)
 	{
 		shell->fd_type = -1;
 		if ((shell->fd = open(file, O_RDWR)) < 0)
-			return (NULL);
+		{
+			ft_putstr_fd(file, 2);
+			ft_putendl_fd(": No such file or directory", 2);
+			shell->ret = 1;
+			return ("");
+		}
 	}
 	else if (d_red == 0)
 		shell->fd = open(file, O_RDWR | O_CREAT | O_TRUNC, 0644);

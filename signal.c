@@ -47,6 +47,7 @@ void	catch_sig(int signal)
 
 void	init(void)
 {
+
 	g_sig.pid = -10;
 	g_sig.catched = 0;
 }
