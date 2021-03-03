@@ -24,7 +24,8 @@ void		add_token(t_shell *shell, t_token *token, char *line)
 	shell->line_left = line;
 	while (shell->line_left && *shell->line_left && shell->semicol != 1)
 	{
-		if ((res = ft_parcer(shell, shell->line_left, "")))
+		res = ft_parcer(shell, shell->line_left, ft_strdup(""));
+		if (ft_strcmp((res) ? res : 0, ""))
 		{
 			(token->args = (char **) realloc_ptr(token->args, i + 2)) ? \
                                                                 0 : exit(9);
@@ -35,7 +36,7 @@ void		add_token(t_shell *shell, t_token *token, char *line)
 		while (shell->line_left && ft_isspace(*shell->line_left))
 			shell->line_left++;
 		i++;
-		free(res);
+		(res) ? free(res) : 0;
 	}
 	if (shell->fd_type == 1)
 		token->fd_out = shell->fd;

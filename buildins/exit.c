@@ -48,7 +48,6 @@ void		ft_exit(t_shell *shell)
 	if (shell->exit == 1)
 	{
 		ft_putstr_fd("exit\n", 2);
-		clear_tokens(shell);
 		free_tab(shell->env);
 	}
 }
