@@ -29,11 +29,13 @@ void		add_token(t_shell *shell, t_token *token, char *line)
 			(token->args = (char **) realloc_ptr(token->args, i + 2)) ? \
                                                                 0 : exit(9);
 			token->args[i + 1] = NULL;
+			(token->args[i]) ? free(token->args[i]) : 0;
 			!(token->args[i] = ft_strdup(res)) ? exit(9) : 0;
 		}
 		while (shell->line_left && ft_isspace(*shell->line_left))
 			shell->line_left++;
 		i++;
+		free(res);
 	}
 	if (shell->fd_type == 1)
 		token->fd_out = shell->fd;

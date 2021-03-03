@@ -48,7 +48,7 @@ char			*special_args_cd(t_shell *shell, char *curpath)
 	char	buf[PATH_MAX];
 
 	if (shell->start->args[1][0] == '/')
-		curpath = shell->start->args[1];
+		curpath = ft_strdup(shell->start->args[1]);
 	else if ((ft_strcmp(shell->start->args[1], "-") == 0))
 	{
 		if (ft_strcmp(get_env(shell, "OLDPWD"), "") == 0)
@@ -79,5 +79,6 @@ int				ft_cd(t_shell *shell)
 		ret *= -1;
 	}
 	set_pwd(shell, "PWD=");
+	(curpath) ? ft_free(curpath) : 0 ;
 	return (ret);
 }

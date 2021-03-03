@@ -45,6 +45,7 @@ void		*realloc_ptr(char **ptr, size_t size)
 		while (ptr[j])
 		{
 			(new[j] = ft_strdup(ptr[j])) ? 0 : exit(9);
+			free(ptr[j]);
 			j++;
 		}
 		free(ptr);
@@ -102,7 +103,7 @@ char		*get_env(t_shell *shell, char *env)
 	{
 		if (!ft_strncmp(env, shell->env[i], len) \
 			&& shell->env[i][len] == '=')
-			return (&shell->env[i][len + 1]);
+			return (ft_strdup(&shell->env[i][len + 1]));
 		i++;
 	}
 	return ("");

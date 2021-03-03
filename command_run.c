@@ -75,15 +75,18 @@ int			start_execve(t_shell *shell)
 	int				n;
 	struct s_token	*token;
 
-	token = shell->start;
 	n = 0;
 	ret = 0;
-	while (token)
+	if (shell->start)
 	{
-		n++;
-		ret = 0;
-		ret = buildin_or_child(shell, token, ret);
-		token = token->next;
+		token = shell->start;
+		while (token)
+		{
+			n++;
+			ret = 0;
+			ret = buildin_or_child(shell, token, ret);
+			token = token->next;
+		}
 	}
 	while (n--)
 	{

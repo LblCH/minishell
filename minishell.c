@@ -17,34 +17,31 @@ t_sig g_sig;
 void	clear_tokens(t_shell *shell)
 {
 	t_token		*tmp;
-	t_token		*previous;
+	t_token		*temp;
 	int			i;
-//	printf("---------------------------------\nClearing tokens\n");
+
 	tmp = shell->start;
 	while (tmp)
 	{
 		i = 0;
-//		(tmp->command) ? free(tmp->command) : 0;
-		previous = tmp;
 		while (tmp->args && tmp->args[i])
 		{
 			free(tmp->args[i]);
 			tmp->args[i] = NULL;
-			//printf("args[%d] cleared\n", i);
 			i++;
 		}
-		//printf("args cleared\n");
+		free(tmp->args[i]);
 		(tmp->args) ? free(tmp->args) : 0;
 		tmp->args = NULL;
 		(tmp->fd_in > 0) ? close(tmp->fd_in) : 0;
 		(tmp->fd_out > 0) ? close(tmp->fd_out) : 0;
 		tmp->fd_out_prev = -1;
-		tmp = tmp->next;
-		free(previous);
-		previous = NULL;
+		temp = tmp->next;
+		free(tmp);
+		tmp = NULL;
+		tmp = temp;
 	}
 	shell->start = NULL;
-//	printf("Tokens cleared\n-----------------------------------\n");
 }
 
 int		invitation(t_shell *shell)
@@ -89,6 +86,8 @@ int		invitation(t_shell *shell)
 int		main(int argc, char **argv, char **envp)
 {
 	t_shell shell;
+	char	*res;
+	char 	*res2;
 
 	(void)argc;
 	(void)argv;
@@ -97,8 +96,10 @@ int		main(int argc, char **argv, char **envp)
 	shell.fd = -1;
 	shell.start = NULL;
 	shell.semicol = 0;
-	add_env(&shell, ft_strjoin("SHLVL=",\
-				ft_itoa(ft_atoi(get_env(&shell, "SHLVL")) + 1)));
+	add_env(&shell, res2 = ft_strjoin("SHLVL=", \
+	res = ft_itoa(ft_atoi(get_env(&shell, "SHLVL")) + 1)));
+	free(res);
+	free(res2);
 	invitation(&shell);
 	return (shell.ret);
 }
