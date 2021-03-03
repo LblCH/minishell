@@ -37,5 +37,6 @@ int	ft_echo(t_token *token)
 	}
 	if (n_option == 0)
 		write((token->fd_out > 0) ? token->fd_out : 1, "\n", 1);
+	close(token->fd_out);
 	return (0);
 }

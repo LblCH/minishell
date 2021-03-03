@@ -22,5 +22,6 @@ int	ft_env(char **env, t_token *token)
 		ft_putendl_fd(env[i], (token->fd_out > 0) ? token->fd_out : 1);
 		i++;
 	}
+	close(token->fd_out);
 	return (0);
 }

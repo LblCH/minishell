@@ -38,7 +38,7 @@ int		gnl_exit(int res, char *str)
 
 	if (res == 0 && str[0] == 0)
 	{
-		ft_putstr_fd("\nexit GNL\n", 2);
+		ft_putstr_fd("\nexit\n", 2);
 		exit(1);
 	}
 	else

@@ -30,7 +30,7 @@ int				error_handling(t_shell *shell)
 	else if (errno == EACCES)
 		error(shell->start->args[1], "Permission denied: ");
 	else if (errno == ENOTDIR)
-		error(shell->start->args[1], "Not a directory: ");
+		error(shell->start->args[1], ": Not a directory");
 	return (0);
 }
 
@@ -75,6 +75,7 @@ int				ft_cd(t_shell *shell)
 	set_pwd(shell, "OLDPWD=");
 	if ((ret = chdir(curpath)) < 0)
 	{
+		ft_putstr_fd("mini: cd: ", 2);
 		error_handling(shell);
 		ret *= -1;
 	}

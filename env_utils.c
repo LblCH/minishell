@@ -93,6 +93,6 @@ int			add_env(t_shell *shell, char *arg)
 
 void		error(char *env, char *text)
 {
-	ft_putstr_fd(text, 2);
-	ft_putendl_fd(env, 2);
+	ft_putstr_fd(env, 2);
+	ft_putendl_fd(text, 2);
 }

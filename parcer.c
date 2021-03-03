@@ -118,7 +118,7 @@ char		*ft_parcer(t_shell *shell, char *line, char *res)
 			line++;
 			shell->line_left = line;
 			shell->semicol = 1;
-			return (res);
+			return (ft_strdup(res));
 		}
 		else
 		{

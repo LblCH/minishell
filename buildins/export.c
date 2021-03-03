@@ -21,6 +21,7 @@ void		env_print(char **env, t_token *token)
 	{
 		ft_putstr_fd("declare -x ", (token->fd_out > 0) ? token->fd_out : 1);
 		ft_putendl_fd(env[i], (token->fd_out > 0) ? token->fd_out : 1);
+		close(token->fd_out);
 		i++;
 	}
 }
