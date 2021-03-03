@@ -45,6 +45,7 @@ typedef struct		s_shell
 	int 			exit;
 	int				semicol;
 	uint8_t 		ret;
+	int				err;
 }					t_shell;
 
 typedef struct		s_sig
@@ -136,7 +137,7 @@ int					cmd_run(t_shell *shell, t_token *token);
 
 void				catch_sig(int signal);
 int					status_return(int status);
-void				init();
+void				init(t_shell *shell);
 extern				t_sig g_sig;
 
 /*

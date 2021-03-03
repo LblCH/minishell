@@ -45,9 +45,9 @@ void	catch_sig(int signal)
 		ft_putstr_fd("\b\b  \b\b", 2);
 }
 
-void	init(void)
+void	init(t_shell *shell)
 {
-
+	shell->err = 0;
 	g_sig.pid = -10;
 	g_sig.catched = 0;
 }

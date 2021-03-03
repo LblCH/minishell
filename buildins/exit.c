@@ -35,7 +35,7 @@ void		ft_exit(t_shell *shell)
 		shell->exit = 0;
 		ft_putendl_fd("exit: too many arguments", 2);
 	}
-	if (shell->start->args[1])
+	else if (shell->start->args[1])
 	{
 		if (arg_is_digit(shell->start->args[1]))
 			shell->ret = ft_atoi(shell->start->args[1]);

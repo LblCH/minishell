@@ -33,7 +33,7 @@ char		*redirect(t_shell *shell, char *line, char *file)
 		{
 			ft_putstr_fd(file, 2);
 			ft_putendl_fd(": No such file or directory", 2);
-			shell->ret = 1;
+			shell->err = 1;
 			return ("");
 		}
 	}

@@ -54,10 +54,9 @@ int		invitation(t_shell *shell)
 	while (shell->exit == 0)
 	{
 		ft_putstr_fd("👻 \033[35mGhost'm IN i-Shell ⇥ \033[0m", 1);
-		init();
+		init(shell);
 		signal(SIGQUIT, catch_sig);
 		signal(SIGINT, catch_sig);
-//		line = ft_strdup("");
 		if (get_next_line(0, &line) < 0)
 		{
 			ft_putstr_fd("\nGNL error\n", 2);
@@ -69,8 +68,8 @@ int		invitation(t_shell *shell)
 			if (!shell->start)
 				shell->start = new_token();
 			(*line) ? add_token(shell, shell->start, line) : 0;
-			(shell->ret != 1) ? shell->ret = start_execve(shell) : 0;
-			while (shell->semicol == 1 && shell->exit != 1 && shell->ret != 1)
+			(shell->err != 1) ? shell->ret = start_execve(shell) : 0;
+			while (shell->semicol == 1 && shell->exit != 1 && shell->err != 1)
 			{
 				shell->semicol = 0;
 				if (!shell->start)
