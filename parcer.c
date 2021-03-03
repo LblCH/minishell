@@ -86,7 +86,6 @@ char		*separators(t_shell *shell, char *line)
 	if (*line == '|')
 	{
 		pipe(pipe_fd);
-//		printf("pipe[0] = %d \npipe[1] = %d\n", pipe_fd[0], pipe_fd[1]);
 		if (token_last(shell->start)->fd_out < 0)
 			token_last(shell->start)->fd_out = pipe_fd[1];
 		token_last(shell->start)->next = new_token();
@@ -110,7 +109,10 @@ char		*ft_parcer(t_shell *shell, char *line, char *res)
 		if (ft_strchr("\'\"$\\><", *line))
 			line = spec_simbol(shell, line, &res);
 		else if (*line == '|')
+		{
 			line = separators(shell, line);
+			return (NULL);
+		}
 		else if (*line == ';')
 		{
 			line++;

@@ -17,22 +17,23 @@ void		add_token(t_shell *shell, t_token *token, char *line)
 	int		i;
 	char	*res;
 
-	i = -1;
+	i = 0;
 	shell->fd_type = 0;
 	while (ft_isspace(*line))
 		line++;
 	shell->line_left = line;
-	while (shell->line_left && *shell->line_left && shell->semicol != 1 && (++i || 1))
+	while (shell->line_left && *shell->line_left && shell->semicol != 1)
 	{
-		if (ft_strcmp((res = ft_parcer(shell, shell->line_left, "")), ""))
+		if ((res = ft_parcer(shell, shell->line_left, "")))
 		{
-			(token->args = (char **)realloc_ptr(token->args, i + 2)) ? \
-																0 : exit(9);
+			(token->args = (char **) realloc_ptr(token->args, i + 2)) ? \
+                                                                0 : exit(9);
 			token->args[i + 1] = NULL;
 			!(token->args[i] = ft_strdup(res)) ? exit(9) : 0;
 		}
 		while (shell->line_left && ft_isspace(*shell->line_left))
 			shell->line_left++;
+		i++;
 	}
 	if (shell->fd_type == 1)
 		token->fd_out = shell->fd;
@@ -47,8 +48,8 @@ void		add_token(t_shell *shell, t_token *token, char *line)
 //	{
 //		printf("arg %d: %s\n", i, token->args[i]);
 //		i++;
-//	printf("--------------\n");
 //	}
+//	printf("-------§-------\n");
 }
 
 t_token		*new_token(void)

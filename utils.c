@@ -19,7 +19,7 @@ char		*add_char(char *line, char c)
 
 	i = 0;
 	if (!(temp = (char *)malloc(sizeof(char) * ft_strlen(line) + 2)))
-		return (NULL);
+		exit (9);
 	while (line && line[i])
 	{
 		temp[i] = line[i];
@@ -69,18 +69,14 @@ char		*escape_handler(char *line, char **res)
 
 char		*quotes_handler(t_shell *shell, char *line, char **res, char quote)
 {
-	char s[2];
-
-	s[1] = '\0';
 	while (*(++line) && *line != quote)
 	{
-		s[0] = *line;
-		if (ft_strchr("$\\", *line) && quote == '\"')
+		if (ft_strchr("$\\", *line) && quote == '\"' && !ft_isalnum(*(line + 1)))
 		{
 			line = spec_simbol(shell, line, res) - 1;
 		}
 		else
-			*res = ft_strjoin(*res, s);
+			*res = add_char(*res, *line);
 	}
 	if (*line == quote)
 		line++;

@@ -57,7 +57,7 @@ int		invitation(t_shell *shell)
 		init();
 		signal(SIGQUIT, catch_sig);
 		signal(SIGINT, catch_sig);
-		line = ft_strdup("");
+//		line = ft_strdup("");
 		if (get_next_line(0, &line) < 0)
 		{
 			ft_putstr_fd("\nGNL error\n", 2);
@@ -69,8 +69,8 @@ int		invitation(t_shell *shell)
 			if (!shell->start)
 				shell->start = new_token();
 			(*line) ? add_token(shell, shell->start, line) : 0;
-			shell->ret = start_execve(shell);
-			while (shell->semicol == 1 && shell->exit != 1)
+			(shell->ret != 1) ? shell->ret = start_execve(shell) : 0;
+			while (shell->semicol == 1 && shell->exit != 1 && shell->ret != 1)
 			{
 				shell->semicol = 0;
 				if (!shell->start)
