@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 13:14:39 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/04 22:00:54 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/04 23:44:30 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,9 @@ int			parent(int ret)
 {
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, SIG_IGN);
-	wait(&ret);
+	waitpid(g_sig.pid, &ret, WUNTRACED);
 	signal(SIGQUIT, catch_sig);
 	signal(SIGINT, catch_sig);
-	if (WIFEXITED(ret))
-		ret = status_return(ret);
-	return (ret);
+	ret = status_return(ret);
+	return(ret);
 }

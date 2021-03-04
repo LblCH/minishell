@@ -29,7 +29,9 @@ int		status_return(int status)
 		if (WTERMSIG(status) == 15)
 			return (143);
 	}
-	return (WEXITSTATUS(status));
+	if (WIFEXITED(status))
+		return (WEXITSTATUS(status));
+	return (status);
 }
 
 void	catch_sig(int signal)
