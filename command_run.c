@@ -51,13 +51,13 @@ int			error_execve(char *path)
 	ft_putstr_fd("👻 \033[35mGhost'm IN i-Shell: \033[0m", 2);
 	ft_putstr_fd(path, 2);
 	if (ft_strchr(path, '/') == NULL)
-		ft_putendl_fd(": command not found", 2);
+		ft_putendl_fd(" :command not found", 2);
 	else if (fd == -1 && dir == NULL)
-		ft_putendl_fd(": No such file or directory", 2);
+		ft_putendl_fd(" :No such file or directory", 2);
 	else if (fd == -1 && dir != NULL)
-		ft_putendl_fd(": is a directory", 2);
+		ft_putendl_fd(" :is a directory", 2);
 	else if (fd != -1 && dir == NULL)
-		ft_putendl_fd(": Permission denied", 2);
+		ft_putendl_fd(" :Permission denied", 2);
 	if (ft_strchr(path, '/') == NULL || (fd == -1 && dir == NULL))
 		ret = 127;
 	else
