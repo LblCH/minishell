@@ -26,9 +26,9 @@ static int		set_pwd(t_shell *shell, char *pwd)
 int				error_handling(t_shell *shell)
 {
 	if (errno == ENOENT)
-		error(shell->start->args[1], "No such file or directory: ");
+		error(shell->start->args[1], ": No such file or directory");
 	else if (errno == EACCES)
-		error(shell->start->args[1], "Permission denied: ");
+		error(shell->start->args[1], ": Permission denied");
 	else if (errno == ENOTDIR)
 		error(shell->start->args[1], ": Not a directory");
 	return (0);
