@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 19:58:11 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/04 22:06:39 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/05 00:00:53 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,9 +119,7 @@ void		prep_execve(t_shell *shell, t_token *token)
 	valid_path = check_location(paths, token->args[0]);
 	free_tab(paths);
 	if (valid_path)
-		(ft_strchr(valid_path, '/') != NULL) ? execve(valid_path, token->args, \
-															shell->env) : 0;
+		execve(valid_path, token->args,shell->env);
 	else
-		(ft_strchr(token->args[0], '/') != NULL) ? \
-					execve(token->args[0], token->args, shell->env) : 0;
+		execve(token->args[0], token->args, shell->env);
 }
