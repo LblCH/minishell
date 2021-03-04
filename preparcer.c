@@ -32,27 +32,33 @@ int		check_redirect(char *line, int i)
 	return (0);
 }
 
-int		check_semicolon(char *line, int i)
+int		check_semicolon(char *line, int i, char *token)
 {
-	char *token;
-
 	i++;
 	token = ft_strdup(";;");
 	while (ft_isspace(line[i]))
 	{
 		i++;
-		free(token);
+		if (line[i] == ';')
+		{
+			ft_free(token);
+			token = ft_strdup(";");
+		}
+	}
+	if (!line[i])
+	{
+		ft_free(token);
 		token = ft_strdup(";");
 	}
-	if (line[i] == ';')
+	if (line[i] == ';' || !line[i])
 	{
 		ft_putstr_fd("mini: syntax error near unexpected token `", 2);
 		ft_putstr_fd(token, 2);
 		ft_putstr_fd("'\n", 2);
-		free(token);
+		ft_free(token);
 		return (1);
 	}
-	free(token);
+	ft_free(token);
 	return (0);
 }
 
@@ -63,7 +69,7 @@ int		preparcer(char *line)
 	i = 0;
 	while (line && line[i])
 	{
-		if (line[i] == ';' && check_semicolon(line, i))
+		if (line[i] == ';' && check_semicolon(line, i, ""))
 			return (1);
 		else if (ft_strchr("><", line[i]) && check_redirect(line, i))
 			return (1);

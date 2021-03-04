@@ -65,7 +65,7 @@ int		invitation(t_shell *shell)
 			if (!shell->start)
 				shell->start = new_token();
 			(*line) ? add_token(shell, shell->start, line) : 0;
-			(shell->err != 1) ? shell->ret = start_execve(shell) : 0;
+			(shell->err != 1 && shell->start->args) ? shell->ret = start_execve(shell) : 0;
 			while (shell->semicol == 1 && shell->exit != 1 && shell->err != 1)
 			{
 				shell->semicol = 0;
