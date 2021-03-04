@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 18:34:24 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/04 23:39:40 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/05 01:35:32 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,14 @@ int				error_handling(t_shell *shell)
 
 char			*no_arg_cd(t_shell *shell, char *curpath)
 {
-	if (ft_strcmp(get_env(shell, "HOME"), "") == 0)
+	char *tmp;
+
+	tmp = get_env(shell, "HOME");
+	if (ft_strcmp(tmp, "") == 0)
 		ft_putstr_fd("cd: HOME not set\n", 2);
 	else
-		curpath = get_env(shell, "HOME");
+		curpath = ft_strdup(tmp);
+	ft_free(tmp);
 	return (curpath);
 }
 
