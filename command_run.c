@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 19:58:11 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/02/28 00:04:58 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/04 22:06:39 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,13 @@ int			error_execve(char *path)
 	ft_putstr_fd("👻 \033[35mGhost'm IN i-Shell: \033[0m", 2);
 	ft_putstr_fd(path, 2);
 	if (ft_strchr(path, '/') == NULL)
-		ft_putendl_fd(" :command not found", 2);
+		ft_putendl_fd(": command not found", 2);
 	else if (fd == -1 && dir == NULL)
-		ft_putendl_fd(" :No such file or directory", 2);
+		ft_putendl_fd(": No such file or directory", 2);
 	else if (fd == -1 && dir != NULL)
-		ft_putendl_fd(" :is a directory", 2);
+		ft_putendl_fd(": is a directory", 2);
 	else if (fd != -1 && dir == NULL)
-		ft_putendl_fd(" :Permission denied", 2);
+		ft_putendl_fd(": Permission denied", 2);
 	if (ft_strchr(path, '/') == NULL || (fd == -1 && dir == NULL))
 		ret = 127;
 	else
