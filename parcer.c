@@ -62,7 +62,7 @@ char		*spec_simbol(t_shell *shell, char *line, char **res)
 			if (*(++line) == '?')
 			{
 				temp = *res;
-				*res = ft_strjoin(*res, ft_itoa(shell->ret));
+				*res = ft_strjoin(*res, (shell->syntax) ? ft_itoa(shell->syntax) : ft_itoa(shell->ret));
 				free(temp);
 				line++;
 			}

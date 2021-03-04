@@ -46,6 +46,7 @@ typedef struct		s_shell
 	int				semicol;
 	uint8_t 		ret;
 	int				err;
+	int 			syntax;
 }					t_shell;
 
 typedef struct		s_sig

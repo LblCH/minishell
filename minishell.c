@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 23:08:34 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/02/27 20:04:57 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/05 00:27:15 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,10 @@ int		invitation(t_shell *shell)
 					add_token(shell, shell->start, shell->line_left);
 				shell->ret = start_execve(shell);
 			}
+			shell->syntax = 0;
 		}
+		else
+			shell->syntax = 258;
 		free(line);
 		clear_tokens(shell);
 		line = NULL;
@@ -101,5 +104,5 @@ int		main(int argc, char **argv, char **envp)
 	free(res);
 	free(res2);
 	invitation(&shell);
-	return (shell.ret);
+	return (shell.syntax ? shell.syntax : shell.ret);
 }
