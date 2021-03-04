@@ -34,7 +34,7 @@ char		*redirect(t_shell *shell, char *line, char *file)
 			ft_putstr_fd(file, 2);
 			ft_putendl_fd(": No such file or directory", 2);
 			shell->err = 1;
-			return ("");
+			return (ft_strdup(""));
 		}
 	}
 	else if (d_red == 0)
@@ -48,6 +48,8 @@ char		*redirect(t_shell *shell, char *line, char *file)
 
 char		*spec_simbol(t_shell *shell, char *line, char **res)
 {
+	char *temp;
+
 	if (*line == '$')
 	{
 		if (!ft_isalnum(*(line + 1)) && !ft_strchr("\'\"?", *(line + 1)))
@@ -59,12 +61,16 @@ char		*spec_simbol(t_shell *shell, char *line, char **res)
 		{
 			if (*(++line) == '?')
 			{
+				temp = *res;
 				*res = ft_strjoin(*res, ft_itoa(shell->ret));
+				free(temp);
 				line++;
 			}
 			else
 			{
+				temp = *res;
 				*res = ft_strjoin(*res, get_env(shell, line));
+				free(temp);
 				while (ft_isalnum(*line) || *line == '_')
 					line++;
 			}
@@ -75,7 +81,7 @@ char		*spec_simbol(t_shell *shell, char *line, char **res)
 	else if (*line == '\'' || *line == '\"')
 		line = quotes_handler(shell, line, res, *line);
 	else if (*line == '<' || *line == '>')
-		line = redirect(shell, line, "");
+		line = redirect(shell, line, ft_strdup(""));
 	return (line);
 }
 
@@ -100,8 +106,10 @@ char		*separators(t_shell *shell, char *line)
 	return (shell->line_left);
 }
 
-char		*ft_parcer(t_shell *shell, char *line, char *res)
+char		*ft_parcer(t_shell *shell, char *line)
 {
+	char *res = ft_strdup("");
+
 	while (ft_isspace(*line))
 		line++;
 	while (line && *line && *line != ' ')
@@ -118,7 +126,7 @@ char		*ft_parcer(t_shell *shell, char *line, char *res)
 			line++;
 			shell->line_left = line;
 			shell->semicol = 1;
-			return (ft_strdup(res));
+			return (res);
 		}
 		else
 		{

@@ -85,6 +85,8 @@ int			start_execve(t_shell *shell)
 			n++;
 			ret = 0;
 			ret = buildin_or_child(shell, token, ret);
+			close(token->fd_in);
+			close(token->fd_out);
 			token = token->next;
 		}
 	}

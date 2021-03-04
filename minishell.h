@@ -65,7 +65,7 @@ void				clear_tokens(t_shell *shell);
  */
 char				*separators(t_shell *shell, char *line);
 char				*redirect(t_shell *shell, char *line, char *file);
-char				*ft_parcer(t_shell *shell, char *line, char *res);
+char				*ft_parcer(t_shell *shell, char *line);
 char				*spec_simbol(t_shell *shell, char *line, char **res);
 
 /*

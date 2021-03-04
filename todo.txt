@@ -9,8 +9,7 @@
 14. cat Makefile | grep fwepr | head -n 5 | cd file_not_exit
 15. ls | exit               - ret 13
 16. sleep 5 | exit
-  -  не может открыть файл, по цепочке передает NUll
-18. >a cat <b >>c  - segfault    ошибка GNL???
+18. >a cat <b >>c  - segfault
 19. cat -e > test1 < test2 - segfault
 20. cat < test - segfault
 21. echo "$tests" "Makefile"

@@ -16,7 +16,7 @@ int		check_redirect(char *line, int i)
 {
 	char *token;
 
-	token = add_char("", line[i]);
+	token = add_char(ft_strdup(""), line[i]);
 	i++;
 	if (line[i - 1] == '>' && line[i] == '>')
 		token = add_char(token, line[i++]);
@@ -41,6 +41,7 @@ int		check_semicolon(char *line, int i)
 	while (ft_isspace(line[i]))
 	{
 		i++;
+		free(token);
 		token = ft_strdup(";");
 	}
 	if (line[i] == ';')

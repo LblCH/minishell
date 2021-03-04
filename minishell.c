@@ -30,7 +30,7 @@ void	clear_tokens(t_shell *shell)
 			tmp->args[i] = NULL;
 			i++;
 		}
-		free(tmp->args[i]);
+		(tmp->args && tmp->args[i]) ? free(tmp->args[i]) : 0;
 		(tmp->args) ? free(tmp->args) : 0;
 		tmp->args = NULL;
 		(tmp->fd_in > 0) ? close(tmp->fd_in) : 0;
