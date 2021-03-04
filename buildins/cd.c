@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 18:34:24 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/02/27 19:30:27 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/04 21:47:42 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ static int		set_pwd(t_shell *shell, char *pwd)
 int				error_handling(t_shell *shell)
 {
 	if (errno == ENOENT)
-		error(shell->start->args[1], "No such file or directory: ");
+		error(shell->start->args[1], ": No such file or directory");
 	else if (errno == EACCES)
-		error(shell->start->args[1], "Permission denied: ");
+		error(shell->start->args[1], ": Permission denied");
 	else if (errno == ENOTDIR)
 		error(shell->start->args[1], ": Not a directory");
 	return (0);
