@@ -71,7 +71,7 @@ int			add_env(t_shell *shell, char *arg)
 	char	**tmp;
 
 	i = 0;
-	name = ft_calloc(1, ft_strlen(arg));
+	name = ft_calloc(1, ft_strlen(arg) + 1);
 	name = env_name(arg, name);
 	while (shell->env[i])
 	{

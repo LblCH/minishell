@@ -38,7 +38,8 @@ char		*ft_strjoin_with_slash(char const *s1, char const *s2)
 
 int			is_buildin(char *command)
 {
-	command = one_to_lower(command);
+	if (command)
+		command = one_to_lower(command);
 	if (ft_strcmp(command, "echo") == 0 || ft_strcmp(command, "cd") == 0)
 		return (1);
 	if (ft_strcmp(command, "env") == 0 || ft_strcmp(command, "pwd") == 0)
