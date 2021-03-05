@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 17:03:42 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/03/05 23:18:51 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/03/06 01:34:23 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,7 @@ void		add_token(t_shell *shell, t_token *token, char *line)
 			shell->line_left++;
 		ft_free(res);
 	}
-	if (shell->fd_type == 1)
-		token->fd_out = shell->fd;
-	else if (shell->fd_type == -1)
-		token->fd_in = shell->fd;
-	shell->fd = -1;
-	shell->fd_type = 0;
-//	printf("--------------\nToken added\n");
-//	printf("fd_in: %d fd_out: %d\n", token->fd_in, token->fd_out);
-//	i = 0;
-//	while (token->args && token->args[i])
-//	{
-//		printf("arg %d: %s\n", i, token->args[i]);
-//		i++;
-//	}
-//	printf("-------§-------\n");
+	correct_fds(shell, token);
 }
 
 t_token		*new_token(void)
@@ -76,4 +62,14 @@ t_token		*token_last(t_token *token)
 			token = token->next;
 	}
 	return (token);
+}
+
+void		correct_fds(t_shell *shell, t_token *token)
+{
+	if (shell->fd_type == 1)
+		token->fd_out = shell->fd;
+	else if (shell->fd_type == -1)
+		token->fd_in = shell->fd;
+	shell->fd = -1;
+	shell->fd_type = 0;
 }

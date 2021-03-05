@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 23:08:34 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/03/06 00:11:30 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/03/06 01:26:29 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,9 @@ int		invitation(t_shell *shell)
 			parce_exec(shell, line);
 		else
 			shell->syntax = 258;
-		free(line);
+		ft_free(line);
+		ft_free(shell->line_added);
 		clear_tokens(shell);
-		line = NULL;
 	}
 	return (0);
 }
