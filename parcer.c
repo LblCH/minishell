@@ -116,20 +116,26 @@ char		*ft_parcer(t_shell *shell, char *line)
 		else if (*line == '|')
 		{
 			line = separators(shell, line);
-			return (NULL);
+			if (*res)
+				return (res);
+			else
+				return (NULL);
 		}
 		else if (*line == ';')
 		{
 			line++;
 			shell->line_left = line;
 			shell->semicol = 1;
-			return (res);
+			if (*res)
+				return (res);
+			else
+			{
+				ft_free(res);
+				return (NULL);
+			}
 		}
 		else
-		{
-			res = add_char(res, *line);
-			line++;
-		}
+			res = add_char(res, *line++);
 	}
 	shell->line_left = line;
 	return (res);
