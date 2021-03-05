@@ -60,8 +60,6 @@ int			buildin_or_child(t_shell *shell, t_token *token, int ret)
 		g_sig.pid = fork();
 		if (g_sig.pid == 0)
 		{
-			if (!ft_strcmp(token->args[0], "./minishell"))
-				increment_shell_level(shell);
 			signal(SIGQUIT, SIG_DFL);
 			signal(SIGINT, SIG_DFL);
 			signal(SIGTERM, SIG_DFL);

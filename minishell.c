@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 23:08:34 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/03/05 14:45:23 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/05 16:14:08 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,6 @@ int		invitation(t_shell *shell)
 int		main(int argc, char **argv, char **envp)
 {
 	t_shell shell;
-	char	*res;
-	char	*res2;
-	char	*res3;
 
 	(void)argc;
 	(void)argv;
@@ -100,13 +97,7 @@ int		main(int argc, char **argv, char **envp)
 	shell.fd = -1;
 	shell.start = NULL;
 	shell.semicol = 0;
-	res3 = get_env(&shell, "SHLVL");
-	res = ft_itoa(ft_atoi(res3) + 1);
-	res2 = ft_strjoin("SHLVL=", res);
-	add_env(&shell, res2);
-	ft_free(res);
-	ft_free(res2);
-	ft_free(res3);
+	increment_shell_level(&shell);
 	invitation(&shell);
 	return (shell.syntax ? shell.syntax : shell.ret);
 }

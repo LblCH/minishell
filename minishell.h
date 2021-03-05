@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 00:22:36 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/03/05 16:06:45 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/05 16:10:17 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,5 +161,6 @@ void				free_tab(char **tab);
 
 int					parent(int ret);
 int					buildin_or_child(t_shell *shell, t_token *token, int ret);
+void				increment_shell_level(t_shell *shell);
 
 #endif
