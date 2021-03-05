@@ -51,7 +51,7 @@ char			*no_arg_cd(t_shell *shell, char *curpath)
 char			*special_args_cd(t_shell *shell, char *curpath)
 {
 	char	buf[PATH_MAX];
-	char 	*tmp;
+	char	*tmp;
 
 	if (shell->start->args[1][0] == '/')
 		curpath = ft_strdup(shell->start->args[1]);

@@ -22,10 +22,10 @@ char	*one_to_lower(char *cmd)
 		cmd[i] = ft_tolower(cmd[i]);
 		i++;
 	}
-	return(cmd);
+	return (cmd);
 }
 
-void		env_print(char **env, t_token *token)
+void	env_print(char **env, t_token *token)
 {
 	int i;
 
@@ -39,7 +39,7 @@ void		env_print(char **env, t_token *token)
 	}
 }
 
-int			env_validation(const char *env)
+int		env_validation(const char *env)
 {
 	int		i;
 
@@ -57,7 +57,7 @@ int			env_validation(const char *env)
 	return (2);
 }
 
-char		**create_env_array(char **env, char *to_add, int var)
+char	**create_env_array(char **env, char *to_add, int var)
 {
 	char	**new;
 	int		i;
@@ -82,7 +82,7 @@ char		**create_env_array(char **env, char *to_add, int var)
 	return (new);
 }
 
-int			ft_export(t_shell *shell, t_token *token)
+int		ft_export(t_shell *shell, t_token *token)
 {
 	int count;
 	int ret;

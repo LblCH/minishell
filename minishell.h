@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 00:22:36 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/03/05 23:08:30 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/03/06 00:02:38 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ typedef struct		s_sig
  */
 int					invitation(t_shell *shell);
 void				clear_tokens(t_shell *shell);
+void 				parce_exec(t_shell *shell, char *line);
 
 /*
  * parcer.c
@@ -73,6 +74,8 @@ char				*spec_simbol(t_shell *shell, char *line, char **res);
  * parcer2.c
  */
 char				*file_error(t_shell *shell, char *file);
+char				*redir_separ(t_shell *shell, char *line, char *res);
+char 				*variable_add(t_shell *shell, char *line);
 
 /*
  * preparcer.c

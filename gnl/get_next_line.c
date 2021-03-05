@@ -64,7 +64,7 @@ int		get_next_line(int fd, char **line)
 		buff[res] = '\0';
 		(res == 0 || buff[res - 1] != '\n') ? ft_putstr_fd("  \b\b", 1) : 0;
 		str = add_and_free(str, buff);
-		gnl_exit(res, str);
+		res = gnl_exit(res, str);
 		if (((i = find_index(str, '\n')) != -1))
 			return (get_line(str, line, i));
 	}

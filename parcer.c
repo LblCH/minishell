@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 04:15:50 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/03/05 23:31:05 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/03/05 23:47:33 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ char		*redirect(t_shell *shell, char *line, char *file)
 
 char		*spec_simbol(t_shell *shell, char *line, char **res)
 {
-	char *temp2;
-
 	if (*line == '$')
 	{
 		if (!ft_isalnum(*(line + 1)) && !ft_strchr("\'\"?", *(line + 1)))
@@ -52,20 +50,7 @@ char		*spec_simbol(t_shell *shell, char *line, char **res)
 			line++;
 		}
 		else
-		{
-			if (*(++line) == '?')
-			{
-				temp2 = (shell->syntax) ? ft_itoa(shell->syntax) : \
-														ft_itoa(shell->ret);
-				line++;
-			}
-			else
-				temp2 = get_env(shell, line);
-			while (ft_isalnum(*line) || *line == '_')
-				line++;
-			line = ft_strjoin(temp2, line);
-			ft_free(temp2);
-		}
+			line = variable_add(shell, line);
 	}
 	else if (*line == '\\')
 		line = escape_handler(++line, res);
@@ -106,35 +91,8 @@ char		*ft_parcer(t_shell *shell, char *line)
 	{
 		if (ft_strchr("\'\"$\\", *line))
 			line = spec_simbol(shell, line, &res);
-		else if (*line == '<' || *line == '>')
-		{
-			shell->line_left = redirect(shell, line, ft_strdup(""));
-			if (*res)
-				return (res);
-			else
-				return (NULL);
-		}
-		else if (*line == '|')
-		{
-			shell->line_left = separators(shell, line);
-			if (*res)
-				return (res);
-			else
-				return (NULL);
-		}
-		else if (*line == ';')
-		{
-			line++;
-			shell->line_left = line;
-			shell->semicol = 1;
-			if (*res)
-				return (res);
-			else
-			{
-				ft_free(res);
-				return (NULL);
-			}
-		}
+		else if (ft_strchr("><|;", *line))
+			return (redir_separ(shell, line, res));
 		else
 			res = add_char(res, *line++);
 	}

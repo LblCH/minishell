@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 23:08:34 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/03/05 16:14:08 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/06 00:11:30 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,26 @@ void	clear_tokens(t_shell *shell)
 	shell->start = NULL;
 }
 
+void	parce_exec(t_shell *shell, char *line)
+{
+	shell->ret = (g_sig.catched == 1) ? 1 : shell->ret;
+	if (!shell->start)
+		shell->start = new_token();
+	(*line) ? add_token(shell, shell->start, line) : 0;
+	(shell->err != 1 && shell->start->args) ?
+			shell->ret = start_execve(shell) : 0;
+	while (shell->semicol == 1 && shell->exit != 1 && shell->err != 1)
+	{
+		shell->semicol = 0;
+		if (!shell->start)
+			shell->start = new_token();
+		if (*shell->line_left)
+			add_token(shell, shell->start, shell->line_left);
+		shell->ret = start_execve(shell);
+	}
+	shell->syntax = 0;
+}
+
 int		invitation(t_shell *shell)
 {
 	char *line;
@@ -59,24 +79,7 @@ int		invitation(t_shell *shell)
 			exit(1);
 		}
 		if (line && preparcer(line) == 0)
-		{
-			shell->ret = (g_sig.catched == 1) ? 1 : shell->ret;
-			if (!shell->start)
-				shell->start = new_token();
-			(*line) ? add_token(shell, shell->start, line) : 0;
-			(shell->err != 1 && shell->start->args) ?
-			shell->ret = start_execve(shell) : 0;
-			while (shell->semicol == 1 && shell->exit != 1 && shell->err != 1)
-			{
-				shell->semicol = 0;
-				if (!shell->start)
-					shell->start = new_token();
-				if (*shell->line_left)
-					add_token(shell, shell->start, shell->line_left);
-				shell->ret = start_execve(shell);
-			}
-			shell->syntax = 0;
-		}
+			parce_exec(shell, line);
 		else
 			shell->syntax = 258;
 		free(line);
