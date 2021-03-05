@@ -91,6 +91,7 @@ int		main(int argc, char **argv, char **envp)
 	t_shell shell;
 	char	*res;
 	char 	*res2;
+	char 	*res3;
 
 	(void)argc;
 	(void)argv;
@@ -99,10 +100,13 @@ int		main(int argc, char **argv, char **envp)
 	shell.fd = -1;
 	shell.start = NULL;
 	shell.semicol = 0;
-	add_env(&shell, res2 = ft_strjoin("SHLVL=", \
-	res = ft_itoa(ft_atoi(get_env(&shell, "SHLVL")) + 1)));
+	res3 = get_env(&shell, "SHLVL");
+	res = ft_itoa(ft_atoi(res3) + 1);
+	res2 = ft_strjoin("SHLVL=", res);
+	add_env(&shell, res2);
 	free(res);
 	free(res2);
+	free(res3);
 	invitation(&shell);
 	return (shell.syntax ? shell.syntax : shell.ret);
 }
