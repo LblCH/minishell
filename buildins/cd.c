@@ -79,7 +79,6 @@ int				ft_cd(t_shell *shell)
 	set_pwd(shell, "OLDPWD=");
 	if ((ret = chdir(curpath)) < 0)
 	{
-		ft_putstr_fd("mini: cd: ", 2);
 		error_handling(shell);
 		ret *= -1;
 	}

@@ -33,5 +33,6 @@ void	free_tab(char **tab)
 			ft_free(tab[i]);
 		i++;
 	}
+	ft_free(tab[i]);
 	ft_free(tab);
 }
