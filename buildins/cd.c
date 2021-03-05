@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 18:34:24 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/05 15:24:50 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/05 18:45:51 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,20 @@ char			*no_arg_cd(t_shell *shell, char *curpath)
 char			*special_args_cd(t_shell *shell, char *curpath)
 {
 	char	buf[PATH_MAX];
+	char 	*tmp;
 
 	if (shell->start->args[1][0] == '/')
 		curpath = ft_strdup(shell->start->args[1]);
 	else if ((ft_strcmp(shell->start->args[1], "-") == 0))
 	{
-		if (ft_strcmp(get_env(shell, "OLDPWD"), "") == 0)
+		tmp = get_env(shell, "OLDPWD");
+		if (ft_strcmp(tmp, "") == 0)
+		{
 			ft_putstr_fd("cd: OLDPWD not set\n", 2);
+			ft_free(tmp);
+		}
 		else
-			curpath = get_env(shell, "OLDPWD");
+			curpath = tmp;
 	}
 	else
 		curpath =
@@ -72,17 +77,22 @@ int				ft_cd(t_shell *shell)
 	int		ret;
 
 	curpath = NULL;
+	ret = 1;
 	if (!shell->start->args[1])
 		curpath = no_arg_cd(shell, curpath);
 	else
 		curpath = special_args_cd(shell, curpath);
 	set_pwd(shell, "OLDPWD=");
-	if ((ret = chdir(curpath)) < 0)
+	if (curpath)
 	{
-		error_handling(shell);
-		ret *= -1;
+		ret = chdir(curpath);
+		if (ret < 0)
+		{
+			error_handling(shell);
+			ret *= -1;
+		}
+		ft_free(curpath);
 	}
 	set_pwd(shell, "PWD=");
-	(curpath) ? ft_free(curpath) : 0;
 	return (ret);
 }
