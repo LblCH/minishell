@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 19:58:11 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/05 14:42:20 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/05 15:43:10 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ int			start_execve(t_shell *shell)
 	struct s_token	*token;
 
 	n = 0;
-	ret = 0;
 	args_to_lower(shell->start->args);
 	if (shell->start)
 	{
