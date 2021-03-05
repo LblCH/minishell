@@ -27,7 +27,7 @@ int			run_buildin(t_shell *shell, char *cmd, t_token *token)
 	i = 1;
 	cmd = one_to_lower(cmd);
 	if (ft_strcmp(cmd, "echo") == 0)
-		ret = ft_echo(shell->start);
+		ret = ft_echo(token);
 	else if (ft_strcmp(cmd, "cd") == 0)
 		ret = (ft_cd(shell));
 	else if (ft_strcmp(cmd, "env") == 0)
@@ -36,9 +36,9 @@ int			run_buildin(t_shell *shell, char *cmd, t_token *token)
 		ft_export(shell, token);
 	else if (ft_strcmp(cmd, "unset") == 0)
 	{
-		while (shell->start->args[i])
+		while (token->args[i])
 		{
-			ft_unset(shell, shell->start->args[i]);
+			ft_unset(shell, token->args[i]);
 			i++;
 		}
 	}
