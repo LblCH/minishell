@@ -75,7 +75,7 @@ char		*quotes_handler(t_shell *shell, char *line, char **res, char quote)
 {
 	while (*(++line) && *line != quote)
 	{
-		if (ft_strchr("$\\", *line) && quote == '\"' && !ft_isalnum(*(line + 1)))
+		if (ft_strchr("$\\", *line) && quote == '\"' && ft_isalnum(*(line + 1)))
 			line = spec_simbol(shell, line, res) - 1;
 		else
 			*res = add_char(*res, *line);

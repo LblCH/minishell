@@ -69,7 +69,6 @@ int		get_next_line(int fd, char **line)
 			return (get_line(str, line, i));
 	}
 	*line = (str) ? ft_strdup_gnl(str) : ft_strdup_gnl("");
-	if (str)
-		ft_free(str);
+	ft_free(str);
 	return (res);
 }
