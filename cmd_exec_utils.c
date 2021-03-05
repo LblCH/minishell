@@ -6,11 +6,30 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 11:34:36 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/02/27 19:53:18 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/05 15:39:29 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	args_to_lower(char **cmd)
+{
+	int i;
+	int x;
+
+	i = 0;
+	x = 0;
+	while (cmd[i])
+	{
+		while (cmd[i][x])
+		{
+			cmd[i][x] = ft_tolower(cmd[i][x]);
+			x++;
+		}
+		i++;
+		x = 0;
+	}
+}
 
 char		*ft_strjoin_with_slash(char const *s1, char const *s2)
 {

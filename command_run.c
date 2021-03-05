@@ -83,6 +83,7 @@ int			start_execve(t_shell *shell)
 
 	n = 0;
 	ret = 0;
+	args_to_lower(shell->start->args);
 	if (shell->start)
 	{
 		token = shell->start;
