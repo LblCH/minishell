@@ -49,6 +49,7 @@ char		*redirect(t_shell *shell, char *line, char *file)
 char		*spec_simbol(t_shell *shell, char *line, char **res)
 {
 	char *temp;
+	char *temp2;
 
 	if (*line == '$')
 	{
@@ -61,19 +62,18 @@ char		*spec_simbol(t_shell *shell, char *line, char **res)
 		{
 			if (*(++line) == '?')
 			{
-				temp = *res;
-				*res = ft_strjoin(*res, (shell->syntax) ? ft_itoa(shell->syntax) : ft_itoa(shell->ret));
-				free(temp);
+				temp2 = (shell->syntax) ? ft_itoa(shell->syntax) : ft_itoa(shell->ret);
 				line++;
 			}
 			else
-			{
-				temp = *res;
-				*res = ft_strjoin(*res, get_env(shell, line));
-				free(temp);
-				while (ft_isalnum(*line) || *line == '_')
-					line++;
-			}
+				temp2 = get_env(shell, line);
+			temp = *res;
+			*res = ft_strjoin(*res, temp2);
+			ft_free(temp);
+			ft_free(temp2);
+			while (ft_isalnum(*line) || *line == '_')
+				line++;
+
 		}
 	}
 	else if (*line == '\\')
