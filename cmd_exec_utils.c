@@ -55,7 +55,7 @@ char		*check_location(char **paths, char *cmd)
 	int				i;
 
 	i = 0;
-	while (paths[i++])
+	while (paths && paths[i])
 	{
 		if (!(dir = opendir(paths[i])))
 			return (NULL);
@@ -70,6 +70,7 @@ char		*check_location(char **paths, char *cmd)
 			}
 			dir_content = readdir(dir);
 		}
+		i++;
 		closedir(dir);
 	}
 	return (NULL);
