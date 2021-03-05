@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 00:22:36 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/03/05 16:10:17 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/05 17:36:37 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <limits.h>
 # include <errno.h>
 # include <signal.h>
-# include "./libft/libft.h"
-# include "./gnl/get_next_line.h"
+# include "libft.h"
+# include "get_next_line.h"
 
 typedef struct		s_token
 {
