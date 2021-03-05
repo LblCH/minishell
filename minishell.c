@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 23:08:34 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/03/05 00:27:15 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/05 14:08:35 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,9 @@ int		main(int argc, char **argv, char **envp)
 	res = ft_itoa(ft_atoi(res3) + 1);
 	res2 = ft_strjoin("SHLVL=", res);
 	add_env(&shell, res2);
-	free(res);
-	free(res2);
-	free(res3);
+	ft_free(res);
+	ft_free(res2);
+	ft_free(res3);
 	invitation(&shell);
 	return (shell.syntax ? shell.syntax : shell.ret);
 }

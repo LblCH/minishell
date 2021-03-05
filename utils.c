@@ -107,5 +107,5 @@ char		*get_env(t_shell *shell, char *env)
 			return (ft_strdup(&shell->env[i][len + 1]));
 		i++;
 	}
-	return ("");
+	return (ft_strdup(""));
 }

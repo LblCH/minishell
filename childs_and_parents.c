@@ -31,6 +31,23 @@ int			child_process(t_shell *shell, t_token *token)
 	return (ret);
 }
 
+void increment_shell_level (t_shell *shell)
+{
+	char	*res;
+	char 	*res2;
+	char 	*res3;
+
+	res3 = get_env(shell, "SHLVL");
+	res = ft_itoa(ft_atoi(res3) + 1);
+	res2 = ft_strjoin("SHLVL=", res);
+	add_env(shell, res2);
+	ft_free(res);
+	ft_free(res2);
+	ft_free(res3);
+}
+
+
+
 int			buildin_or_child(t_shell *shell, t_token *token, int ret)
 {
 	if (token->args && (!ft_strcmp(token->args[0], "exit")))
@@ -46,8 +63,7 @@ int			buildin_or_child(t_shell *shell, t_token *token, int ret)
 		if (g_sig.pid == 0)
 		{
 			if (!ft_strcmp(token->args[0], "./minishell"))
-				add_env(shell, ft_strjoin("SHLVL=",\
-				ft_itoa(ft_atoi(get_env(shell, "SHLVL")) + 1)));
+				increment_shell_level(shell);
 			signal(SIGQUIT, SIG_DFL);
 			signal(SIGINT, SIG_DFL);
 			signal(SIGTERM, SIG_DFL);
