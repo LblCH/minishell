@@ -6,7 +6,7 @@
 #    By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/01/02 23:10:05 by ztawanna          #+#    #+#              #
-#    Updated: 2021/03/05 11:45:22 by cdrennan         ###   ########.fr        #
+#    Updated: 2021/03/05 23:10:29 by ztawanna         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = minishell
 
 CC = clang
 
-CFLAGS = -Wall -Wextra -Werror -g -I. -Ilibft/ -Ignl/
+CFLAGS = -Wall -Wextra -Werror -I. -Ilibft/ -Ignl/
 
 LIBFT = -L libft -lft
 

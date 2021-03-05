@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/25 21:03:00 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/05 00:16:19 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/06 01:55:16 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	catch_sig(int signal)
 
 void	init(t_shell *shell)
 {
-	shell->line_added = ft_strdup("");
 	shell->err = 0;
 	g_sig.pid = -10;
 	g_sig.catched = 0;

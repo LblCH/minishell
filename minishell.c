@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 23:08:34 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/03/06 01:26:29 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/03/06 01:52:35 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int		invitation(t_shell *shell)
 	{
 		ft_putstr_fd("👻 \033[35mGhost'm IN i-Shell ⇥ \033[0m", 1);
 		init(shell);
+		shell->line_added = ft_strdup("");
 		signal(SIGQUIT, catch_sig);
 		signal(SIGINT, catch_sig);
 		if (get_next_line(0, &line) < 0)

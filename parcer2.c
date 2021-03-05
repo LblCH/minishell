@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 23:05:32 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/03/06 01:57:27 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/03/06 01:58:07 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ char	*variable_add(t_shell *shell, char *line)
 	while (ft_isalnum(*line) || *line == '_')
 		line++;
 	line = ft_strjoin(temp2, line);
+	ft_free(shell->line_added);
 	shell->line_added = line;
 	ft_free(temp2);
 	return (line);
