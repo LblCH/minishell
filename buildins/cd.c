@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 18:34:24 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/05 18:45:51 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/05 18:47:06 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static int		set_pwd(t_shell *shell, char *pwd)
 	char *env;
 
 	env = ft_strjoin(pwd, getcwd(buf, PATH_MAX));
-	add_env(shell, env);
+	if (env)
+		add_env(shell, env);
 	free(env);
 	return (0);
 }
