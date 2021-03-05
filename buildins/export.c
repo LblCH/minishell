@@ -6,11 +6,24 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 12:49:15 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/05 15:24:50 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/05 16:06:08 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
+
+char	*one_to_lower(char *cmd)
+{
+	int i;
+
+	i = 0;
+	while (cmd[i])
+	{
+		cmd[i] = ft_tolower(cmd[i]);
+		i++;
+	}
+	return(cmd);
+}
 
 void		env_print(char **env, t_token *token)
 {

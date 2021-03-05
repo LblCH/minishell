@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 00:22:36 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/03/05 15:39:29 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/05 16:06:45 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,6 @@ char				*ft_strjoin_with_slash(char const *s1, char const *s2);
 int					is_buildin(char *command);
 char				*check_location(char **paths, char *cmd);
 int					cmd_run(t_shell *shell, t_token *token);
-void				args_to_lower(char **args);
 
 /*
  * signal.c
@@ -147,6 +146,7 @@ extern				t_sig g_sig;
  */
 
 char				**create_env_array(char **env, char *to_add, int var);
+char				*one_to_lower(char *cmd);
 
 /*
  * free_utils.c

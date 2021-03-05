@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 19:58:11 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/05 15:43:10 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/05 16:04:11 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int			run_buildin(t_shell *shell, char *cmd, t_token *token)
 
 	ret = 0;
 	i = 1;
+	cmd = one_to_lower(cmd);
 	if (ft_strcmp(cmd, "echo") == 0)
 		ret = ft_echo(shell->start);
 	else if (ft_strcmp(cmd, "cd") == 0)
@@ -82,7 +83,6 @@ int			start_execve(t_shell *shell)
 	struct s_token	*token;
 
 	n = 0;
-	args_to_lower(shell->start->args);
 	if (shell->start)
 	{
 		token = shell->start;
