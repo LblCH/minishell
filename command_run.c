@@ -123,7 +123,10 @@ void		prep_execve(t_shell *shell, t_token *token)
 	valid_path = check_location(paths, token->args[0]);
 	free_tab(paths);
 	if (valid_path)
+	{
 		execve(valid_path, token->args, shell->env);
+		ft_free(valid_path);
+	}
 	else
 		execve(token->args[0], token->args, shell->env);
 }
