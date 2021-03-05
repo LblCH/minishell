@@ -6,11 +6,17 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 19:58:11 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/05 00:00:53 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/05 14:42:20 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void		close_fds(t_token *token)
+{
+	close(token->fd_in);
+	close(token->fd_out);
+}
 
 int			run_buildin(t_shell *shell, char *cmd, t_token *token)
 {
@@ -83,10 +89,8 @@ int			start_execve(t_shell *shell)
 		while (token)
 		{
 			n++;
-			ret = 0;
 			ret = buildin_or_child(shell, token, ret);
-			close(token->fd_in);
-			close(token->fd_out);
+			close_fds(token);
 			token = token->next;
 		}
 	}
@@ -113,13 +117,13 @@ void		prep_execve(t_shell *shell, t_token *token)
 	if (shell->env[i] == NULL)
 	{
 		execve(token->args[0], token->args, shell->env);
-		return;
+		return ;
 	}
 	paths = ft_split(shell->env[i] + 5, ':');
 	valid_path = check_location(paths, token->args[0]);
 	free_tab(paths);
 	if (valid_path)
-		execve(valid_path, token->args,shell->env);
+		execve(valid_path, token->args, shell->env);
 	else
 		execve(token->args[0], token->args, shell->env);
 }

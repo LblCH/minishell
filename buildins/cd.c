@@ -83,6 +83,6 @@ int				ft_cd(t_shell *shell)
 		ret *= -1;
 	}
 	set_pwd(shell, "PWD=");
-	(curpath) ? ft_free(curpath) : 0 ;
+	(curpath) ? ft_free(curpath) : 0;
 	return (ret);
 }

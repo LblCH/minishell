@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 17:03:42 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/26 16:12:11 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/05 14:23:15 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void		add_token(t_shell *shell, t_token *token, char *line)
 		res = ft_parcer(shell, shell->line_left);
 		if (ft_strcmp((res) ? res : 0, ""))
 		{
-			(token->args = (char **) realloc_ptr(token->args, i + 2)) ? \
-                                                                0 : exit(9);
+			(token->args = (char **)realloc_ptr(token->args, i + 2)) ? \
+			0 : exit(9);
 			token->args[i + 1] = NULL;
 			(token->args[i]) ? free(token->args[i]) : 0;
 			!(token->args[i] = ft_strdup(res)) ? exit(9) : 0;

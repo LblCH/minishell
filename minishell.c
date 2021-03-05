@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/02 23:08:34 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/03/05 14:08:35 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/05 14:45:23 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ void	clear_tokens(t_shell *shell)
 		(tmp->fd_out > 0) ? close(tmp->fd_out) : 0;
 		tmp->fd_out_prev = -1;
 		temp = tmp->next;
-		free(tmp);
-		tmp = NULL;
+		ft_free(tmp);
 		tmp = temp;
 	}
 	shell->start = NULL;
@@ -65,7 +64,8 @@ int		invitation(t_shell *shell)
 			if (!shell->start)
 				shell->start = new_token();
 			(*line) ? add_token(shell, shell->start, line) : 0;
-			(shell->err != 1 && shell->start->args) ? shell->ret = start_execve(shell) : 0;
+			(shell->err != 1 && shell->start->args) ?
+			shell->ret = start_execve(shell) : 0;
 			while (shell->semicol == 1 && shell->exit != 1 && shell->err != 1)
 			{
 				shell->semicol = 0;
@@ -90,8 +90,8 @@ int		main(int argc, char **argv, char **envp)
 {
 	t_shell shell;
 	char	*res;
-	char 	*res2;
-	char 	*res3;
+	char	*res2;
+	char	*res3;
 
 	(void)argc;
 	(void)argv;

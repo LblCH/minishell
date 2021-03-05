@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/27 13:14:39 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/04 23:47:39 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/05 14:36:38 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ int			child_process(t_shell *shell, t_token *token)
 	return (ret);
 }
 
-void increment_shell_level (t_shell *shell)
+void		increment_shell_level(t_shell *shell)
 {
 	char	*res;
-	char 	*res2;
-	char 	*res3;
+	char	*res2;
+	char	*res3;
 
 	res3 = get_env(shell, "SHLVL");
 	res = ft_itoa(ft_atoi(res3) + 1);
@@ -45,8 +45,6 @@ void increment_shell_level (t_shell *shell)
 	ft_free(res2);
 	ft_free(res3);
 }
-
-
 
 int			buildin_or_child(t_shell *shell, t_token *token, int ret)
 {
@@ -81,5 +79,5 @@ int			parent(int ret)
 	signal(SIGQUIT, catch_sig);
 	signal(SIGINT, catch_sig);
 	ret = status_return(ret);
-	return(ret);
+	return (ret);
 }

@@ -73,7 +73,7 @@ int		preparcer(char *line)
 			return (1);
 		else if (ft_strchr("><", line[i]) && check_redirect(line, i))
 			return (1);
-		else if (line[i + 1] && line [i] == '|' && line [i + 1] == '|')
+		else if (line[i + 1] && line[i] == '|' && line[i + 1] == '|')
 		{
 			ft_putstr_fd("mini: syntax error near unexpected token `||'\n", 2);
 			return (1);

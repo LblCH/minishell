@@ -6,23 +6,19 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 12:49:23 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/05 13:58:24 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/05 14:34:35 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char		**recreate_env_array(char **env, int delete)
+char		**recreate_env_array(char **env, int delete, int i, int k)
 {
 	char	**new;
-	int		i;
-	int		k;
 	int		count;
 
 	count = env_count(env);
 	new = malloc(sizeof(new) * count);
-	i = 0;
-	k = 0;
 	while (k < (count - 1))
 	{
 		if (k == delete)
@@ -34,7 +30,7 @@ char		**recreate_env_array(char **env, int delete)
 		else
 			new[i++] = ft_strdup(env[k++]);
 	}
-	if (k == (count -1) && k != delete)
+	if (k == (count - 1) && k != delete)
 	{
 		new[i] = ft_strdup(env[k]);
 		i++;
@@ -75,7 +71,7 @@ int			ft_unset(t_shell *shell, char *arg)
 		if (ft_strncmp(shell->env[i], arg, ft_strlen(arg)) == 0)
 		{
 			tmp = shell->env;
-			shell->env = recreate_env_array(tmp, i);
+			shell->env = recreate_env_array(tmp, i, 0, 0);
 			free_tab(tmp);
 			return (0);
 		}

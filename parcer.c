@@ -108,8 +108,9 @@ char		*separators(t_shell *shell, char *line)
 
 char		*ft_parcer(t_shell *shell, char *line)
 {
-	char *res = ft_strdup("");
+	char *res;
 
+	res = ft_strdup("");
 	while (ft_isspace(*line))
 		line++;
 	while (line && *line && *line != ' ')

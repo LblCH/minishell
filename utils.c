@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 05:48:10 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/01/19 20:04:07 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/03/05 14:21:29 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char		*add_char(char *line, char c)
 
 	i = 0;
 	if (!(temp = (char *)malloc(sizeof(char) * ft_strlen(line) + 2)))
-		exit (9);
+		exit(9);
 	while (line && line[i])
 	{
 		temp[i] = line[i];
