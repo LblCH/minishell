@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 00:22:36 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/03/05 17:36:37 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/05 23:08:30 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,11 @@ char				*separators(t_shell *shell, char *line);
 char				*redirect(t_shell *shell, char *line, char *file);
 char				*ft_parcer(t_shell *shell, char *line);
 char				*spec_simbol(t_shell *shell, char *line, char **res);
+
+/*
+ * parcer2.c
+ */
+char				*file_error(t_shell *shell, char *file);
 
 /*
  * preparcer.c

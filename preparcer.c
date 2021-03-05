@@ -38,8 +38,7 @@ int		check_semicolon(char *line, int i, char *token)
 	token = ft_strdup(";;");
 	while (ft_isspace(line[i]))
 	{
-		i++;
-		if (line[i] == ';')
+		if (line[++i] == ';')
 		{
 			ft_free(token);
 			token = ft_strdup(";");

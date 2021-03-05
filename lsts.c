@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 17:03:42 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/03/05 21:56:03 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/05 23:15:40 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ void		add_token(t_shell *shell, t_token *token, char *line)
 			token->args[i + 1] = NULL;
 			(token->args[i]) ? free(token->args[i]) : 0;
 			!(token->args[i] = ft_strdup(res)) ? exit(9) : 0;
+			i++;
 		}
 		while (shell->line_left && ft_isspace(*shell->line_left))
 			shell->line_left++;
-		i++;
 		ft_free(res);
 	}
 	if (shell->fd_type == 1)
@@ -44,15 +44,15 @@ void		add_token(t_shell *shell, t_token *token, char *line)
 		token->fd_in = shell->fd;
 	shell->fd = -1;
 	shell->fd_type = 0;
-//	printf("--------------\nToken added\n");
-//	printf("fd_in: %d fd_out: %d\n", token->fd_in, token->fd_out);
-//	i = 0;
-//	while (token->args && token->args[i])
-//	{
-//		printf("arg %d: %s\n", i, token->args[i]);
-//		i++;
-//	}
-//	printf("-------§-------\n");
+	printf("--------------\nToken added\n");
+	printf("fd_in: %d fd_out: %d\n", token->fd_in, token->fd_out);
+	i = 0;
+	while (token->args && token->args[i])
+	{
+		printf("arg %d: %s\n", i, token->args[i]);
+		i++;
+	}
+	printf("-------§-------\n");
 }
 
 t_token		*new_token(void)

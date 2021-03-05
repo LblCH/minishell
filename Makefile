@@ -22,7 +22,7 @@ LIBFT = -L libft -lft
 SRCS = minishell.c parcer.c ./gnl/get_next_line.c ./gnl/get_next_line_utils.c \
 		utils.c lsts.c buildins/cd.c buildins/echo.c buildins/env.c buildins/exit.c command_run.c env_utils.c \
 		cmd_exec_utils.c signal.c free_utils.c preparcer.c buildins/export.c buildins/pwd.c buildins/unset.c \
-		childs_and_parents.c
+		childs_and_parents.c parcer2.c
 
 OBJS = $(SRCS:.c=.o)
 

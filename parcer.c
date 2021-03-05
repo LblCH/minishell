@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 04:15:50 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/03/05 21:56:03 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/05 23:31:05 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,13 @@ char		*redirect(t_shell *shell, char *line, char *file)
 	{
 		shell->fd_type = -1;
 		if ((shell->fd = open(file, O_RDWR)) < 0)
-		{
-			ft_putstr_fd(file, 2);
-			ft_putendl_fd(": No such file or directory", 2);
-			shell->err = 1;
-			return (ft_strdup(""));
-		}
+			return (file_error(shell, file));
 	}
 	else if (d_red == 0)
 		shell->fd = open(file, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	else
 		shell->fd = open(file, O_RDWR | O_CREAT | O_APPEND, 0644);
-	free(file);
-	file = NULL;
+	ft_free(file);
 	return (line);
 }
 
@@ -61,7 +55,8 @@ char		*spec_simbol(t_shell *shell, char *line, char **res)
 		{
 			if (*(++line) == '?')
 			{
-				temp2 = (shell->syntax) ? ft_itoa(shell->syntax) : ft_itoa(shell->ret);
+				temp2 = (shell->syntax) ? ft_itoa(shell->syntax) : \
+														ft_itoa(shell->ret);
 				line++;
 			}
 			else
@@ -76,8 +71,6 @@ char		*spec_simbol(t_shell *shell, char *line, char **res)
 		line = escape_handler(++line, res);
 	else if (*line == '\'' || *line == '\"')
 		line = quotes_handler(shell, line, res, *line);
-	else if (*line == '<' || *line == '>')
-		line = redirect(shell, line, ft_strdup(""));
 	return (line);
 }
 
@@ -111,11 +104,19 @@ char		*ft_parcer(t_shell *shell, char *line)
 		line++;
 	while (line && *line && *line != ' ')
 	{
-		if (ft_strchr("\'\"$\\><", *line))
+		if (ft_strchr("\'\"$\\", *line))
 			line = spec_simbol(shell, line, &res);
+		else if (*line == '<' || *line == '>')
+		{
+			shell->line_left = redirect(shell, line, ft_strdup(""));
+			if (*res)
+				return (res);
+			else
+				return (NULL);
+		}
 		else if (*line == '|')
 		{
-			line = separators(shell, line);
+			shell->line_left = separators(shell, line);
 			if (*res)
 				return (res);
 			else
