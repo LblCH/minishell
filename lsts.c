@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 17:03:42 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/03/06 01:34:23 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/03/06 05:55:31 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,15 @@ void		add_token(t_shell *shell, t_token *token, char *line)
 			shell->line_left++;
 		ft_free(res);
 	}
+//	printf("--------------\nToken added\n");
+//	printf("fd_in: %d fd_out: %d\n", token->fd_in, token->fd_out);
+//	i = 0;
+//	while (token->args && token->args[i])
+//	{
+//		printf("arg %d: %s\n", i, token->args[i]);
+//		i++;
+//	}
+//	printf("-------§-------\n");
 }
 
 t_token		*new_token(void)

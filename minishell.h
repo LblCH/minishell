@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 00:22:36 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/03/06 01:43:49 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/03/06 06:00:03 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void				correct_fds(t_shell *shell, t_token *token);
 int					cmd_run(t_shell *shell, t_token *token);
 void				prep_execve(t_shell *shell, t_token *token);
 int					start_execve(t_shell *shell);
-int					error_execve(char *path);
+int					error_execve(t_shell *shell, char *path);
 int					run_buildin(t_shell *shell, char *cmd, t_token *token);
 
 /*

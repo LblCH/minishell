@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 19:58:11 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/05 19:30:52 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/06 06:57:53 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int			run_buildin(t_shell *shell, char *cmd, t_token *token)
 	return (ret);
 }
 
-int			error_execve(char *path)
+int			error_execve(t_shell *shell, char *path)
 {
 	DIR *dir;
 	int fd;
@@ -57,7 +57,7 @@ int			error_execve(char *path)
 	dir = opendir(path);
 	ft_putstr_fd("👻 \033[35mGhost'm IN i-Shell: \033[0m", 2);
 	ft_putstr_fd(path, 2);
-	if (ft_strchr(path, '/') == NULL)
+	if (ft_strchr(path, '/') == NULL && !get_env(shell, "PATH"))
 		ft_putendl_fd(": command not found", 2);
 	else if (fd == -1 && dir == NULL)
 		ft_putendl_fd(": No such file or directory", 2);

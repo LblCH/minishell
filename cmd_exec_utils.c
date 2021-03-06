@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/16 11:34:36 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/05 21:53:50 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/06 06:05:44 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,9 @@ int			cmd_run(t_shell *shell, t_token *token)
 	if (cmd)
 	{
 		prep_execve(shell, token);
-		ret = error_execve(token->args[0]);
+		ret = error_execve(shell, token->args[0]);
 	}
 	else
-	{
 		ret = 1;
-		ft_putendl_fd("you just met wierd error. Good", 2);
-	}
 	exit(ret);
 }

@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/08 05:48:10 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/03/05 14:21:29 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/06 06:31:50 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,14 @@ void		*realloc_ptr(char **ptr, size_t size)
 
 char		*escape_handler(char *line, char **res)
 {
-	char s[2];
-	char *temp;
+//	char *temp;
 
-	s[1] = '\0';
+//	printf("%c\n", *line);
 	if (ft_strchr(";\\\'\"><| $", *line))
 	{
-		s[0] = *line;
-		temp = *res;
-		*res = ft_strjoin(*res, s);
-		free(temp);
+//		temp = *res;
+		*res = add_char(*res, *line);
+//		free(temp);
 		line++;
 	}
 	return (line);
@@ -75,7 +73,7 @@ char		*quotes_handler(t_shell *shell, char *line, char **res, char quote)
 {
 	while (*(++line) && *line != quote)
 	{
-		if (ft_strchr("$\\", *line) && quote == '\"' && ft_isalnum(*(line + 1)))
+		if (ft_strchr("$\\", *line) && quote == '\"' )
 			line = spec_simbol(shell, line, res) - 1;
 		else
 			*res = add_char(*res, *line);
