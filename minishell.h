@@ -47,7 +47,7 @@ typedef struct		s_shell
 	uint8_t			ret;
 	int				err;
 	int				syntax;
-	char 			*line_added;
+	char			*line_added;
 }					t_shell;
 
 typedef struct		s_sig
