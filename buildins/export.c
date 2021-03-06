@@ -6,7 +6,7 @@
 /*   By: cdrennan <cdrennan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/12 12:49:15 by cdrennan          #+#    #+#             */
-/*   Updated: 2021/03/06 06:00:00 by cdrennan         ###   ########.fr       */
+/*   Updated: 2021/03/06 06:00:03 by cdrennan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int		ft_export(t_shell *shell, t_token *token)
 	int ret;
 	int i;
 
-	if (!shell->start->args[1])
+	if (!token->args[1])
 	{
 		count = env_count(shell->env);
 		sort_env(shell->env, count);
@@ -98,13 +98,13 @@ int		ft_export(t_shell *shell, t_token *token)
 	else
 	{
 		i = 1;
-		while (shell->start->args[i])
+		while (token->args[i] && !token->next)
 		{
-			ret = env_validation(shell->start->args[i]);
+			ret = env_validation(token->args[i]);
 			if (ret < 0)
-				error(shell->start->args[i], "export: not valid identifier: ");
+				error(token->args[i], "export: not valid identifier: ");
 			if (ret == 2)
-				add_env(shell, shell->start->args[i]);
+				add_env(shell, token->args[i]);
 			i++;
 		}
 	}
