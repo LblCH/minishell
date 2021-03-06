@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/03 04:15:50 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/03/06 01:52:35 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/03/06 03:26:45 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ char		*redirect(t_shell *shell, char *line, char *file)
 		shell->fd = open(file, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	else
 		shell->fd = open(file, O_RDWR | O_CREAT | O_APPEND, 0644);
+	correct_fds(shell, token_last(shell->start));
 	ft_free(file);
 	return (line);
 }

@@ -6,7 +6,7 @@
 /*   By: ztawanna <ztawanna@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 17:03:42 by ztawanna          #+#    #+#             */
-/*   Updated: 2021/03/06 01:34:23 by ztawanna         ###   ########.fr       */
+/*   Updated: 2021/03/06 03:26:35 by ztawanna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void		add_token(t_shell *shell, t_token *token, char *line)
 			shell->line_left++;
 		ft_free(res);
 	}
-	correct_fds(shell, token);
 }
 
 t_token		*new_token(void)
