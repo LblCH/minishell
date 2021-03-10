@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-int		check_redirect(char *line, int i)
+int		check_redirect(char *line, int i, int simbol)
 {
 	char *token;
 
@@ -22,7 +22,7 @@ int		check_redirect(char *line, int i)
 		token = add_char(token, line[i++]);
 	while (ft_isspace(line[i]))
 		i++;
-	if (!line[i])
+	if (!line[i] && simbol == 0)
 	{
 		ft_putstr_fd("mini: syntax error near unexpected token `newline'\n", 2);
 		free(token);
@@ -53,9 +53,16 @@ int		check_semicolon(char *line, int i)
 
 int		preparcer_2(char *line, int i, int simbol)
 {
+	if (line[i] == ';' && simbol == 0 && \
+								(!line[i + 1] || line[i + 1] != ';'))
+	{
+		ft_putstr_fd("mini: syntax error near unexpected token `;'\n" \
+																	, 2);
+		return (1);
+	}
 	if (line[i] == ';' && check_semicolon(line, i))
 		return (1);
-	else if (ft_strchr("><", line[i]) && check_redirect(line, i))
+	else if (ft_strchr("><", line[i]) && check_redirect(line, i, simbol))
 		return (1);
 	else if (line[i + 1] && line[i] == '|' && line[i + 1] == '|')
 	{
@@ -77,17 +84,14 @@ int		preparcer(char *line)
 
 	i = 0;
 	simbol = 0;
+	while (line && line[i] && ft_isspace(line[i]))
+		i++;
+	if (!line[i])
+		return (0);
 	while (line && line[i])
 	{
 		while (ft_isspace(line[i]))
 			i++;
-		if (line[i] == ';' && simbol == 0 && \
-								(!line[i + 1] || line[i + 1] != ';'))
-		{
-			ft_putstr_fd("mini: syntax error near unexpected token `;'\n" \
-																	, 2);
-			return (1);
-		}
 		if (preparcer_2(line, i, simbol))
 			return (1);
 		else if (ft_isalnum(line[i]))
