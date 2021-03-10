@@ -51,7 +51,7 @@ int		check_semicolon(char *line, int i)
 	return (0);
 }
 
-int		preparcer_2(char *line, int i, int *simbol)
+int		preparcer_2(char *line, int i, int simbol)
 {
 	if (line[i] == ';' && check_semicolon(line, i))
 		return (1);
@@ -67,8 +67,6 @@ int		preparcer_2(char *line, int i, int *simbol)
 		ft_putstr_fd("mini: syntax error near unexpected token `|'\n", 2);
 		return (1);
 	}
-	else if (ft_isalnum(line[i]))
-		*simbol = 1;
 	return (0);
 }
 
@@ -90,8 +88,10 @@ int		preparcer(char *line)
 																	, 2);
 			return (1);
 		}
-		if (preparcer_2(line, i, &simbol))
+		if (preparcer_2(line, i, simbol))
 			return (1);
+		else if (ft_isalnum(line[i]))
+			simbol = 1;
 		i++;
 	}
 	return (0);
