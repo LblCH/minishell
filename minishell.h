@@ -121,7 +121,7 @@ void				correct_fds(t_shell *shell, t_token *token);
 int					cmd_run(t_shell *shell, t_token *token);
 void				prep_execve(t_shell *shell, t_token *token);
 int					start_execve(t_shell *shell);
-int					error_execve(t_shell *shell, char *path);
+int					error_execve(char *path);
 int					run_buildin(t_shell *shell, char *cmd, t_token *token);
 
 /*

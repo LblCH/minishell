@@ -47,7 +47,7 @@ int			run_buildin(t_shell *shell, char *cmd, t_token *token)
 	return (ret);
 }
 
-int			error_execve(t_shell *shell, char *path)
+int			error_execve(char *path)
 {
 	DIR *dir;
 	int fd;
@@ -57,7 +57,7 @@ int			error_execve(t_shell *shell, char *path)
 	dir = opendir(path);
 	ft_putstr_fd("👻 \033[35mGhost'm IN i-Shell: \033[0m", 2);
 	ft_putstr_fd(path, 2);
-	if (ft_strchr(path, '/') == NULL && !get_env(shell, "PATH"))
+	if (ft_strchr(path, '/') == NULL)
 		ft_putendl_fd(": command not found", 2);
 	else if (fd == -1 && dir == NULL)
 		ft_putendl_fd(": No such file or directory", 2);

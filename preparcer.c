@@ -51,6 +51,27 @@ int		check_semicolon(char *line, int i)
 	return (0);
 }
 
+int		preparcer_2(char *line, int i, int *simbol)
+{
+	if (line[i] == ';' && check_semicolon(line, i))
+		return (1);
+	else if (ft_strchr("><", line[i]) && check_redirect(line, i))
+		return (1);
+	else if (line[i + 1] && line[i] == '|' && line[i + 1] == '|')
+	{
+		ft_putstr_fd("mini: syntax error near unexpected token `||'\n", 2);
+		return (1);
+	}
+	else if (line[i] == '|' && simbol == 0)
+	{
+		ft_putstr_fd("mini: syntax error near unexpected token `|'\n", 2);
+		return (1);
+	}
+	else if (ft_isalnum(line[i]))
+		*simbol = 1;
+	return (0);
+}
+
 int		preparcer(char *line)
 {
 	int i;
@@ -63,28 +84,14 @@ int		preparcer(char *line)
 		while (ft_isspace(line[i]))
 			i++;
 		if (line[i] == ';' && simbol == 0 && \
-								(!line[i + 1] || line [i + 1] != ';'))
+								(!line[i + 1] || line[i + 1] != ';'))
 		{
 			ft_putstr_fd("mini: syntax error near unexpected token `;'\n" \
 																	, 2);
 			return (1);
 		}
-		if (line[i] == ';' && check_semicolon(line, i))
+		if (preparcer_2(line, i, &simbol))
 			return (1);
-		else if (ft_strchr("><", line[i]) && check_redirect(line, i))
-			return (1);
-		else if (line[i + 1] && line[i] == '|' && line[i + 1] == '|')
-		{
-			ft_putstr_fd("mini: syntax error near unexpected token `||'\n", 2);
-			return (1);
-		}
-		else if (line[i] == '|' && simbol == 0)
-		{
-			ft_putstr_fd("mini: syntax error near unexpected token `|'\n", 2);
-			return (1);
-		}
-		else if (ft_isalnum(line[i]))
-			simbol = 1;
 		i++;
 	}
 	return (0);

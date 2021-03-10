@@ -15,7 +15,7 @@ NAME = minishell
 
 CC = clang
 
-CFLAGS = -Wall -Wextra -Werror -I. -Ilibft/ -Ignl/
+CFLAGS = -Wall -Wextra -Werror -g -I. -Ilibft/ -Ignl/
 
 LIBFT = -L libft -lft
 

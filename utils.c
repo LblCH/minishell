@@ -56,14 +56,9 @@ void		*realloc_ptr(char **ptr, size_t size)
 
 char		*escape_handler(char *line, char **res)
 {
-//	char *temp;
-
-//	printf("%c\n", *line);
 	if (ft_strchr(";\\\'\"><| $", *line))
 	{
-//		temp = *res;
 		*res = add_char(*res, *line);
-//		free(temp);
 		line++;
 	}
 	return (line);
@@ -73,7 +68,7 @@ char		*quotes_handler(t_shell *shell, char *line, char **res, char quote)
 {
 	while (*(++line) && *line != quote)
 	{
-		if (ft_strchr("$\\", *line) && quote == '\"' )
+		if (ft_strchr("$\\", *line) && quote == '\"')
 			line = spec_simbol(shell, line, res) - 1;
 		else
 			*res = add_char(*res, *line);

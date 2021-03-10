@@ -90,7 +90,7 @@ int			cmd_run(t_shell *shell, t_token *token)
 	if (cmd)
 	{
 		prep_execve(shell, token);
-		ret = error_execve(shell, token->args[0]);
+		ret = error_execve(token->args[0]);
 	}
 	else
 		ret = 1;
